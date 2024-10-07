@@ -1,0 +1,7 @@
+{
+  "name": "GGSSC",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
