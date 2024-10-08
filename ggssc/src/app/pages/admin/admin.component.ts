@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { ToastrService } from 'ngx-toastr';
 import { AppServiceService } from 'src/app/services/app-service.service';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
@@ -22,7 +23,7 @@ export class AdminComponent  implements OnInit {
     public toastr: ToastrService,
     public authService: AuthServiceService,
     private router:Router,
-    public appService: AppServiceService
+    public appService: AppServiceService,
   ) {}
 
   ngOnInit() {
@@ -42,7 +43,7 @@ export class AdminComponent  implements OnInit {
       this.email = ''; 
       this.password = '';
     }else{
-      this.toastr.error("Invalid credentials",'Message');
+      this.appService.presentToast('top','Invalid Credentials !!!')
     }
   } 
 }

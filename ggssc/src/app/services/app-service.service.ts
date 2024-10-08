@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-// import { LoadingController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class AppServiceService {
   public isLoading = false
 
   constructor(
-    // private loadingCtrl: LoadingController
+    private toastController: ToastController
   ) { }
 
   public isLoggedIn(){
@@ -19,5 +19,22 @@ export class AppServiceService {
     }else{
       return true;
     }
+  }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom', message:any) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 5000,
+      position: position,
+      buttons: [
+        {
+          icon: 'close',
+          htmlAttributes: {
+            'aria-label': 'close',
+          },
+        },
+      ],
+    });
+    await toast.present();
   }
 }

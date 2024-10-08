@@ -36,5 +36,9 @@ ion-menu-button {
   ion-button{
     width:30%; 
     margin: auto; 
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+  }
+
+  ion-item:first-child {
+    margin-bottom: 0px;
   }
