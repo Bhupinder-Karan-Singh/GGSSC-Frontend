@@ -1,5 +1,5 @@
 
-  <div id="container">
+  <div id="container" *ngIf="!appService.isLoggedIn()">
 
     <div class="text-center">
       <img class="img-fluid" src="/assets/icon/login.png" style="width:100px;"/>
@@ -7,7 +7,7 @@
 
     <ion-list>
       <ion-item>
-        <ion-input labelPlacement="floating">
+        <ion-input labelPlacement="floating" [(ngModel)]="email">
           <div slot="label">Email 
             <ion-text color="primary">
             </ion-text>
@@ -16,7 +16,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-input labelPlacement="floating" type="password">
+        <ion-input labelPlacement="floating" type="password" [(ngModel)]="password">
           <div slot="label">Password 
             <ion-text color="primary">
             </ion-text>

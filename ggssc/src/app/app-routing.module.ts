@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './folder/home/home.component';
-import { AdminComponent } from './folder/admin/admin.component';
-import { RegistrationComponent } from './folder/registration/registration.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
+import { AdminHomeComponent } from './pages/admin-home/admin-home.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -21,6 +23,11 @@ const routes: Routes = [
   {
     path: 'registration',
     component:RegistrationComponent,
+  },
+  {
+    path: 'admin-home',
+    component:AdminHomeComponent,
+    canActivate: [AuthGuardService]
   },
 ];
 
