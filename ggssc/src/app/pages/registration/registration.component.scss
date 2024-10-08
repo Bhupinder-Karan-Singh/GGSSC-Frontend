@@ -31,7 +31,11 @@ text-decoration: none;
 }
 
 ion-card{
-    width:70%; 
+    width:80%; 
     margin: auto; 
     margin-bottom: 20px;
+}
+
+ion-card:last-child {
+    margin-bottom: 5px;
 }
