@@ -20,7 +20,7 @@ export class AppComponent {
   public appPages = [
     { title: 'Home', url: '/home', icon: 'home' },
     { title: 'Admin', url: '/admin', icon: 'person' },
-    { title: 'Registration', url: '/registration', icon: 'document' },
+    // { title: 'Registration', url: '/registration', icon: 'document' },
   ];
   constructor(
     private loadingCtrl: LoadingController,
@@ -32,6 +32,11 @@ export class AppComponent {
   }
   ngOnInit(): void {
     this.currentYear = new Date().getFullYear();
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        console.log('Current URL:', event.url);
+      }
+    });
     }
 
     async showLoading() {

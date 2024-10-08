@@ -28,6 +28,7 @@ import { AdminHomeComponent } from './pages/admin-home/admin-home.component';
   imports: [
     BrowserModule, 
     IonicModule.forRoot(
+      
     ), 
     AppRoutingModule,
     CommonModule,

@@ -20,10 +20,10 @@ const routes: Routes = [
     path: 'admin',
     component:AdminComponent,
   },
-  {
-    path: 'registration',
-    component:RegistrationComponent,
-  },
+  // {
+  //   path: 'registration',
+  //   component:RegistrationComponent,
+  // },
   {
     path: 'admin-home',
     component:AdminHomeComponent,
@@ -33,7 +33,11 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, useHash: true, enableTracing: true  })
+    RouterModule.forRoot(routes, { 
+      preloadingStrategy: PreloadAllModules, 
+      useHash: true, 
+      enableTracing: true,
+      onSameUrlNavigation: 'reload'  })
   ],
   exports: [RouterModule]
 })
