@@ -43,34 +43,6 @@ export class HomeComponent  implements OnInit {
       "color": "COLOR",
       "feature_icon": "assets/Power plant - blue.svg",
     },
-    {
-      "name": "Event 2",
-      "subtitle": "Event subtitle",
-      "description": "Event description",
-      "color": "COLOR",
-      "feature_icon": "assets/Power plant - blue.svg",
-    },
-    {
-      "name": "Event 2",
-      "subtitle": "Event subtitle",
-      "description": "Event description",
-      "color": "COLOR",
-      "feature_icon": "assets/Power plant - blue.svg",
-    },
-    {
-      "name": "Event 2",
-      "subtitle": "Event subtitle",
-      "description": "Event description",
-      "color": "COLOR",
-      "feature_icon": "assets/Power plant - blue.svg",
-    },
-    {
-      "name": "Event 2",
-      "subtitle": "Event subtitle",
-      "description": "Event description",
-      "color": "COLOR",
-      "feature_icon": "assets/Power plant - blue.svg",
-    },
   ]
 
 }
