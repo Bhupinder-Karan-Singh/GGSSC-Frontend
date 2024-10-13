@@ -7,7 +7,11 @@ import { ToastController } from '@ionic/angular';
 export class AppServiceService {
 
   public isLoading = false
-
+  public appPages = [
+    { title: 'Home', url: '/home', icon: 'home' },
+    { title: 'Admin Login', url: '/admin', icon: 'person' },
+    // { title: 'Registration', url: '/registration', icon: 'document' },
+  ];
   constructor(
     private toastController: ToastController
   ) { }

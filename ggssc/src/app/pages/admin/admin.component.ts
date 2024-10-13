@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, ViewWillEnter } from '@ionic/angular';
 import { ToastrService } from 'ngx-toastr';
 import { AppServiceService } from 'src/app/services/app-service.service';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
@@ -10,7 +10,7 @@ import { AuthServiceService } from 'src/app/services/auth-service.service';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],
 })
-export class AdminComponent  implements OnInit {
+export class AdminComponent  implements OnInit, ViewWillEnter {
   public title!: string;
   public page!: string;
   email!: string;
@@ -18,7 +18,7 @@ export class AdminComponent  implements OnInit {
   cpassword!:string;
   success!:boolean;
   name!: string;
-  public loggedIn=false;
+
   constructor(
     public toastr: ToastrService,
     public authService: AuthServiceService,
@@ -27,16 +27,21 @@ export class AdminComponent  implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.title = "Guru Gobind Singh Study Circle, Canada";
-    this.page = "Admin";
-    this.loggedIn = this.appService.isLoggedIn()
-    if(this.loggedIn){
-      this.router.navigate(['/admin-home']);
-    }else{
-      this.router.navigate(['/admin']);
-    }
+
   }
 
+  ionViewWillEnter(): void {
+    this.title = "Guru Gobind Singh Study Circle, Canada";
+    this.page = "Admin";
+    if(this.appService.isLoggedIn()){
+      this.appService.appPages[1] = { title: 'Admin Home', url: '/admin-home', icon: 'person'}
+      this.router.navigate(['/admin-home']);
+    }else{
+      this.appService.appPages[1] = { title: 'Admin Login', url: '/admin', icon: 'person'}
+      this.router.navigate(['/admin']);
+    }  
+  }
+  
   login(){
     if((this.email!='' && this.password!='')&&(this.email!=null && this.password!=null)){
       this.authService.SignIn(this.email, this.password);

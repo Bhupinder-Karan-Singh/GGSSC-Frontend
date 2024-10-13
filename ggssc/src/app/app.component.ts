@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import {
   Router,
@@ -9,6 +9,8 @@ import {
   NavigationCancel,
   NavigationError
 } from '@angular/router'
+import { AppServiceService } from './services/app-service.service';
+import { AuthServiceService } from './services/auth-service.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -17,19 +19,18 @@ import {
 export class AppComponent {
   currentYear:any;
   isLoading = false
-  public appPages = [
-    { title: 'Home', url: '/home', icon: 'home' },
-    { title: 'Admin', url: '/admin', icon: 'person' },
-    // { title: 'Registration', url: '/registration', icon: 'document' },
-  ];
+
   constructor(
     private loadingCtrl: LoadingController,
-    private router: Router
+    private router: Router,
+    public appService: AppServiceService,
+    private authService: AuthServiceService
   ) {
     this.router.events.subscribe((e : RouterEvent) => {
       this.navigationInterceptor(e);
     })
   }
+
   ngOnInit(): void {
     this.currentYear = new Date().getFullYear();
     this.router.events.subscribe(event => {
@@ -37,21 +38,21 @@ export class AppComponent {
         console.log('Current URL:', event.url);
       }
     });
-    }
+  }
 
-    async showLoading() {
-      const loading = await this.loadingCtrl.create({
-        message: 'Loading...',
-      });
-    
-      await loading.present();
-      const condition = this.isLoading;  // Async condition or API call
-      if (condition) {
-        await loading.dismiss();
-      } else {
-        console.log('Condition not met');
-        await loading.dismiss();  // Make sure to always dismiss to prevent a hanging spinner
-      }
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading...',
+    });
+  
+    await loading.present();
+    const condition = this.isLoading;  // Async condition or API call
+    if (condition) {
+      await loading.dismiss();
+    } else {
+      console.log('Condition not met');
+      await loading.dismiss();  // Make sure to always dismiss to prevent a hanging spinner
+    }
   }
   
   navigationInterceptor(event: RouterEvent): void {
@@ -68,6 +69,17 @@ export class AppComponent {
     if (event instanceof NavigationError) {
       this.isLoading = false
     }
+  }
+
+  @HostListener('window:focus', ['$event'])
+  onFocus(event: FocusEvent) {
+    if(this.appService.isLoggedIn()){
+      this.router.navigate(['/admin-home']);
+      this.appService.appPages[1] = { title: 'Admin Home', url: '/admin-home', icon: 'person'}
+    }else{
+      this.appService.appPages[1] = { title: 'Admin Login', url: '/admin', icon: 'person'}
+      this.router.navigate(['/home']);
+    }  
   }
     
 }
