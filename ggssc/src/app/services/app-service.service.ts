@@ -8,8 +8,9 @@ export class AppServiceService {
 
   public isLoading = false
   public appPages = [
-    { title: 'Home', url: '/home', icon: 'home' },
-    { title: 'Admin Login', url: '/admin', icon: 'person' },
+    { title: 'Home', url: '/home', icon: 'home', active:true},
+    { title: 'Admin Login', url: '/admin', icon: 'person', active:true},
+    { title: 'Sign out', url: '/logout', icon: 'exit', active:false},
     // { title: 'Registration', url: '/registration', icon: 'document' },
   ];
   constructor(
@@ -19,8 +20,10 @@ export class AppServiceService {
   public isLoggedIn(){
     let token = localStorage.getItem("idToken")
     if(token==undefined || token==null || token==''){
+      this.appPages[2].active = false
       return false;
     }else{
+      this.appPages[2].active = true
       return true;
     }
   }

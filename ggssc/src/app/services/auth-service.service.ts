@@ -30,7 +30,8 @@ export class AuthServiceService {
     this.angularFireAuth['signInWithEmailAndPassword'](email, password).then((res: any) => {
         localStorage.setItem('email', email);
         this.saveIdToken(res.user);
-        this.appService.appPages[1] = { title: 'Admin Home', url: '/admin-home', icon: 'person'}
+        this.appService.appPages[1] = { title: 'Admin Home', url: '/admin-home', icon: 'person', active:true }
+        this.appService.appPages[2].active = true
         this.router.navigate(['/admin-home'])
       })
       .catch((err) => {
@@ -44,7 +45,8 @@ export class AuthServiceService {
     localStorage.clear();
     localStorage.removeItem('user_email');
     localStorage.removeItem('idToken');
-    this.appService.appPages[1] = { title: 'Admin Login', url: '/admin', icon: 'person'}
+    this.appService.appPages[1] = { title: 'Admin Login', url: '/admin', icon: 'person', active:true }
+    this.appService.appPages[2].active = false
     this.router.navigate(['/admin'])
   } 
 

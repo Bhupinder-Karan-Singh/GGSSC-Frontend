@@ -17,6 +17,8 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AdminHomeComponent } from './pages/admin-home/admin-home.component';
+import { CreateEventComponent } from './pages/create-event/create-event.component'; 
+import { LogoutComponent } from './pages/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { AdminHomeComponent } from './pages/admin-home/admin-home.component';
     HomeComponent,
     AdminComponent,
     RegistrationComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    CreateEventComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule, 

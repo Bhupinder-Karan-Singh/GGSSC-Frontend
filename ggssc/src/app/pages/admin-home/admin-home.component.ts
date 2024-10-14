@@ -23,11 +23,44 @@ export class AdminHomeComponent  implements OnInit {
     this.page = "Admin-home";
   }
 
+  featureList = [
+    {
+      "name": "Create an event",
+      "subtitle": "subtitle",
+      "description": "Click on proceed to create an event",
+      "color": "COLOR",
+      "feature_icon": "assets/Power plant - blue.svg",
+      "task":"createEvent"
+    },
+    {
+      "name": "Edit events",
+      "subtitle": "Edit events",
+      "description": "Edit already created event",
+      "color": "COLOR",
+      "feature_icon": "assets/Power plant - blue.svg",
+      "task":"editEvent"
+    },
+    {
+      "name": "Candidate list",
+      "subtitle": "Event subtitle",
+      "description": "Event details",
+      "color": "COLOR",
+      "feature_icon": "assets/Power plant - blue.svg",
+      "task":"candidateList"
+    },
+  ]
+
   logout(){
     this.authService.SignOut()
   }
 
   goto(){
     this.router.navigate(['/home']);
+  }
+
+  proceed(task:string){
+    if(task=="createEvent"){
+      this.router.navigate(['/create-event']);
+    }
   }
 }

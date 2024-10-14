@@ -5,6 +5,8 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { AdminHomeComponent } from './pages/admin-home/admin-home.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { CreateEventComponent } from './pages/create-event/create-event.component';
+import { LogoutComponent } from './pages/logout/logout.component';
 
 const routes: Routes = [
   {
@@ -27,6 +29,16 @@ const routes: Routes = [
   {
     path: 'admin-home',
     component:AdminHomeComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'create-event',
+    component:CreateEventComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'logout',
+    component:LogoutComponent,
     canActivate: [AuthGuardService]
   },
 ];

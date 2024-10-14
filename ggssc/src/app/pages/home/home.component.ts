@@ -11,6 +11,7 @@ import { AppServiceService } from 'src/app/services/app-service.service';
 export class HomeComponent  implements OnInit {
   public title!: string;
   public page!: string;
+  events:any
   constructor(
     private appService : AppServiceService
   ) {}
@@ -18,31 +19,44 @@ export class HomeComponent  implements OnInit {
   ngOnInit() {
     this.title = "Guru Gobind Singh Study Circle, Canada";
     this.page = "Registration";
+    this.events = [
+      // {
+      //   "name": "Event 1",
+      //   "subtitle": "Event subtitle",
+      //   "description": "Event description",
+      //   "color": "COLOR",
+      //   "feature_icon": "assets/Power plant - blue.svg",
+      // },
+      // {
+      //   "name": "Event 2",
+      //   "subtitle": "Event subtitle",
+      //   "description": "Event description",
+      //   "color": "COLOR",
+      //   "feature_icon": "assets/Power plant - blue.svg",
+      // },
+      // {
+      //   "name": "Event 2",
+      //   "subtitle": "Event subtitle",
+      //   "description": "Event description",
+      //   "color": "COLOR",
+      //   "feature_icon": "assets/Power plant - blue.svg",
+      // },
+      // {
+      //   "name": "Event 2",
+      //   "subtitle": "Event subtitle",
+      //   "description": "Event description",
+      //   "color": "COLOR",
+      //   "feature_icon": "assets/Power plant - blue.svg",
+      // },
+    ]
   }
 
   ionViewWillEnter(): void {
     if(this.appService.isLoggedIn()){
-      this.appService.appPages[1] = { title: 'Admin Home', url: '/admin-home', icon: 'person'}
+      this.appService.appPages[1] = { title: 'Admin Home', url: '/admin-home', icon: 'person', active:true }
     }else{
-      this.appService.appPages[1] = { title: 'Admin Login', url: '/admin', icon: 'person'}
+      this.appService.appPages[1] = { title: 'Admin Login', url: '/admin', icon: 'person', active:true }
     }  
   }
-
-  events = [
-    {
-      "name": "Event 1",
-      "subtitle": "Event subtitle",
-      "description": "Event description",
-      "color": "COLOR",
-      "feature_icon": "assets/Power plant - blue.svg",
-    },
-    {
-      "name": "Event 2",
-      "subtitle": "Event subtitle",
-      "description": "Event description",
-      "color": "COLOR",
-      "feature_icon": "assets/Power plant - blue.svg",
-    },
-  ]
 
 }

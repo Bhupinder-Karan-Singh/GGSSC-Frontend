@@ -71,14 +71,19 @@ export class AppComponent {
     }
   }
 
-  @HostListener('window:focus', ['$event'])
+  @HostListener('window:click', ['$event'])
   onFocus(event: FocusEvent) {
     if(this.appService.isLoggedIn()){
-      this.router.navigate(['/admin-home']);
-      this.appService.appPages[1] = { title: 'Admin Home', url: '/admin-home', icon: 'person'}
+      if(this.router.url == "/admin"){
+        this.router.navigate(['/admin-home']);
+      }
+      // this.router.navigate(['/admin-home']);
+      this.appService.appPages[1] = { title: 'Admin Home', url: '/admin-home', icon: 'person', active:true}
     }else{
-      this.appService.appPages[1] = { title: 'Admin Login', url: '/admin', icon: 'person'}
-      this.router.navigate(['/home']);
+      this.appService.appPages[1] = { title: 'Admin Login', url: '/admin', icon: 'person', active:true}
+      if(this.router.url == "/admin-home" || this.router.url == "/create-event"){
+        this.router.navigate(['/admin']);
+      }
     }  
   }
     

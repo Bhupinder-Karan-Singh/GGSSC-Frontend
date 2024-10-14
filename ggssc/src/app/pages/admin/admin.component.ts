@@ -34,10 +34,10 @@ export class AdminComponent  implements OnInit, ViewWillEnter {
     this.title = "Guru Gobind Singh Study Circle, Canada";
     this.page = "Admin";
     if(this.appService.isLoggedIn()){
-      this.appService.appPages[1] = { title: 'Admin Home', url: '/admin-home', icon: 'person'}
+      this.appService.appPages[1] = { title: 'Admin Home', url: '/admin-home', icon: 'person', active:true }
       this.router.navigate(['/admin-home']);
     }else{
-      this.appService.appPages[1] = { title: 'Admin Login', url: '/admin', icon: 'person'}
+      this.appService.appPages[1] = { title: 'Admin Login', url: '/admin', icon: 'person', active:true }
       this.router.navigate(['/admin']);
     }  
   }
