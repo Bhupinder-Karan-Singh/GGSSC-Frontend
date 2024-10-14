@@ -7,7 +7,7 @@
 
     <ion-list>
       <ion-item>
-        <ion-input labelPlacement="floating" [(ngModel)]="email">
+        <ion-input type="email" fill="solid" labelPlacement="floating" [(ngModel)]="email" email style="margin-bottom: 10px;">
           <div slot="label">Email 
             <ion-text color="primary">
             </ion-text>
@@ -16,7 +16,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-input labelPlacement="floating" type="password" [(ngModel)]="password">
+        <ion-input fill="solid" labelPlacement="floating" type="password" [(ngModel)]="password">
           <div slot="label">Password 
             <ion-text color="primary">
             </ion-text>

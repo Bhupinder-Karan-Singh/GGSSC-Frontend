@@ -19,6 +19,8 @@ import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AdminHomeComponent } from './pages/admin-home/admin-home.component';
 import { CreateEventComponent } from './pages/create-event/create-event.component'; 
 import { LogoutComponent } from './pages/logout/logout.component';
+import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { LogoutComponent } from './pages/logout/logout.component';
     RegistrationComponent,
     AdminHomeComponent,
     CreateEventComponent,
-    LogoutComponent
+    LogoutComponent,
+    ImageUploadComponent
   ],
   imports: [
     BrowserModule, 

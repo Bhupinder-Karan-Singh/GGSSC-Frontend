@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ImageProcessService } from 'src/app/services/image-process.service';
+import { UploadServiceService } from 'src/app/services/upload-service.service';
 
 @Component({
   selector: 'app-create-event',
@@ -6,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-event.component.scss'],
 })
 export class CreateEventComponent  implements OnInit {
+  eventName:any;
+  eventDescription:any;
+  fileName:any;
 
-  constructor() { }
+  imageGuidelines:any = {
+    "Image 1" : [
+      {full:"",short:""}
+    ]
+  }
 
-  ngOnInit() {}
+  constructor(
+    public uploadService: UploadServiceService
+  ) { }
 
+  ngOnInit() {
+  }
+
+  submit(){
+  }
+  
 }

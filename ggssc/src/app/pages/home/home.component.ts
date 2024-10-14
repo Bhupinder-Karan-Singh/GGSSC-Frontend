@@ -20,34 +20,34 @@ export class HomeComponent  implements OnInit {
     this.title = "Guru Gobind Singh Study Circle, Canada";
     this.page = "Registration";
     this.events = [
-      // {
-      //   "name": "Event 1",
-      //   "subtitle": "Event subtitle",
-      //   "description": "Event description",
-      //   "color": "COLOR",
-      //   "feature_icon": "assets/Power plant - blue.svg",
-      // },
-      // {
-      //   "name": "Event 2",
-      //   "subtitle": "Event subtitle",
-      //   "description": "Event description",
-      //   "color": "COLOR",
-      //   "feature_icon": "assets/Power plant - blue.svg",
-      // },
-      // {
-      //   "name": "Event 2",
-      //   "subtitle": "Event subtitle",
-      //   "description": "Event description",
-      //   "color": "COLOR",
-      //   "feature_icon": "assets/Power plant - blue.svg",
-      // },
-      // {
-      //   "name": "Event 2",
-      //   "subtitle": "Event subtitle",
-      //   "description": "Event description",
-      //   "color": "COLOR",
-      //   "feature_icon": "assets/Power plant - blue.svg",
-      // },
+      {
+        "name": "Event 1",
+        "subtitle": "Event subtitle",
+        "description": "Event description",
+        "color": "COLOR",
+        "feature_icon": "assets/Power plant - blue.svg",
+      },
+      {
+        "name": "Event 2",
+        "subtitle": "Event subtitle",
+        "description": "Event description",
+        "color": "COLOR",
+        "feature_icon": "assets/Power plant - blue.svg",
+      },
+      {
+        "name": "Event 2",
+        "subtitle": "Event subtitle",
+        "description": "Event description",
+        "color": "COLOR",
+        "feature_icon": "assets/Power plant - blue.svg",
+      },
+      {
+        "name": "Event 2",
+        "subtitle": "Event subtitle",
+        "description": "Event description",
+        "color": "COLOR",
+        "feature_icon": "assets/Power plant - blue.svg",
+      },
     ]
   }
 
