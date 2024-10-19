@@ -1,5 +1,4 @@
 <ion-app>
-
   <ion-header [translucent]="true">
     <ion-toolbar>
       <ion-buttons slot="start">
@@ -16,8 +15,8 @@
           <!-- <ion-list-header>Welcome</ion-list-header> -->
           <ion-note></ion-note>
 
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appService.appPages; let i = index">
+            <ion-item *ngIf="p.active" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
@@ -31,9 +30,11 @@
   <ion-footer [translucent]="true">
     <ion-toolbar>
       <ion-title id="footer-title">
-          &copy;  {{currentYear}}. All rights reserved.
+          <!-- &copy; GGSSC {{currentYear}}. All rights reserved. -->
+          &copy; {{currentYear}}. All rights reserved.
       </ion-title>
     </ion-toolbar>
+    
   </ion-footer>
   
 </ion-app>

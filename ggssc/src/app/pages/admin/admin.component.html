@@ -1,0 +1,31 @@
+
+  <div id="container" *ngIf="!appService.isLoggedIn()">
+
+    <div class="text-center">
+      <img class="img-fluid" src="/assets/icon/login.png" style="width:100px;"/>
+    </div><h5 class="text-center">Admin Login</h5>
+
+    <ion-list>
+      <ion-item>
+        <ion-input type="email" fill="solid" labelPlacement="floating" [(ngModel)]="email" email style="margin-bottom: 10px;">
+          <div slot="label">Email 
+            <ion-text color="primary">
+            </ion-text>
+          </div>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input fill="solid" labelPlacement="floating" type="password" [(ngModel)]="password">
+          <div slot="label">Password 
+            <ion-text color="primary">
+            </ion-text>
+          </div>
+        </ion-input>
+      </ion-item>
+
+      <ion-button expand="block" (click)="login()" (keydown.enter)="login()">Login</ion-button>
+
+      <a href="www.bhupinderkaransingh.com" target="_blank">Forgot password</a>
+    </ion-list>
+  </div>
