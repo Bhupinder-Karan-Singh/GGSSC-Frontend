@@ -96,7 +96,7 @@ export class ImageUploadComponent  implements OnInit {
       this.uploadService.capturingStep = stepTitle
       this.uploadService.setImages([imageObject]);
       this.uploadService.uploadResource(imageFile,fileName).subscribe((result:any)=>{
-      },(e)=>{
+        },(e)=>{
       })
     }
 

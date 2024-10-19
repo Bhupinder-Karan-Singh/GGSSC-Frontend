@@ -8,6 +8,7 @@
   <ion-list>
     <ion-item>
       <ion-input 
+      (ngModelChange)="detectChanges($event)"
       fill="solid" 
       labelPlacement="floating" 
       [(ngModel)]="eventName" 
@@ -35,7 +36,7 @@
     </ion-item>
     
     <ion-item>
-      <ion-input 
+      <!-- <ion-input 
       fill="solid" 
       labelPlacement="floating" 
       [(ngModel)]="fileName" 
@@ -45,13 +46,15 @@
         <ion-text color="primary">
         </ion-text>
       </div>
-      </ion-input>
+      </ion-input> -->
       
-      <app-image-upload [imageGuidelines]=imageGuidelines></app-image-upload>
+      <div class="image-content" style="display: flex; justify-content: center;">
+        <app-image-upload [imageGuidelines]=imageGuidelines></app-image-upload>
+      </div>
 
     </ion-item>
 
-    <ion-button expand="block" (click)="submit()">Create event</ion-button>
+    <ion-button color="success" expand="block" [disabled]="buttonDisabled" (click)="submit()">Create event</ion-button>
 
   </ion-list>
 </div>

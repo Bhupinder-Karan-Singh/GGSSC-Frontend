@@ -11,11 +11,10 @@ export class CreateEventComponent  implements OnInit {
   eventName:any;
   eventDescription:any;
   fileName:any;
+  buttonDisabled = true
 
   imageGuidelines:any = {
-    "Image 1" : [
-      {full:"",short:""}
-    ]
+    "cover-photo" : []
   }
 
   constructor(
@@ -26,6 +25,14 @@ export class CreateEventComponent  implements OnInit {
   }
 
   submit(){
+  }
+
+  detectChanges(event:any){
+    if(event.length >= 3){
+      this.buttonDisabled = false
+    }else{
+      this.buttonDisabled = true
+    }
   }
   
 }
