@@ -26,3 +26,20 @@ ion-menu-button {
   #container a {
     text-decoration: none;
   }
+
+  ion-item{
+    width:80%; 
+    margin: auto; 
+    margin-bottom: 20px;
+    --border-style: 0px
+  }
+
+  ion-button{
+    width:30%; 
+    margin: auto; 
+    margin-bottom: 10px;
+  }
+
+  ion-item:first-child {
+    margin-bottom: 0px;
+  }

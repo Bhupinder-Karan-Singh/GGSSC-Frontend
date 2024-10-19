@@ -1,0 +1,25 @@
+<div id="container">
+  <div id="card-container">
+
+    <div *ngIf="events.length > 0">
+      <ion-card *ngFor="let event of events; let i = index">
+        <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+        <ion-card-header>
+          <ion-card-title>{{event.name}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{event.subtitle}}
+        </ion-card-content>
+        <ion-button fill="clear">Register</ion-button>
+        <ion-button fill="clear">Already registered ?</ion-button>
+      </ion-card>
+    </div>
+
+    <div *ngIf="events.length <= 0">
+      <span>
+        No event to display !!!
+      </span>
+    </div>
+
+  </div>
+</div>
