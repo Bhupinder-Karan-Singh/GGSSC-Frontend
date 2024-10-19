@@ -8,6 +8,8 @@ ion-menu-button {
     left: 0;
     right: 0;
     top: 50%;
+    height:80%;
+    overflow: auto;
     transform: translateY(-50%);
   }
   
@@ -35,7 +37,7 @@ ion-menu-button {
   }
 
   ion-button{
-    width:30%; 
+    width: 50%; 
     margin: auto; 
     margin-bottom: 10px;
   }
@@ -43,3 +45,12 @@ ion-menu-button {
   ion-item:first-child {
     margin-bottom: 0px;
   }
+
+  .image-content{
+    width:100%
+  }
+
+  app-image-upload{
+    width:70%
+  }
+

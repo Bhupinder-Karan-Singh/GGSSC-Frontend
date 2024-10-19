@@ -7,6 +7,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { Observable } from 'rxjs';
+import { AppServiceService } from './app-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthServiceService {
     private angularFireAuth: AngularFireAuth,
     private router: Router, 
     private http: HttpClient,
-    public toastr: ToastrService) {
+    public appService: AppServiceService) {
       this.userData = angularFireAuth.authState;
       this.userData.subscribe( userInfo => {
         this.saveIdToken(userInfo!);
@@ -29,11 +30,13 @@ export class AuthServiceService {
     this.angularFireAuth['signInWithEmailAndPassword'](email, password).then((res: any) => {
         localStorage.setItem('email', email);
         this.saveIdToken(res.user);
+        this.appService.appPages[1] = { title: 'Admin Home', url: '/admin-home', icon: 'person', active:true }
+        this.appService.appPages[2].active = true
         this.router.navigate(['/admin-home'])
       })
-      .catch((err: { message: any; }) => {
-        // this.messageService.newMessage(err.message);
-        this.toastr.error(err.message,'Message');
+      .catch((err) => {
+        const errorMessage = err.message.replace(/.*Firebase:\s/, '').trim();
+        this.appService.presentToast('top',errorMessage)
       });
   }
 
@@ -42,6 +45,8 @@ export class AuthServiceService {
     localStorage.clear();
     localStorage.removeItem('user_email');
     localStorage.removeItem('idToken');
+    this.appService.appPages[1] = { title: 'Admin Login', url: '/admin', icon: 'person', active:true }
+    this.appService.appPages[2].active = false
     this.router.navigate(['/admin'])
   } 
 

@@ -1,3 +1,16 @@
 <div id="container">
-  <ion-button expand="block" (click)="logout()">Logout</ion-button>
+  <div id="card-container">
+
+    <ion-card *ngFor="let feature of featureList; let i = index">
+      <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+      <ion-card-header>
+        <ion-card-title>{{feature.name}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{feature.description}}
+      </ion-card-content>
+      <ion-button color="primary" expand="block" (click)="proceed(feature.task)">Proceed</ion-button>
+    </ion-card>
+    
+  </div>
 </div>

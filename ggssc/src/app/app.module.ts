@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +17,10 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AdminHomeComponent } from './pages/admin-home/admin-home.component';
+import { CreateEventComponent } from './pages/create-event/create-event.component'; 
+import { LogoutComponent } from './pages/logout/logout.component';
+import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
+
 
 @NgModule({
   declarations: [
@@ -23,11 +28,16 @@ import { AdminHomeComponent } from './pages/admin-home/admin-home.component';
     HomeComponent,
     AdminComponent,
     RegistrationComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    CreateEventComponent,
+    LogoutComponent,
+    ImageUploadComponent
   ],
   imports: [
     BrowserModule, 
+    BrowserAnimationsModule,
     IonicModule.forRoot(
+      
     ), 
     AppRoutingModule,
     CommonModule,
