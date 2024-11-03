@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CreateEventServiceService } from 'src/app/services/create-event-service.service';
 import { ImageProcessService } from 'src/app/services/image-process.service';
 import { UploadServiceService } from 'src/app/services/upload-service.service';
 
@@ -12,19 +13,30 @@ export class CreateEventComponent  implements OnInit {
   eventDescription:any;
   fileName:any;
   buttonDisabled = true
+  payload:any
 
   imageGuidelines:any = {
     "cover-photo" : []
   }
 
   constructor(
-    public uploadService: UploadServiceService
+    public uploadService: UploadServiceService,
+    private createEvenet: CreateEventServiceService
   ) { }
 
   ngOnInit() {
   }
 
   submit(){
+    this.payload = {
+      "eventName":this.eventName,
+      "eventDescription":this.eventDescription,
+      "images":this.uploadService.capturedImages
+    }
+    console.log(this.payload)
+    this.createEvenet.submitEvent(this.payload).subscribe((response:any)=>{
+      console.log(response)
+    })
   }
 
   detectChanges(event:any){

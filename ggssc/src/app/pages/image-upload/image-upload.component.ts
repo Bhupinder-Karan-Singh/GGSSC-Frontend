@@ -30,10 +30,11 @@ export class ImageUploadComponent  implements OnInit {
           if(i>=1)
           return;
           let file = event.target.files[i];
+          console.log(file)
           const reader = new FileReader();
             if(this.uploadService.capturedImages?.stepTitle){
               reader.onload = e => {
-                var fileName = stepTitle
+                var fileName = file.name
                 if(file.size > 1 * 1024 *1024 && file.size < 15 * 1024 *1024){
                   this.imageProcess.imgToFile(reader.result,fileName,file.type).then((imageFile) => {
                     this.imageAnalysis(imageFile,fileName,stepTitle,reader)
@@ -48,7 +49,7 @@ export class ImageUploadComponent  implements OnInit {
               }
             }else{
               reader.onload = e => {
-                var fileName = stepTitle
+                var fileName = file.name
                 if(file.size > 1 * 1024 * 1024 && file.size < 15 * 1024 * 1024){
                   this.imageProcess.imgToFile(reader.result,fileName,file.type).then((imageFile) => {
                     this.imageAnalysis(imageFile,fileName,stepTitle,reader)
@@ -90,14 +91,14 @@ export class ImageUploadComponent  implements OnInit {
 
     imageAnalysis(imageFile:any,fileName:any,stepTitle:any,reader:any){
       var imageObject = {
-        title:stepTitle,
+        title:fileName,
         img: reader.result,
       }
       this.uploadService.capturingStep = stepTitle
       this.uploadService.setImages([imageObject]);
-      this.uploadService.uploadResource(imageFile,fileName).subscribe((result:any)=>{
-        },(e)=>{
-      })
+      // this.uploadService.uploadResource(imageFile,fileName).subscribe((result:any)=>{
+      //   },(e)=>{
+      // })
     }
 
     deleteImage(stepTitle:any,toDelete:any){
