@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpServiceService } from './http-service.service';
@@ -13,7 +13,11 @@ export class CreateEventServiceService {
     private http:HttpClient
   ) {}
 
+  
   submitEvent(payload:any){
-    return this.http.post(environment.appsEndpoint+"/form/createEvent",payload);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+    return this.httpService.post(environment.appsEndpoint+"/form/createEvent",payload, {headers});
   }
 }
