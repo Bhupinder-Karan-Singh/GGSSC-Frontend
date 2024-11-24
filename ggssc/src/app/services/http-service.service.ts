@@ -16,6 +16,19 @@ export class HttpServiceService {
     private router: Router
   ) { }
 
+  get(url:any): Observable<any> {
+    return this.http.get<any>(url).pipe(    
+      map((resp:any) => {
+          return resp
+      }),
+      timeout(Timeout),
+      catchError(error => {
+        console.error('Error in PUT request:', error);
+        throw error;
+      })
+    );
+  }
+
   post(url:any, payload:any, headers:any): Observable<any> {
       return this.http.post<any>(url, payload, headers).pipe(    
         map((resp:any) => {

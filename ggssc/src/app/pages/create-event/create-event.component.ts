@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateEventServiceService } from 'src/app/services/create-event-service.service';
+import { Router } from '@angular/router';
+import { EventServiceService } from 'src/app/services/event-service.service';
 import { ImageProcessService } from 'src/app/services/image-process.service';
 import { UploadServiceService } from 'src/app/services/upload-service.service';
 
@@ -16,12 +17,13 @@ export class CreateEventComponent  implements OnInit {
   payload:any
 
   imageGuidelines:any = {
-    "cover-photo" : []
+    "coverPhoto" : []
   }
 
   constructor(
     public uploadService: UploadServiceService,
-    private createEvenet: CreateEventServiceService
+    private eventService: EventServiceService,
+    private router:Router,
   ) { }
 
   ngOnInit() {
@@ -31,11 +33,13 @@ export class CreateEventComponent  implements OnInit {
     this.payload = {
       "eventName":this.eventName,
       "eventDescription":this.eventDescription,
-      "images":this.uploadService.capturedImages
+      "images":this.uploadService.capturedImages,
+      "status":"active"
     }
     console.log(this.payload)
-    this.createEvenet.submitEvent(this.payload).subscribe((response:any)=>{
-      console.log(response)
+    this.eventService.submitEvent(this.payload).subscribe((response:any)=>{
+      this.uploadService.capturedImages = {}
+      this.router.navigate(['/home']);
     })
   }
 

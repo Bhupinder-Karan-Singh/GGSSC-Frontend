@@ -6,7 +6,7 @@ import { HttpServiceService } from './http-service.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CreateEventServiceService {
+export class EventServiceService {
 
   constructor(
     private httpService: HttpServiceService,
@@ -19,5 +19,9 @@ export class CreateEventServiceService {
       'Content-Type': 'application/x-www-form-urlencoded'
     });
     return this.httpService.post(environment.appsEndpoint+"/form/createEvent",payload, {headers});
+  }
+
+  getEvents(){
+    return this.httpService.get(environment.appsEndpoint+"/form/getEvents");
   }
 }
