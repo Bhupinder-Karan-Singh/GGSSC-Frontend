@@ -20,7 +20,9 @@ import { AdminHomeComponent } from './pages/admin-home/admin-home.component';
 import { CreateEventComponent } from './pages/create-event/create-event.component'; 
 import { LogoutComponent } from './pages/logout/logout.component';
 import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
-
+import { MatTableModule } from '@angular/material/table';
+import { EditEventsComponent } from './pages/edit-events/edit-events.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -31,14 +33,13 @@ import { ImageUploadComponent } from './pages/image-upload/image-upload.componen
     AdminHomeComponent,
     CreateEventComponent,
     LogoutComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    EditEventsComponent
   ],
   imports: [
     BrowserModule, 
     BrowserAnimationsModule,
-    IonicModule.forRoot(
-      
-    ), 
+    IonicModule.forRoot( ), 
     AppRoutingModule,
     CommonModule,
     FormsModule,
@@ -51,11 +52,13 @@ import { ImageUploadComponent } from './pages/image-upload/image-upload.componen
       closeButton: true,
       }),
       AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    MatTableModule,
+    MatDividerModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   AuthServiceService],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

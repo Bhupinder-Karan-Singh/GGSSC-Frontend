@@ -34,9 +34,35 @@
       width:80%; 
       margin: auto; 
       margin-bottom: 20px;
+      background-color: rgb(246, 246, 246);
+      ion-card-header{
+        padding:0px
+      }
+      ion-title{
+        margin:5px
+      }
   }
   
   ion-card:last-child {
       margin-bottom: 5px;
+  }
+
+  .img-event:hover{
+    transform: scale(1.02);
+    opacity: 0.3;
+  }
+ 
+  .img-event{
+      transition: all 0.2s ease-in-out;
+      border-radius: 0.5em;
+      width: 50%;
+      height: 50%;
+      margin: 10px;
+  }
+
+  ion-card-title{
+    color: darkgoldenrod;
+    font-family: sans-serif;
+    font-weight: 600;
   }
   
