@@ -3,6 +3,7 @@
     
     <div *ngIf="events.length > 0">
       <ion-card *ngFor="let event of events; let i = index">
+        <ion-title>Event #{{i+1}}</ion-title>
         <a [href]="event.images" download="event.jpg">
           <img class="img-event" alt="Event Image" [src]="event.images"/>
         </a>

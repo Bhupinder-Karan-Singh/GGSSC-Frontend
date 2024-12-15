@@ -34,6 +34,13 @@
       width:80%; 
       margin: auto; 
       margin-bottom: 20px;
+      background-color: rgb(246, 246, 246);
+      ion-card-header{
+        padding:0px
+      }
+      ion-title{
+        margin:5px
+      }
   }
   
   ion-card:last-child {
