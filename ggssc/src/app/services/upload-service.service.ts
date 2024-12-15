@@ -11,16 +11,15 @@ export class UploadServiceService {
 
   constructor() { }
 
-  uploadResource(imgFile:any,title:any){
-    var observable = new Observable(subscriber=>{
-      var formData: any = new FormData();
-      formData.append("file", imgFile);
-    })
-    return observable;
-  }
+  // uploadResource(imgFile:any,title:any){
+  //   var observable = new Observable(subscriber=>{
+  //     var formData: any = new FormData();
+  //     formData.append("file", imgFile);
+  //   })
+  //   return observable;
+  // }
   
   setImages(images:any){
-    console.log(this.capturingStep)
     images.forEach((image:any) => {
       if(this.capturedImages[this.capturingStep]){
         this.capturedImages[this.capturingStep] = [image]
@@ -28,7 +27,6 @@ export class UploadServiceService {
         this.capturedImages[this.capturingStep] = [image]
       }
     });
-    console.log(this.capturedImages)
   }
 
 }

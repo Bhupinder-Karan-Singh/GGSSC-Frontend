@@ -38,7 +38,7 @@ export class AdminHomeComponent  implements OnInit {
       "description": "Edit already created event",
       "color": "COLOR",
       "feature_icon": "assets/Power plant - blue.svg",
-      "task":"editEvent"
+      "task":"editEvents"
     },
     {
       "name": "Candidate list",
@@ -61,6 +61,9 @@ export class AdminHomeComponent  implements OnInit {
   proceed(task:string){
     if(task=="createEvent"){
       this.router.navigate(['/create-event']);
+    }
+    if(task=="editEvents"){
+      this.router.navigate(['/edit-events']);
     }
   }
 }

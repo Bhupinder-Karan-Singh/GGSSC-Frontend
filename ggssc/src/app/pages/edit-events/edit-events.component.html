@@ -1,0 +1,50 @@
+<div id="container" *ngIf="!loading">
+
+  <div style="text-align: right;">
+    <a style="margin: 10px; cursor: pointer;" color="primary" expand="block" (click)="createEvent()">Create Event</a>
+  </div>
+  <div *ngIf="events.length > 0">
+      <ion-title>{{title}}</ion-title>
+  </div>
+
+  <div id="card-container">
+    <div *ngIf="events.length <= 0">
+      <p>
+        No Event Found
+      </p>
+    </div>
+    <table *ngIf="events.length > 0" mat-table [dataSource]="events" class="mat-elevation-z8" style="margin-top:15px; margin-bottom:15px;">
+      <ng-container matColumnDef="Event">
+        <th mat-header-cell *matHeaderCellDef>Event</th>
+        <td mat-cell *matCellDef="let element">{{element.eventName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Desc">
+        <th mat-header-cell *matHeaderCellDef>Desc</th>
+        <td mat-cell *matCellDef="let element">{{element.eventDescription}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">{{element.status}} </td>
+      </ng-container>
+      <ng-container matColumnDef="File">
+        <th mat-header-cell *matHeaderCellDef>File</th>
+        <td mat-cell *matCellDef="let element">
+          <a [href]="element.images" download="event.jpg">
+            <img class="img-event" alt="Image" [src]="element.images"/>
+          </a>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element; let j = index">
+          <a style="cursor: pointer;" (click)="edit(element,j)">Edit</a> |
+          <a style="cursor: pointer;" (click)="delete(element,j)">Delete</a>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <mat-divider></mat-divider>
+    </table>
+
+  </div>
+</div>
