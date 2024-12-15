@@ -22,6 +22,7 @@ import { LogoutComponent } from './pages/logout/logout.component';
 import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
 import { MatTableModule } from '@angular/material/table';
 import { EditEventsComponent } from './pages/edit-events/edit-events.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { EditEventsComponent } from './pages/edit-events/edit-events.component';
       }),
       AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    MatTableModule
+    MatTableModule,
+    MatDividerModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

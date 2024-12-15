@@ -1,6 +1,6 @@
 <div id="container" *ngIf="!loading">
   <div id="card-container">
-
+    
     <div *ngIf="events.length > 0">
       <ion-card *ngFor="let event of events; let i = index">
         <a [href]="event.images" download="event.jpg">

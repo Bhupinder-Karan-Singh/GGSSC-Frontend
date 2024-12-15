@@ -41,4 +41,17 @@ export class HttpServiceService {
         })
       );
   }
+
+  delete(url:any): Observable<any> {
+    return this.http.delete<any>(url).pipe(    
+      map((resp:any) => {
+          return resp
+      }),
+      timeout(Timeout),
+      catchError(error => {
+        console.error('Error in PUT request:', error);
+        throw error;
+      })
+    );
+}
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { EventServiceService } from 'src/app/services/event-service.service';
 
@@ -9,30 +10,50 @@ import { EventServiceService } from 'src/app/services/event-service.service';
 })
 export class EditEventsComponent  implements OnInit {
 
-  displayedColumns: string[] = ['Event Name','Event Description','Edit'];
+  displayedColumns: string[] = ['Event Name','Event Description','Status','Cover Photo','Action'];
   events:any = []
-  loading:any
+  loading = true
+  title = "Events List"
 
   constructor(
     private eventService: EventServiceService,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private router: Router
   ) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(): void {
+    this.loading = true
+    this.appComponent.isLoading = true
     this.eventService.getEvents().subscribe((response:any)=>{
-      console.log(response)
-      if(response.length>0){
-        this.events = response
-        this.loading = false
-        this.appComponent.isLoading = false
+      this.events = response
+      this.loading = false
+      this.appComponent.isLoading = false
+    })
+  }
+
+  edit(element:any,index:any){
+    this.router.navigate(
+      ['/create-event/'+element._id ]
+    );
+  }
+
+  delete(element:any, index:any){
+    this.loading = true
+    this.appComponent.isLoading = true
+    this.eventService.deleteEvent(element._id).subscribe((response:any)=>{
+      this.loading = false
+      this.appComponent.isLoading = false
+      if(response == "Deleted"){
+        window.location.reload()
       }
     })
   }
 
-  edit(element:any, rack:any,index:any){
-  }
-
-  save(element:any, rack:any,index:any){
+  createEvent(){
+    this.router.navigate(['/create-event']);
   }
 
 }

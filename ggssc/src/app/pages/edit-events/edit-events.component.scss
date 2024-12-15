@@ -41,7 +41,19 @@
     }
     
     ion-button{
-      width:30%; 
       margin: auto; 
-      margin-bottom: 20px;
+    //   margin-bottom: 20px;
+    }
+
+    .img-event:hover{
+        transform: scale(1.02);
+        opacity: 0.3;
+      }
+     
+    .img-event{
+        transition: all 0.2s ease-in-out;
+        border-radius: 0.5em;
+        object-fit: cover;
+        width:100px;
+        margin:10px
     }

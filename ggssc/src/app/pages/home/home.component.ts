@@ -34,6 +34,9 @@ export class HomeComponent  implements OnInit {
         });
         this.loading = false
         this.appComponent.isLoading = false
+      }else{
+        this.loading = false
+        this.appComponent.isLoading = false
       }
     })
   }

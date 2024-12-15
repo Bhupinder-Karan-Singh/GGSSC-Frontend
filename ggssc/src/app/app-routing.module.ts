@@ -38,6 +38,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
+    path: 'create-event/:formPayloadId',
+    component:CreateEventComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
     path: 'edit-events',
     component:EditEventsComponent,
     canActivate: [AuthGuardService]
