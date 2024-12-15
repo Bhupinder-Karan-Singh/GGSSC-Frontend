@@ -1,7 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ViewWillEnter } from '@ionic/angular';
+import { AppComponent } from 'src/app/app.component';
 import { AppServiceService } from 'src/app/services/app-service.service';
+import { EventServiceService } from 'src/app/services/event-service.service';
 
 @Component({
   selector: 'app-home',
@@ -11,30 +13,32 @@ import { AppServiceService } from 'src/app/services/app-service.service';
 export class HomeComponent  implements OnInit {
   public title!: string;
   public page!: string;
-  events:any
+  events:any = []
+  loading:any
   constructor(
-    private appService : AppServiceService
+    private appService : AppServiceService,
+    private eventService: EventServiceService,
+    private appComponent: AppComponent
   ) {}
 
   ngOnInit() {
     this.title = "Guru Gobind Singh Study Circle, Canada";
     this.page = "Registration";
-    this.events = [
-      {
-        "name": "Event 1",
-        "subtitle": "Event subtitle",
-        "description": "Event description",
-        "color": "COLOR",
-        "feature_icon": "assets/Power plant - blue.svg",
-      },
-      {
-        "name": "Event 2",
-        "subtitle": "Event subtitle",
-        "description": "Event description",
-        "color": "COLOR",
-        "feature_icon": "assets/Power plant - blue.svg",
-      },
-    ]
+    this.loading = true
+    this.appComponent.isLoading = true
+    this.appComponent.showLoading()
+    this.eventService.getEvents().subscribe((response:any)=>{
+      if(response.length>0){
+        response.forEach((element:any) => {
+          this.events.push(element)
+        });
+        this.loading = false
+        this.appComponent.isLoading = false
+      }else{
+        this.loading = false
+        this.appComponent.isLoading = false
+      }
+    })
   }
 
   ionViewWillEnter(): void {

@@ -50,7 +50,6 @@ export class AppComponent {
     if (condition) {
       await loading.dismiss();
     } else {
-      console.log('Condition not met');
       await loading.dismiss();  // Make sure to always dismiss to prevent a hanging spinner
     }
   }
@@ -77,7 +76,6 @@ export class AppComponent {
       if(this.router.url == "/admin"){
         this.router.navigate(['/admin-home']);
       }
-      // this.router.navigate(['/admin-home']);
       this.appService.appPages[1] = { title: 'Admin Home', url: '/admin-home', icon: 'person', active:true}
     }else{
       this.appService.appPages[1] = { title: 'Admin Login', url: '/admin', icon: 'person', active:true}
