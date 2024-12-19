@@ -32,14 +32,13 @@ ion-menu-button {
   ion-item{
     width:80%; 
     margin: auto; 
-    margin-bottom: 20px;
     --border-style: 0px
   }
 
   ion-button{
-    width: 50%; 
+    width: 100%; 
     margin: auto; 
-    margin-bottom: 10px;
+    margin-top:0px
   }
 
   ion-item:first-child {
@@ -51,6 +50,6 @@ ion-menu-button {
   }
 
   app-image-upload{
-    width:70%
+    width:100%
   }
 

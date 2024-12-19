@@ -1,7 +1,7 @@
 
 export const environment = {
   production: false,
-  appsEndpoint:"https://singhbhupinderkaran.com:8443/apps/api/v1",
+  appsEndpoint:"https://www.singhbhupinderkaran.com:8443/apps/api/v1",
   firebaseConfig: {
     apiKey: "AIzaSyDExtqeZgYySV8z9yFd4HAHwElFsHKjKUA",
     authDomain: "photo-application-bk-singh.firebaseapp.com",
