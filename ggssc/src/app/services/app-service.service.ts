@@ -6,6 +6,8 @@ import { ToastController } from '@ionic/angular';
 })
 export class AppServiceService {
 
+  public loading: any;
+  public loadingSubMessage:any
   public isLoading = false
   public appPages = [
     { title: 'Home', url: '/home', icon: 'home', active:true},

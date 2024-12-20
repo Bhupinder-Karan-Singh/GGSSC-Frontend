@@ -52,7 +52,7 @@
       </div>
       </ion-input> -->
       <div class="image-content" style="display: flex; justify-content: center;">
-        <app-image-upload [imageGuidelines]=imageGuidelines></app-image-upload>
+        <app-image-upload [imageGuidelines]=imageGuidelines (imageChanged)="handleImageChange($event)"></app-image-upload>
       </div>
     </ion-item>
 

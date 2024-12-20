@@ -1,0 +1,5 @@
+<div class="loading-cont">
+  <mat-spinner [diameter]="50" [strokeWidth]="3" class="mat-spinner-color"></mat-spinner>
+  <span class="heavy">{{appService.loading}}</span>
+  <span *ngIf="appService.loadingSubMessage" class="sub-msg">{{appService.loadingSubMessage}}</span>
+</div>

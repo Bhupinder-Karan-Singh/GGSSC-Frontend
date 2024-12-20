@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
+import { AppServiceService } from 'src/app/services/app-service.service';
 import { EventServiceService } from 'src/app/services/event-service.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class EditEventsComponent  implements OnInit {
   constructor(
     private eventService: EventServiceService,
     private appComponent: AppComponent,
-    private router: Router
+    private router: Router,
+    private appService: AppServiceService
   ) { }
 
   ngOnInit() {
@@ -26,11 +28,16 @@ export class EditEventsComponent  implements OnInit {
 
   ionViewWillEnter(): void {
     this.loading = true
-    this.appComponent.isLoading = true
+    this.appService.loading = "Loading...";
     this.eventService.getEvents().subscribe((response:any)=>{
-      this.events = response
-      this.loading = false
-      this.appComponent.isLoading = false
+      if(response.length>0){
+        this.events = response
+        this.loading = false
+        this.appService.loading = false;
+      }else{
+        this.loading = false
+        this.appService.loading = false;
+      }
     })
   }
 
@@ -43,9 +50,10 @@ export class EditEventsComponent  implements OnInit {
   delete(element:any, index:any){
     this.loading = true
     this.appComponent.isLoading = true
+    this.appService.loading = "Loading...";
     this.eventService.deleteEvent(element._id).subscribe((response:any)=>{
       this.loading = false
-      this.appComponent.isLoading = false
+      this.appService.loading = false;
       if(response == "Deleted"){
         window.location.reload()
       }

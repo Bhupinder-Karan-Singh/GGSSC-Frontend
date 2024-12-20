@@ -24,19 +24,22 @@ export class HomeComponent  implements OnInit {
   ngOnInit() {
     this.title = "Guru Gobind Singh Study Circle, Canada";
     this.page = "Registration";
+    this.appService.loading = "Loading...";
     this.loading = true
-    this.appComponent.isLoading = true
-    this.appComponent.showLoading()
+    // this.appComponent.isLoading = true
+    // this.appComponent.showLoading()
     this.eventService.getEvents().subscribe((response:any)=>{
       if(response.length>0){
         response.forEach((element:any) => {
           this.events.push(element)
         });
         this.loading = false
-        this.appComponent.isLoading = false
+        // this.appComponent.isLoading = false
+        this.appService.loading = false
       }else{
         this.loading = false
-        this.appComponent.isLoading = false
+        // this.appComponent.isLoading = false
+        this.appService.loading = false
       }
     })
   }

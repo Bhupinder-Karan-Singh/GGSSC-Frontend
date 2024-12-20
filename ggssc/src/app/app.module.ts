@@ -23,6 +23,8 @@ import { ImageUploadComponent } from './pages/image-upload/image-upload.componen
 import { MatTableModule } from '@angular/material/table';
 import { EditEventsComponent } from './pages/edit-events/edit-events.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { LoadingComponent } from './pages/loading/loading.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { MatDividerModule } from '@angular/material/divider';
     CreateEventComponent,
     LogoutComponent,
     ImageUploadComponent,
-    EditEventsComponent
+    EditEventsComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule, 
@@ -54,7 +57,8 @@ import { MatDividerModule } from '@angular/material/divider';
       AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     MatTableModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
