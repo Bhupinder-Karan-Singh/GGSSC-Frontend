@@ -43,6 +43,7 @@ export class AppServiceService {
           },
         },
       ],
+      cssClass: 'custom-toast',
     });
     await toast.present();
   }

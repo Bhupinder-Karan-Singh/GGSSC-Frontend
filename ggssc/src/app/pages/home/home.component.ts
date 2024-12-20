@@ -41,6 +41,10 @@ export class HomeComponent  implements OnInit {
         // this.appComponent.isLoading = false
         this.appService.loading = false
       }
+    },(error) => {
+      this.appService.loading = false
+      const errorMessage = "Internal Server Error : "+error.statusText;
+      this.appService.presentToast('top',errorMessage)
     })
   }
 

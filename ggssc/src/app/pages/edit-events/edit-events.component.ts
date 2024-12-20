@@ -38,6 +38,10 @@ export class EditEventsComponent  implements OnInit {
         this.loading = false
         this.appService.loading = false;
       }
+    },(error) => {
+      this.appService.loading = false
+      const errorMessage = "Internal Server Error : "+error.statusText;
+      this.appService.presentToast('top',errorMessage)
     })
   }
 
@@ -57,6 +61,10 @@ export class EditEventsComponent  implements OnInit {
       if(response == "Deleted"){
         window.location.reload()
       }
+    },(error) => {
+      this.appService.loading = false
+      const errorMessage = "Internal Server Error : "+error.statusText;
+      this.appService.presentToast('top',errorMessage)
     })
   }
 
