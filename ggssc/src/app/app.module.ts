@@ -25,6 +25,7 @@ import { EditEventsComponent } from './pages/edit-events/edit-events.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { LoadingComponent } from './pages/loading/loading.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AngularFireAuthModule,
     MatTableModule,
     MatDividerModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDatepickerModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

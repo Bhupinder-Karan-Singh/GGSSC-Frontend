@@ -39,6 +39,10 @@ export class EventServiceService {
     return this.httpService.get(environment.appsEndpoint+"/form/getEvents");
   }
 
+  getAllEvents(){
+    return this.httpService.get(environment.appsEndpoint+"/form/getAllEvents");
+  }
+
   getEvent(id:any){
     return this.httpService.get(environment.appsEndpoint+"/form/getEvent?payloadId="+id);
   }

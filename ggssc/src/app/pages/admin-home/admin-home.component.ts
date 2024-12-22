@@ -40,14 +40,14 @@ export class AdminHomeComponent  implements OnInit {
       "feature_icon": "assets/Power plant - blue.svg",
       "task":"editEvents"
     },
-    {
-      "name": "Candidate list",
-      "subtitle": "Event subtitle",
-      "description": "Event details",
-      "color": "COLOR",
-      "feature_icon": "assets/Power plant - blue.svg",
-      "task":"candidateList"
-    },
+    // {
+    //   "name": "Candidate list",
+    //   "subtitle": "Event subtitle",
+    //   "description": "Event details",
+    //   "color": "COLOR",
+    //   "feature_icon": "assets/Power plant - blue.svg",
+    //   "task":"candidateList"
+    // },
   ]
 
   logout(){

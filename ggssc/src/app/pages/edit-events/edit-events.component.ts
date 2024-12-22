@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { AppComponent } from 'src/app/app.component';
 import { AppServiceService } from 'src/app/services/app-service.service';
 import { EventServiceService } from 'src/app/services/event-service.service';
@@ -11,7 +12,7 @@ import { EventServiceService } from 'src/app/services/event-service.service';
 })
 export class EditEventsComponent  implements OnInit {
 
-  displayedColumns: string[] = ['Event','Desc','Status','File','Action'];
+  // displayedColumns: string[] = ['Event','Desc','Status','File','Action'];
   events:any = []
   loading = true
   title = "Events List"
@@ -20,7 +21,8 @@ export class EditEventsComponent  implements OnInit {
     private eventService: EventServiceService,
     private appComponent: AppComponent,
     private router: Router,
-    private appService: AppServiceService
+    private appService: AppServiceService,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -29,7 +31,7 @@ export class EditEventsComponent  implements OnInit {
   ionViewWillEnter(): void {
     this.loading = true
     this.appService.loading = "Loading...";
-    this.eventService.getEvents().subscribe((response:any)=>{
+    this.eventService.getAllEvents().subscribe((response:any)=>{
       if(response.length>0){
         this.events = response
         this.loading = false
@@ -45,31 +47,57 @@ export class EditEventsComponent  implements OnInit {
     })
   }
 
-  edit(element:any,index:any){
+  editEvent(element:any){
     this.router.navigate(
       ['/create-event/'+element._id ]
     );
   }
 
-  delete(element:any, index:any){
-    this.loading = true
-    this.appComponent.isLoading = true
-    this.appService.loading = "Loading...";
-    this.eventService.deleteEvent(element._id).subscribe((response:any)=>{
-      this.loading = false
-      this.appService.loading = false;
-      if(response == "Deleted"){
-        window.location.reload()
-      }
-    },(error) => {
-      this.appService.loading = false
-      const errorMessage = "Internal Server Error : "+error.statusText;
-      this.appService.presentToast('top',errorMessage)
-    })
+  async deleteEvent(element:any){
+
+    const alert = await this.alertController.create({
+      header: 'Confirm',
+      message: 'Are you sure you want to delete this event?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          },
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            console.log('Delete clicked');    
+            this.loading = true
+            this.appComponent.isLoading = true
+            this.appService.loading = "Loading...";
+            this.eventService.deleteEvent(element._id).subscribe((response:any)=>{
+              this.loading = false
+              this.appService.loading = false;
+              if(response == "Deleted"){
+                window.location.reload()
+              }
+            },(error) => {
+              this.appService.loading = false
+              const errorMessage = "Internal Server Error : "+error.statusText;
+              this.appService.presentToast('top',errorMessage)
+            })
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   createEvent(){
     this.router.navigate(['/create-event']);
+  }
+
+  candidateList(element:any){
+    console.log(element)
   }
 
 }

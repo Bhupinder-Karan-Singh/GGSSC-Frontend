@@ -56,4 +56,8 @@ export class HomeComponent  implements OnInit {
     }  
   }
 
+  register(event:any){
+    console.log(event)
+  }
+
 }

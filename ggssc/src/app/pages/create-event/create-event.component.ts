@@ -13,6 +13,10 @@ import { UploadServiceService } from 'src/app/services/upload-service.service';
 export class CreateEventComponent  implements OnInit {
   eventName:any;
   eventDescription:any;
+  startTime:any;
+  endTime:any;
+  location:any;
+  isChecked:any;
   fileName:any;
   createButtonDisabled = true
   saveButtonDisabled = true
@@ -43,6 +47,10 @@ export class CreateEventComponent  implements OnInit {
           if(response.length>0){
             this.eventName = response[0].eventName
             this.eventDescription = response[0].eventDescription
+            this.startTime = response[0].startTime
+            this.endTime = response[0].endTime
+            this.location = response[0].location,
+            this.isChecked = response[0].status == "Active" ? true : false
             this.uploadService.capturedImages = response[0].images
             this.saveButtonDisabled = false
             this.createForm = false
@@ -69,8 +77,11 @@ export class CreateEventComponent  implements OnInit {
     this.payload = {
       "eventName":this.eventName,
       "eventDescription":this.eventDescription,
+      "startTime": this.startTime,
+      "endTime":this.endTime,
+      "location":this.location,
       "images":this.uploadService.capturedImages,
-      "status":"active"
+      "status":this.isChecked ? "Active" : "InActive"
     }
     this.eventService.submitEvent(this.payload).subscribe((response:any)=>{
       this.uploadService.capturedImages = {}
@@ -89,8 +100,11 @@ export class CreateEventComponent  implements OnInit {
       "_id":this.payloadId,
       "eventName":this.eventName,
       "eventDescription":this.eventDescription,
+      "startTime": this.startTime,
+      "endTime":this.endTime,
+      "location":this.location,
       "images":this.uploadService.capturedImages,
-      "status":"active"
+      "status":this.isChecked ? "Active" : "InActive"
     }
 
     this.eventService.saveEvent(this.payload).subscribe((response:any)=>{
@@ -138,5 +152,10 @@ export class CreateEventComponent  implements OnInit {
   eventsList(){
     this.router.navigate(['/edit-events']);
   }
+
+  // onCheckboxChange(event: any) {
+  //   console.log('Checkbox state:', this.isChecked);
+  //   console.log('Event details:', event);
+  // }
   
 }
