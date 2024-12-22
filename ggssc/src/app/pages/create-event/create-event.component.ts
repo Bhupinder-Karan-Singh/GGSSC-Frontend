@@ -81,7 +81,10 @@ export class CreateEventComponent  implements OnInit {
       "endTime":this.endTime,
       "location":this.location,
       "images":this.uploadService.capturedImages,
-      "status":this.isChecked ? "Active" : "InActive"
+      "status":this.isChecked ? "Active" : "InActive",
+      "createdOn": new Date().toLocaleString(),
+      "createdBy" : localStorage.getItem('email'),
+      "updatedBy" : localStorage.getItem('email')
     }
     this.eventService.submitEvent(this.payload).subscribe((response:any)=>{
       this.uploadService.capturedImages = {}
@@ -104,7 +107,10 @@ export class CreateEventComponent  implements OnInit {
       "endTime":this.endTime,
       "location":this.location,
       "images":this.uploadService.capturedImages,
-      "status":this.isChecked ? "Active" : "InActive"
+      "status":this.isChecked ? "Active" : "InActive",
+      "createdOn": new Date().toLocaleString(),
+      "createdBy" : localStorage.getItem('email'),
+      "updatedBy" : localStorage.getItem('email')
     }
 
     this.eventService.saveEvent(this.payload).subscribe((response:any)=>{

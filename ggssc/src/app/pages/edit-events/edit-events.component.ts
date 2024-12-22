@@ -33,7 +33,7 @@ export class EditEventsComponent  implements OnInit {
     this.appService.loading = "Loading...";
     this.eventService.getAllEvents().subscribe((response:any)=>{
       if(response.length>0){
-        this.events = response
+        this.events = response.reverse()
         this.loading = false
         this.appService.loading = false;
       }else{
@@ -76,9 +76,13 @@ export class EditEventsComponent  implements OnInit {
             this.eventService.deleteEvent(element._id).subscribe((response:any)=>{
               this.loading = false
               this.appService.loading = false;
-              if(response == "Deleted"){
-                window.location.reload()
-              }
+              const index = this.events.findIndex((item:any) => item._id === element._id);
+                if (index !== -1) {
+                  this.events.splice(index, 1);
+                }
+              // if(response == "Deleted"){
+              //   window.location.reload()
+              // }
             },(error) => {
               this.appService.loading = false
               const errorMessage = "Internal Server Error : "+error.statusText;

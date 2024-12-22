@@ -43,7 +43,7 @@ export class AuthServiceService {
   SignOut() {
     this.angularFireAuth['signOut']();
     localStorage.clear();
-    localStorage.removeItem('user_email');
+    localStorage.removeItem('email');
     localStorage.removeItem('idToken');
     this.appService.appPages[1] = { title: 'Admin Login', url: '/admin', icon: 'person', active:true }
     this.appService.appPages[2].active = false

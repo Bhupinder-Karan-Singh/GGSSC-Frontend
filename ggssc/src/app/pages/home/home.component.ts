@@ -30,6 +30,7 @@ export class HomeComponent  implements OnInit {
     // this.appComponent.showLoading()
     this.eventService.getEvents().subscribe((response:any)=>{
       if(response.length>0){
+        response.reverse()
         response.forEach((element:any) => {
           this.events.push(element)
         });
