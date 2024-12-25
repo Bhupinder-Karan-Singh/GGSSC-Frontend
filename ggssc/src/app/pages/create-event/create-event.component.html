@@ -41,7 +41,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-input 
+      <!-- <ion-input 
       (ngModelChange)="detectChanges($event)"
       fill="solid" 
       labelPlacement="floating" 
@@ -51,11 +51,47 @@
           <ion-text color="primary">
           </ion-text>
         </div>
+      </ion-input> -->
+      <!-- <ion-label position="floating">Select Date</ion-label> -->
+      <ion-input
+        fill="solid" 
+        labelPlacement="floating" 
+        readonly
+        (click)="openDatePicker()"
+        [value]="startTime | date: 'd MMM y'"
+        style="margin-bottom: 10px;">
+        <div slot="label">Start Date 
+          <ion-text color="primary">
+          </ion-text>
+        </div>
       </ion-input>
+
+      <ion-modal #datePickerModal>
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button (click)="closeDatePicker()">Cancel</ion-button>
+              </ion-buttons>
+              <ion-title>Start Date</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="confirmDate()">OK</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+      
+          <ion-content>
+            <ion-datetime
+              [presentation]="'date'"
+              [(ngModel)]="startTime">
+            </ion-datetime>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
     </ion-item>
 
     <ion-item>
-      <ion-input 
+      <!-- <ion-input 
       (ngModelChange)="detectChanges($event)"
       fill="solid" 
       labelPlacement="floating" 
@@ -65,7 +101,44 @@
           <ion-text color="primary">
           </ion-text>
         </div>
-      </ion-input>
+      </ion-input> -->
+
+      <ion-input
+      fill="solid" 
+      labelPlacement="floating" 
+      readonly
+      (click)="openDatePicker2()"
+      [value]="endTime | date: 'd MMM y'"
+      style="margin-bottom: 10px;">
+      <div slot="label">End Date 
+        <ion-text color="primary">
+        </ion-text>
+      </div>
+    </ion-input>
+
+    <ion-modal #datePickerModal2>
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-button (click)="closeDatePicker2()">Cancel</ion-button>
+            </ion-buttons>
+            <ion-title>End Date</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="confirmDate2()">OK</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+    
+        <ion-content>
+          <ion-datetime
+            [presentation]="'date'"
+            [(ngModel)]="endTime">
+          </ion-datetime>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
     </ion-item>
 
     <ion-item>

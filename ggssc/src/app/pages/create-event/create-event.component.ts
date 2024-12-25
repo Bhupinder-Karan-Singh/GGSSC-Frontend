@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IonModal } from '@ionic/angular';
 import { AppServiceService } from 'src/app/services/app-service.service';
 import { EventServiceService } from 'src/app/services/event-service.service';
 import { ImageProcessService } from 'src/app/services/image-process.service';
@@ -25,6 +26,9 @@ export class CreateEventComponent  implements OnInit {
   payloadId:any
   title = "Create Event"
   loading = true
+  selectedDate: string = '';
+  @ViewChild('datePickerModal') datePickerModal: IonModal | any;
+  @ViewChild('datePickerModal2') datePickerModal2: IonModal | any;
 
   imageGuidelines:any = {
     "coverPhoto" : []
@@ -47,8 +51,12 @@ export class CreateEventComponent  implements OnInit {
           if(response.length>0){
             this.eventName = response[0].eventName
             this.eventDescription = response[0].eventDescription
-            this.startTime = response[0].startTime
-            this.endTime = response[0].endTime
+            const startTime = new Date(response[0].startTime); // Convert selected value to Date object
+            this.startTime = startTime.toISOString();
+            // this.startTime = response[0].startTime.toISOString()
+            const endTime = new Date(response[0].endTime); // Convert selected value to Date object
+            this.endTime = endTime.toISOString();
+            // this.endTime = response[0].endTime.toISOString()
             this.location = response[0].location,
             this.isChecked = response[0].status == "Active" ? true : false
             this.uploadService.capturedImages = response[0].images
@@ -77,8 +85,8 @@ export class CreateEventComponent  implements OnInit {
     this.payload = {
       "eventName":this.eventName,
       "eventDescription":this.eventDescription,
-      "startTime": this.startTime,
-      "endTime":this.endTime,
+      "startTime": this.formatDate(this.startTime),
+      "endTime": this.formatDate(this.endTime),
       "location":this.location,
       "images":this.uploadService.capturedImages,
       "status":this.isChecked ? "Active" : "InActive",
@@ -103,8 +111,8 @@ export class CreateEventComponent  implements OnInit {
       "_id":this.payloadId,
       "eventName":this.eventName,
       "eventDescription":this.eventDescription,
-      "startTime": this.startTime,
-      "endTime":this.endTime,
+      "startTime": this.formatDate(this.startTime),
+      "endTime":  this.formatDate(this.endTime),
       "location":this.location,
       "images":this.uploadService.capturedImages,
       "status":this.isChecked ? "Active" : "InActive",
@@ -123,6 +131,20 @@ export class CreateEventComponent  implements OnInit {
       this.appService.presentToast('top',errorMessage)
     })
   }
+
+  // Helper function to format the date (no time)
+formatDate(date: string): string {
+  const parsedDate = new Date(date);
+  return parsedDate.toLocaleDateString('en-GB', {
+    // weekday: 'short', // Example: 'Tue'
+    year: 'numeric',
+    month: 'short', // Example: 'Dec'
+    day: 'numeric',
+    // hour: '2-digit',
+    // minute: '2-digit',
+    // hour12: true // 12-hour format
+  });
+}
 
   detectChanges(event:any){
     if(event.length < 3 ){
@@ -163,5 +185,31 @@ export class CreateEventComponent  implements OnInit {
   //   console.log('Checkbox state:', this.isChecked);
   //   console.log('Event details:', event);
   // }
+
+  openDatePicker() {
+    this.datePickerModal.present();
+  }
+
+  closeDatePicker() {
+    this.datePickerModal.dismiss();
+  }
+
+  confirmDate() {
+    // Confirm the selected date (if needed, you can add additional logic here)
+    this.datePickerModal.dismiss();
+  }
+
+  openDatePicker2() {
+    this.datePickerModal2.present();
+  }
+
+  closeDatePicker2() {
+    this.datePickerModal2.dismiss();
+  }
+
+  confirmDate2() {
+    // Confirm the selected date (if needed, you can add additional logic here)
+    this.datePickerModal2.dismiss();
+  }
   
 }

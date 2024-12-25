@@ -53,5 +53,23 @@ ion-menu-button {
     width:100%
   }
 
+  /* Custom styles for the modal */
+.custom-date-picker-modal {
+  --width: 80%;   /* Adjust the width of the modal */
+  --height: 60%;  /* Adjust the height of the modal */
+  --border-radius: 10px; /* Optional: rounded corners */
+  --max-height: 90%; /* Prevent the modal from growing too tall */
+}
+
+/* Optional: Adjust the modal content height */
+.custom-date-picker-modal .modal-wrapper {
+  max-height: 80%; /* Control max height for the content */
+}
+
+.custom-date-picker-modal .datetime-modal {
+  height: 100%; /* Ensures the datetime picker fills the available space */
+  width: 100%;  /* Make sure the datetime picker fills the width */
+}
+
 
 
