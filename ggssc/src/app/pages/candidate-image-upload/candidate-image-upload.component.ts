@@ -15,7 +15,7 @@ export class CandidateImageUploadComponent  implements OnInit {
   constructor(
     public uploadService: UploadServiceService,
     private imageProcess: ImageProcessService,
-    private appService: AppServiceService
+    public appService: AppServiceService
   ) { }
 
   ngOnInit() {

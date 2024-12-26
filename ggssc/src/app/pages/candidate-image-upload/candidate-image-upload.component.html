@@ -1,8 +1,8 @@
 <div *ngFor="let requirement of arrayify(imageGuidelines)">
-  <ion-button expand="block" type="button"  (click)="fileInput1.click()" mat-button>Capture</ion-button>
+  <ion-button expand="block" type="button"  (click)="fileInput1.click()" mat-button>Capture Face photo</ion-button>
   <input hidden multiple (change)="onFileSelected($event,requirement)" #fileInput1 accept="image/*" capture type="file">
   <div class="row">
-    <ion-button color="primary" expand="block" type="button" (click)="fileInput.click()" mat-button>Upload Picture</ion-button>
+    <ion-button color="primary" expand="block" type="button" (click)="fileInput.click()" mat-button>Upload Face Photo</ion-button>
     <input hidden multiple (change)="onFileSelected($event, requirement)" #fileInput accept="image/*" type="file" id="file">  
   </div>
   <div class="row">
