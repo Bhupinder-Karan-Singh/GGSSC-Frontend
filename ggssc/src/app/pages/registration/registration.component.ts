@@ -5,6 +5,7 @@ import { IonModal } from '@ionic/angular';
 import { AppServiceService } from 'src/app/services/app-service.service';
 import { UploadServiceService } from 'src/app/services/upload-service.service';
 import { requiredObjectValidator } from './required-object.validator'; // Adjust the path
+import { EventServiceService } from 'src/app/services/event-service.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
   public title:any
   registerButtonDisabled:any
   @ViewChild('datePickerModal') datePickerModal: IonModal | any;
-  dob:any
+  dateOfBirth:any
   imageGuidelines:any = {
     "profilePhoto" : []
   }
@@ -26,7 +27,8 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
     private router: Router,
     public appService: AppServiceService,
-    public uploadService: UploadServiceService) {
+    public uploadService: UploadServiceService,
+  private eventService: EventServiceService) {
   }
 
   ngOnInit() {
@@ -35,12 +37,13 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
     }
     this.registrationForm = this.fb.group({
       name: ['', Validators.required],
-      dob: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
       fatherName: ['', Validators.required],
       motherName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      images: [null, requiredObjectValidator], 
+      images: [null, requiredObjectValidator],
+      eventId: [''], 
     });
   }
 
@@ -62,10 +65,20 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (this.registrationForm.valid) {
+    if(this.registrationForm.valid) {
+      this.appService.loading = "Loading";
       const formData = this.registrationForm.value
-      formData.dob = this.formatDate(formData.dob)
-      console.log('Form Data:', formData);
+      formData.dateOfBirth = this.formatDate(formData.dateOfBirth)
+      formData.eventId = this.appService.registerEvent._id
+      this.eventService.registerEvent(formData).subscribe((response:any)=>{
+        this.uploadService.capturedImages = {}
+        this.router.navigate(['/home']);
+        this.appService.loading = false;
+      },(error) => {
+        this.appService.loading = false
+        const errorMessage = "Internal Server Error : "+error.statusText;
+        this.appService.presentToast('top',errorMessage)
+      })
     } else {
       console.log('Form is invalid!');
     }

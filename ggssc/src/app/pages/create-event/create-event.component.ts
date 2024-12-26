@@ -106,7 +106,7 @@ export class CreateEventComponent  implements OnInit {
   }
 
   save(){
-    this.appService.loading = "Loading...";
+    this.appService.loading = "Loading";
     this.payload = {
       "_id":this.payloadId,
       "eventName":this.eventName,

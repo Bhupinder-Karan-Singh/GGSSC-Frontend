@@ -16,6 +16,7 @@ export class AppServiceService {
     // { title: 'Registration', url: '/registration', icon: 'document' },
   ];
   public registerEvent:any;
+  public eventId:any;
   constructor(
     private toastController: ToastController
   ) { }

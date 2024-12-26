@@ -28,6 +28,13 @@ export class EventServiceService {
     return this.httpService.post(environment.appsEndpoint+"/form/saveEvent",payload, {headers});
   }
 
+  registerEvent(payload:any){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+    return this.httpService.post(environment.appsEndpoint+"/form/registerEvent",payload, {headers});
+  }
+
   deleteEvent(id:any){
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded'

@@ -59,6 +59,7 @@ export class HomeComponent  implements OnInit {
   }
 
   register(event:any){
+    console.log(event)
     this.appService.registerEvent = event
     this.router.navigate(['/register']);
   }
