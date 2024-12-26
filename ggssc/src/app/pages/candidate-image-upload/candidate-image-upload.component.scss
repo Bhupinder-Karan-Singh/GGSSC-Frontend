@@ -25,15 +25,16 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 16px;
-        width: 16px;
-        color: blue;
+        height: 20px;
+        width: 20px;
+        color: black;
         position: absolute;
         left: calc(100% - 8px);
-        top: -8px;
+        top: -10px;
         mat-icon{
             transform: scale(.5);
         }
+        background-color: lightgray;
     }
 }
 
