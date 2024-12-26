@@ -133,18 +133,18 @@ export class CreateEventComponent  implements OnInit {
   }
 
   // Helper function to format the date (no time)
-formatDate(date: string): string {
-  const parsedDate = new Date(date);
-  return parsedDate.toLocaleDateString('en-GB', {
-    // weekday: 'short', // Example: 'Tue'
-    year: 'numeric',
-    month: 'short', // Example: 'Dec'
-    day: 'numeric',
-    // hour: '2-digit',
-    // minute: '2-digit',
-    // hour12: true // 12-hour format
-  });
-}
+  formatDate(date: string): string {
+    const parsedDate = new Date(date);
+    return parsedDate.toLocaleDateString('en-GB', {
+      // weekday: 'short', // Example: 'Tue'
+      year: 'numeric',
+      month: 'short', // Example: 'Dec'
+      day: 'numeric',
+      // hour: '2-digit',
+      // minute: '2-digit',
+      // hour12: true // 12-hour format
+    });
+  }
 
   detectChanges(event:any){
     if(event.length < 3 ){
@@ -169,9 +169,11 @@ formatDate(date: string): string {
       this.createButtonDisabled = true
       this.saveButtonDisabled = true
       if(obj.coverPhoto && obj.coverPhoto.length>0){
-        if(this.eventName.length > 3){
-          this.createButtonDisabled = false
-          this.saveButtonDisabled = false
+        if(this.eventName != "" && this.eventName != undefined && this.eventName != null){
+          if(this.eventName.length > 3){
+            this.createButtonDisabled = false
+            this.saveButtonDisabled = false
+          }
         }
       }
     }

@@ -15,6 +15,7 @@ export class AppServiceService {
     { title: 'Sign out', url: '/logout', icon: 'exit', active:false},
     // { title: 'Registration', url: '/registration', icon: 'document' },
   ];
+  public registerEvent:any;
   constructor(
     private toastController: ToastController
   ) { }

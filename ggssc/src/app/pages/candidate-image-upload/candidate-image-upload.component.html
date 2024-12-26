@@ -1,0 +1,18 @@
+<div *ngFor="let requirement of arrayify(imageGuidelines)">
+  <ion-button expand="block" type="button"  (click)="fileInput1.click()" mat-button>Capture</ion-button>
+  <input hidden multiple (change)="onFileSelected($event,requirement)" #fileInput1 accept="image/*" capture type="file">
+  <div class="row">
+    <ion-button color="primary" expand="block" type="button" (click)="fileInput.click()" mat-button>Upload Picture</ion-button>
+    <input hidden multiple (change)="onFileSelected($event, requirement)" #fileInput accept="image/*" type="file" id="file">  
+  </div>
+  <div class="row">
+    <div class="images-cont" *ngIf="uploadService.capturedProfileImages[requirement]">
+      <div class="captured-image-cont" *ngFor="let image of uploadService.capturedProfileImages[requirement]; let i = index">
+        <div class="image-delete-button hover" (click)="deleteImage(requirement,image)">
+          <ion-icon  slot="start" [ios]="'close-fill'" [md]="'close-sharp'" style="cursor: pointer;"></ion-icon>
+        </div>
+        <img [src]="image.imageFile.img">
+      </div>
+    </div>
+  </div>
+</div>

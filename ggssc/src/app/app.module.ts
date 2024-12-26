@@ -20,12 +20,14 @@ import { AdminHomeComponent } from './pages/admin-home/admin-home.component';
 import { CreateEventComponent } from './pages/create-event/create-event.component'; 
 import { LogoutComponent } from './pages/logout/logout.component';
 import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
+import { CandidateImageUploadComponent } from './pages/candidate-image-upload/candidate-image-upload.component';
 import { MatTableModule } from '@angular/material/table';
 import { EditEventsComponent } from './pages/edit-events/edit-events.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { LoadingComponent } from './pages/loading/loading.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     LogoutComponent,
     ImageUploadComponent,
     EditEventsComponent,
-    LoadingComponent
+    LoadingComponent,
+    CandidateImageUploadComponent
   ],
   imports: [
     BrowserModule, 
@@ -60,7 +63,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatTableModule,
     MatDividerModule,
     MatProgressSpinnerModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

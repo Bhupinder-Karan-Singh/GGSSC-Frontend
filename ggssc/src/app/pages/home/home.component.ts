@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ViewWillEnter } from '@ionic/angular';
 import { AppComponent } from 'src/app/app.component';
 import { AppServiceService } from 'src/app/services/app-service.service';
@@ -18,7 +18,8 @@ export class HomeComponent  implements OnInit {
   constructor(
     private appService : AppServiceService,
     private eventService: EventServiceService,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private router : Router
   ) {}
 
   ngOnInit() {
@@ -58,7 +59,8 @@ export class HomeComponent  implements OnInit {
   }
 
   register(event:any){
-    console.log(event)
+    this.appService.registerEvent = event
+    this.router.navigate(['/register']);
   }
 
 }

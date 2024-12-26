@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'admin',
     component:AdminComponent,
   },
+  {
+    path: 'register',
+    component:RegistrationComponent,
+  },
   // {
   //   path: 'registration',
   //   component:RegistrationComponent,

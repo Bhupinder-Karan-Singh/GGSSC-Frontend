@@ -7,7 +7,7 @@ right: 0;
 top: 50%;
 transform: translateY(-50%);
 height:80%;
-overflow: auto;
+// overflow: auto;
 }
 
 #container strong {
@@ -38,4 +38,28 @@ ion-card{
 
 ion-card:last-child {
     margin-bottom: 5px;
+}
+
+ion-button{
+  width: 73%; 
+  margin: auto; 
+  margin-top:0px
+}
+
+ion-item{
+  width:80%; 
+  margin: auto; 
+  --border-style: 0px
+}
+
+app-candidate-image-upload{
+  width:100%
+}
+
+.image-content{
+  width:100%
+}
+
+ion-title{
+  margin-bottom: 10px
 }
