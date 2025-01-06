@@ -30,7 +30,7 @@ export class EditEventsComponent  implements OnInit {
 
   ionViewWillEnter(): void {
     this.loading = true
-    this.appService.loading = "Loading...";
+    this.appService.loading = "Loading";
     this.eventService.getAllEvents().subscribe((response:any)=>{
       if(response.length>0){
         this.events = response.reverse()
@@ -72,7 +72,7 @@ export class EditEventsComponent  implements OnInit {
             console.log('Delete clicked');    
             this.loading = true
             this.appComponent.isLoading = true
-            this.appService.loading = "Loading...";
+            this.appService.loading = "Loading";
             this.eventService.deleteEvent(element._id).subscribe((response:any)=>{
               this.loading = false
               this.appService.loading = false;

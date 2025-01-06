@@ -71,9 +71,11 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
       formData.dateOfBirth = this.formatDate(formData.dateOfBirth)
       formData.eventId = this.appService.registerEvent._id
       this.eventService.registerEvent(formData).subscribe((response:any)=>{
+        console.log(response)
+        this.appService.loading = false;
+        this.appService.presentToast('top',response)
         this.uploadService.capturedImages = {}
         this.router.navigate(['/home']);
-        this.appService.loading = false;
       },(error) => {
         this.appService.loading = false
         const errorMessage = "Internal Server Error : "+error.statusText;

@@ -46,7 +46,7 @@ export class CreateEventComponent  implements OnInit {
     this.route.params.subscribe((params)=>{
       if(params['formPayloadId']){
         this.payloadId = params['formPayloadId']
-        this.appService.loading = "Loading...";
+        this.appService.loading = "Loading";
         this.eventService.getEvent(this.payloadId).subscribe((response:any)=>{
           if(response.length>0){
             this.eventName = response[0].eventName
@@ -81,7 +81,7 @@ export class CreateEventComponent  implements OnInit {
   }
 
   submit(){
-    this.appService.loading = "Loading...";
+    this.appService.loading = "Loading";
     this.payload = {
       "eventName":this.eventName,
       "eventDescription":this.eventDescription,

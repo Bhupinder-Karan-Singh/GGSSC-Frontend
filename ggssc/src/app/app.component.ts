@@ -42,7 +42,7 @@ export class AppComponent {
 
   async showLoading() {
     const loading = await this.loadingCtrl.create({
-      message: 'Loading...',
+      message: 'Loading',
     });
   
     await loading.present();
