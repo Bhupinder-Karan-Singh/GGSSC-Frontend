@@ -58,6 +58,22 @@
   <ion-content  *ngIf="otpVerified">
     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
       <ion-list>
+
+        <ion-item>
+          <ion-input formControlName="email" [(ngModel)]="email" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
+            <div slot="label">Email
+              <ion-text color="primary">
+              </ion-text>
+            </div>
+          </ion-input>
+        </ion-item>
+        <div *ngIf="registrationForm.get('email').hasError('required') && registrationForm.get('email').touched">
+          <ion-text color="danger">Email is required.</ion-text>
+        </div>
+        <div *ngIf="registrationForm.get('email').hasError('email') && registrationForm.get('email').touched">
+          <ion-text color="danger">Invalid email format.</ion-text>
+        </div>
+        
       <ion-item >
         <ion-input formControlName="name" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
           <div slot="label">Candidate Name 
@@ -92,21 +108,6 @@
       </ion-item>
       <div *ngIf="registrationForm.get('motherName').hasError('required') && registrationForm.get('motherName').touched">
         <ion-text color="danger">Mother's Name is required.</ion-text>
-      </div>
-  
-      <ion-item>
-        <ion-input formControlName="email" [(ngModel)]="email" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
-          <div slot="label">Email
-            <ion-text color="primary">
-            </ion-text>
-          </div>
-        </ion-input>
-      </ion-item>
-      <div *ngIf="registrationForm.get('email').hasError('required') && registrationForm.get('email').touched">
-        <ion-text color="danger">Email is required.</ion-text>
-      </div>
-      <div *ngIf="registrationForm.get('email').hasError('email') && registrationForm.get('email').touched">
-        <ion-text color="danger">Invalid email format.</ion-text>
       </div>
   
       <ion-item>
