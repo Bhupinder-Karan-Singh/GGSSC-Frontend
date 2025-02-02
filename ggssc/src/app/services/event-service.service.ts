@@ -35,6 +35,20 @@ export class EventServiceService {
     return this.httpService.post(environment.appsEndpoint+"/form/registerEvent",payload, {headers});
   }
 
+  sendOtp(payload:any){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+    return this.httpService.post(environment.appsEndpoint+"/form/sendOtp",payload, {headers});
+  }
+
+  verifyOtp(payload:any){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+    return this.httpService.post(environment.appsEndpoint+"/form/verifyOtp",payload, {headers});
+  }
+
   deleteEvent(id:any){
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded'

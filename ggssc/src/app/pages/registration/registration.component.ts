@@ -16,10 +16,17 @@ import { EventServiceService } from 'src/app/services/event-service.service';
 export class RegistrationComponent  implements OnInit, OnDestroy {
 
   public registrationForm: FormGroup | any;
+  public sendOtpForm: FormGroup | any;
+  public verifyForm: FormGroup | any;
+
+  email:any
+
   public title:any
   registerButtonDisabled:any
   @ViewChild('datePickerModal') datePickerModal: IonModal | any;
   dateOfBirth:any
+  otpVerified:any = false;
+  otpSent:any = false;
   imageGuidelines:any = {
     "profilePhoto" : []
   }
@@ -35,20 +42,32 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
     if(this.appService.registerEvent == "" || this.appService.registerEvent == null || this.appService.registerEvent == undefined){
       this.router.navigate(['/home']);
     }
+
+    this.sendOtpForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+    });
+
+    this.verifyForm = this.fb.group({
+      otp: ['', Validators.required],
+    });
+    
     this.registrationForm = this.fb.group({
       name: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       fatherName: ['', Validators.required],
       motherName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: [{value:this.email, disabled: true}, [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       images: [null, requiredObjectValidator],
       eventId: [''], 
+      otp: ['']
     });
   }
 
   ngOnDestroy(): void {
       this.uploadService.capturedProfileImages = {}
+      this.otpVerified = false;
+      this.otpSent = false
   }
 
   openDatePicker() {
@@ -70,6 +89,7 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
       const formData = this.registrationForm.value
       formData.dateOfBirth = this.formatDate(formData.dateOfBirth)
       formData.eventId = this.appService.registerEvent._id
+      formData.email = this.email
       this.eventService.registerEvent(formData).subscribe((response:any)=>{
         console.log(response)
         this.appService.loading = false;
@@ -108,5 +128,47 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
       this.registrationForm.get('images')?.setValue('');
     }
   }
+
+  sendOtp() {
+    if(this.sendOtpForm.valid) {
+      this.appService.loading = "Loading";
+      const formData = this.sendOtpForm.value
+      this.eventService.sendOtp(formData).subscribe((response:any)=>{
+        console.log(response)
+        this.otpSent = true
+        this.appService.loading = false;
+        this.appService.presentToast('top',response)
+      },(error) => {
+        this.appService.loading = false
+        const errorMessage = "Internal Server Error : "+error.statusText;
+        this.appService.presentToast('top',errorMessage)
+      })
+    } else {
+      console.log('Form is invalid!');
+    }
+  }
+
+  verifyOtp() {
+    if(this.verifyForm.valid) {
+      this.appService.loading = "Loading";
+      const formData = this.verifyForm.value
+      formData.email = this.sendOtpForm.value.email
+      this.eventService.verifyOtp(formData).subscribe((response:any)=>{
+        console.log(response)
+        if(response == "Code Verification successfull"){
+          this.otpVerified = true
+        }
+        this.appService.loading = false;
+        this.appService.presentToast('top',response)
+      },(error) => {
+        this.appService.loading = false
+        const errorMessage = "Internal Server Error : "+error.statusText;
+        this.appService.presentToast('top',errorMessage)
+      })
+    } else {
+      console.log('Form is invalid!');
+    }
+  }
+
 
 }

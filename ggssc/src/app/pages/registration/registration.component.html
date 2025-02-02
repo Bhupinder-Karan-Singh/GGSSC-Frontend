@@ -2,8 +2,60 @@
   <div>
     <ion-title style="font-size: 18px;">Event : {{appService.registerEvent.eventName}}</ion-title>
   </div>
-  
-  <ion-content>
+
+  <ion-content  *ngIf="!otpVerified">
+
+    <form [formGroup]="sendOtpForm" (ngSubmit)="sendOtp()">
+      <ion-list>
+
+        <ion-item>
+          <ion-input formControlName="email" [(ngModel)]="email" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
+            <div slot="label">Email
+              <ion-text color="primary">
+              </ion-text>
+            </div>
+          </ion-input>
+        </ion-item>
+        <div *ngIf="sendOtpForm.get('email').hasError('required') && sendOtpForm.get('email').touched">
+          <ion-text color="danger">Email is required.</ion-text>
+        </div>
+        <div *ngIf="sendOtpForm.get('email').hasError('email') && sendOtpForm.get('email').touched">
+          <ion-text color="danger">Invalid email format.</ion-text>
+        </div>
+    
+        <ion-item>
+          <ion-button color="primary" style="margin-bottom: 20px;" expand="block" type="submit" [disabled]="sendOtpForm.invalid">Send Code</ion-button>
+        </ion-item>
+
+        </ion-list>
+      </form>
+
+      
+    <form *ngIf="otpSent" [formGroup]="verifyForm" (ngSubmit)="verifyOtp()">
+      <ion-list>
+
+        <ion-item >
+          <ion-input formControlName="otp" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
+            <div slot="label">Enter code
+              <ion-text color="primary">
+              </ion-text>
+            </div>
+          </ion-input>
+        </ion-item>
+        <div style="border: none;" *ngIf="verifyForm.get('otp').hasError('required') && verifyForm.get('otp').touched">
+          <ion-text color="danger">code is required.</ion-text>
+        </div>
+    
+        <ion-item>
+          <ion-button color="success" style="margin-bottom: 20px;" expand="block" type="submit" [disabled]="verifyForm.invalid">Verify Code</ion-button>
+        </ion-item>
+
+        </ion-list>
+      </form>
+
+  </ion-content>
+
+  <ion-content  *ngIf="otpVerified">
     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
       <ion-list>
       <ion-item >
@@ -43,7 +95,7 @@
       </div>
   
       <ion-item>
-        <ion-input formControlName="email" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
+        <ion-input formControlName="email" [(ngModel)]="email" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
           <div slot="label">Email
             <ion-text color="primary">
             </ion-text>
@@ -130,4 +182,6 @@
   </ion-content>
   
 </div>
+
+
 

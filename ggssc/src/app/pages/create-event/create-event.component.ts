@@ -92,12 +92,27 @@ export class CreateEventComponent  implements OnInit {
       "status":this.isChecked ? "Active" : "InActive",
       "createdOn": new Date().toLocaleString(),
       "createdBy" : localStorage.getItem('email'),
-      "updatedBy" : localStorage.getItem('email')
+      "updatedBy" : localStorage.getItem('email'),
+      "participants" : []
     }
     this.eventService.submitEvent(this.payload).subscribe((response:any)=>{
       this.uploadService.capturedImages = {}
       this.router.navigate(['/edit-events']);
       this.appService.loading = false;
+
+      this.eventName = ""
+      this.eventDescription = ""
+      this.startTime = ""
+      this.endTime = ""
+      this.location = ""
+      this.isChecked = false
+      this.uploadService.capturedImages = {}
+      this.createButtonDisabled = true
+      this.saveButtonDisabled = true
+      this.createForm=true
+      this.payloadId=""
+      this.title = "Create Event"
+
     },(error) => {
       this.appService.loading = false
       const errorMessage = "Internal Server Error : "+ error.statusText;
@@ -124,7 +139,21 @@ export class CreateEventComponent  implements OnInit {
     this.eventService.saveEvent(this.payload).subscribe((response:any)=>{
       this.uploadService.capturedImages = {}
       this.router.navigate(['/edit-events']);
+      this.loading = false
       this.appService.loading = false;
+
+      this.eventName = ""
+      this.eventDescription = ""
+      this.startTime = ""
+      this.endTime = ""
+      this.location = ""
+      this.isChecked = false
+      this.uploadService.capturedImages = {}
+      this.createButtonDisabled = true
+      this.saveButtonDisabled = true
+      this.createForm=true
+      this.payloadId=""
+      this.title = "Create Event"
     },(error) => {
       this.appService.loading = false
       const errorMessage = "Internal Server Error : "+error.statusText;
