@@ -28,6 +28,13 @@ import { LoadingComponent } from './pages/loading/loading.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditCandidateComponent } from './pages/edit-candidate/edit-candidate.component';
+
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -40,6 +47,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LogoutComponent,
     ImageUploadComponent,
     EditEventsComponent,
+    EditCandidateComponent,
     LoadingComponent,
     CandidateImageUploadComponent
   ],
@@ -64,7 +72,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDividerModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

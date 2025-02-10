@@ -8,6 +8,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { CreateEventComponent } from './pages/create-event/create-event.component';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { EditEventsComponent } from './pages/edit-events/edit-events.component';
+import { EditCandidateComponent } from './pages/edit-candidate/edit-candidate.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,11 @@ const routes: Routes = [
     path: 'edit-events',
     component:EditEventsComponent,
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'edit-candidates',
+    component:EditCandidateComponent,
+    canActivate: [AuthGuardService] 
   },
   {
     path: 'logout',

@@ -12,7 +12,6 @@ import { EventServiceService } from 'src/app/services/event-service.service';
 })
 export class EditEventsComponent  implements OnInit {
 
-  // displayedColumns: string[] = ['Event','Desc','Status','File','Action'];
   events:any = []
   loading = true
   title = "Events List"
