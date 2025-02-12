@@ -114,6 +114,21 @@
     ::ng-deep .mat-paginator {
         position: relative;  /* Ensure the z-index works */
         z-index: 1000;       /* Adjust this value to control the stacking order */
-      }
-  
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2; /* Light gray */
+    }
+
+    tr:nth-child(odd) {
+      background-color: #ffffff; /* White */
+    }
+
+    th {
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background-color: #e0e0e0; /* Slightly darker gray */
+    }
 

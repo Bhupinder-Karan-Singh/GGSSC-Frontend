@@ -88,6 +88,9 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
       this.appService.loading = "Loading";
       const formData = this.registrationForm.value
       formData.dateOfBirth = this.formatDate(formData.dateOfBirth)
+      formData.createdBy = this.email
+      formData.createdOn = new Date()
+      formData.isEdited = false
       formData.eventId = this.appService.registerEvent._id
       formData.eventName = this.appService.registerEvent.eventName
       formData.location = this.appService.registerEvent.location

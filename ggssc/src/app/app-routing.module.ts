@@ -9,6 +9,7 @@ import { CreateEventComponent } from './pages/create-event/create-event.componen
 import { LogoutComponent } from './pages/logout/logout.component';
 import { EditEventsComponent } from './pages/edit-events/edit-events.component';
 import { EditCandidateComponent } from './pages/edit-candidate/edit-candidate.component';
+import { CandidateListComponent } from './pages/candidate-list/candidate-list.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,11 @@ const routes: Routes = [
   {
     path: 'edit-candidates',
     component:EditCandidateComponent,
+    canActivate: [AuthGuardService] 
+  },
+  {
+    path: 'candidates-list/:_id',
+    component:CandidateListComponent,
     canActivate: [AuthGuardService] 
   },
   {

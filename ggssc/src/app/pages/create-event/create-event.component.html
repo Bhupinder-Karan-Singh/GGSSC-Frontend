@@ -90,30 +90,30 @@
         <ion-text color="primary">
         </ion-text>
       </div>
-    </ion-input>
+      </ion-input>
 
-    <ion-modal #datePickerModal2>
-      <ng-template>
-        <ion-header>
-          <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-button (click)="closeDatePicker2()">Cancel</ion-button>
-            </ion-buttons>
-            <ion-title>End Date</ion-title>
-            <ion-buttons slot="end">
-              <ion-button (click)="confirmDate2()">OK</ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-    
-        <ion-content>
-          <ion-datetime
-            [presentation]="'date'"
-            [(ngModel)]="endTime">
-          </ion-datetime>
-        </ion-content>
-      </ng-template>
-    </ion-modal>
+      <ion-modal #datePickerModal2>
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button (click)="closeDatePicker2()">Cancel</ion-button>
+              </ion-buttons>
+              <ion-title>End Date</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="confirmDate2()">OK</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+      
+          <ion-content>
+            <ion-datetime
+              [presentation]="'date'"
+              [(ngModel)]="endTime">
+            </ion-datetime>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
 
     </ion-item>
 

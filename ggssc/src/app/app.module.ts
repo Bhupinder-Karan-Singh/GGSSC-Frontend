@@ -35,6 +35,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { CandidateListComponent } from './pages/candidate-list/candidate-list.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     EditEventsComponent,
     EditCandidateComponent,
     LoadingComponent,
-    CandidateImageUploadComponent
+    CandidateImageUploadComponent,
+    CandidateListComponent
   ],
   imports: [
     BrowserModule, 

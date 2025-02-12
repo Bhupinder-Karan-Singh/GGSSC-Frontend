@@ -99,8 +99,12 @@ export class EditEventsComponent  implements OnInit {
     this.router.navigate(['/create-event']);
   }
 
-  candidateList(element:any){
-    console.log(element)
+  candidateList(event:any){
+    console.log(event)
+    this.eventService.eventName = event.eventName
+    this.router.navigate(
+      ['/candidates-list/'+event._id ]
+    );
   }
 
 }

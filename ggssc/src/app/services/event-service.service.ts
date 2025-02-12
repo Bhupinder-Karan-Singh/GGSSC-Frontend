@@ -8,6 +8,8 @@ import { HttpServiceService } from './http-service.service';
 })
 export class EventServiceService {
 
+  eventName:any;
+
   constructor(
     private httpService: HttpServiceService,
     private http:HttpClient

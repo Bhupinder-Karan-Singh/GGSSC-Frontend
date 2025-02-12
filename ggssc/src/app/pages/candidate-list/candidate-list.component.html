@@ -1,6 +1,6 @@
 <div id="container" *ngIf="!loading">
 
-  <div *ngIf="dataSource.data.length > 0">
+  <div>
     <ion-title>{{ title }}</ion-title>
   </div>
 
@@ -31,29 +31,21 @@
           <ng-container matColumnDef="roll_number">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Roll Number</th>
             <td mat-cell *matCellDef="let element">
-              <input matInput *ngIf="element.isEdit" [(ngModel)]="element.rollNumber">
-              <span *ngIf="!element.isEdit">{{ element.rollNumber }}</span>
+              <span>{{ element.rollNumber }}</span>
             </td>
           </ng-container>
     
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
             <td mat-cell *matCellDef="let element">
-              <input matInput *ngIf="element.isEdit" [(ngModel)]="element.name">
-              <span *ngIf="!element.isEdit">{{ element.name }}</span>
+              <span>{{ element.name }}</span>
             </td>
           </ng-container>
     
           <ng-container matColumnDef="dob">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>DOB</th>
-            <td mat-cell *matCellDef="let element">
-              <input 
-                matInput 
-                type="date" 
-                *ngIf="element.isEdit" 
-                [(ngModel)]="element.dateOfBirth">
-                
-              <span *ngIf="!element.isEdit">{{ formatDateForDatePicker(element.dateOfBirth) }}</span>
+            <td mat-cell *matCellDef="let element"> 
+              <span>{{ formatDateForDatePicker(element.dateOfBirth) }}</span>
             </td>
           </ng-container>
           
@@ -61,32 +53,28 @@
           <ng-container matColumnDef="fname">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Father Name</th>
             <td mat-cell *matCellDef="let element">
-              <input matInput *ngIf="element.isEdit" [(ngModel)]="element.fatherName">
-              <span *ngIf="!element.isEdit">{{ element.fatherName }}</span>
+              <span>{{ element.fatherName }}</span>
             </td>
           </ng-container>
     
           <ng-container matColumnDef="mname">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Mother Name</th>
             <td mat-cell *matCellDef="let element">
-              <input matInput *ngIf="element.isEdit" [(ngModel)]="element.motherName">
-              <span *ngIf="!element.isEdit">{{ element.motherName }}</span>
+              <span >{{ element.motherName }}</span>
             </td>
           </ng-container>
     
           <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
             <td mat-cell *matCellDef="let element">
-              <input matInput *ngIf="element.isEdit" [(ngModel)]="element.email">
-              <span *ngIf="!element.isEdit">{{ element.email }}</span>
+              <span >{{ element.email }}</span>
             </td>
           </ng-container>
     
           <ng-container matColumnDef="phoneNumber">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact Number</th>
             <td mat-cell *matCellDef="let element">
-              <input matInput *ngIf="element.isEdit" [(ngModel)]="element.phoneNumber">
-              <span *ngIf="!element.isEdit">{{ element.phoneNumber }}</span>
+              <span >{{ element.phoneNumber }}</span>
             </td>
           </ng-container>
     
@@ -96,16 +84,6 @@
               <a [href]="element.images" download="event.jpg">
                 <img class="img-event" alt="Image" [src]="element.images.profilePhoto[0].imageFile.img"/>
               </a>
-            </td>
-          </ng-container>
-    
-          <ng-container matColumnDef="Action" >
-            <th class="action-column" mat-header-cell *matHeaderCellDef>Action</th>
-            <td class="action-column" mat-cell *matCellDef="let element; let j = index">
-              <a style="cursor: pointer; margin-right: 5px;" (click)="toggleEdit(element)">
-                {{ element.isEdit ? 'Save' : 'Edit' }}
-              </a>
-              <a style="cursor: pointer; margin-left: 5px;" (click)="deleteEvent(element, j)">Delete</a>
             </td>
           </ng-container>
     

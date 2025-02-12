@@ -2,109 +2,74 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { AppComponent } from 'src/app/app.component';
-import { AppServiceService } from 'src/app/services/app-service.service';
-import { CandidateServiceService } from 'src/app/services/candidate-service.service';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import 'jspdf-autotable';
+import { EventServiceService } from 'src/app/services/event-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppServiceService } from 'src/app/services/app-service.service';
+import { AlertController } from '@ionic/angular';
+import { CandidateServiceService } from 'src/app/services/candidate-service.service';
 
 @Component({
-  selector: 'app-edit-candidate',
-  templateUrl: './edit-candidate.component.html',
-  styleUrls: ['./edit-candidate.component.scss'],
+  selector: 'app-candidate-list',
+  templateUrl: './candidate-list.component.html',
+  styleUrls: ['./candidate-list.component.scss'],
 })
-export class EditCandidateComponent implements OnInit {
-  displayedColumns: string[] = ['roll_number', 'name', 'dob', 'fname', 'mname', 'email', 'phoneNumber', 'File', 'Action'];
-  dataSource = new MatTableDataSource<any>([]);
+export class CandidateListComponent  implements OnInit {
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  candidates:any
-  loading:any = false
-
-  title = "Candidates List";
+    displayedColumns: string[] = ['roll_number', 'name', 'dob', 'fname', 'mname', 'email', 'phoneNumber', 'File'];
+    dataSource = new MatTableDataSource<any>([]);
+  
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
+  
+    candidates:any
+    loading:any = false
+  
+    title:any
 
   constructor(
-    private candidateService: CandidateServiceService,
-    private appComponent: AppComponent,
+    public eventService: EventServiceService,
+    private route:ActivatedRoute,
     private router: Router,
     private appService: AppServiceService,
-    private alertController: AlertController
-  ) {}
+    private alertController: AlertController,
+    private candidateService: CandidateServiceService
+  ) { }
 
-  ngOnInit() {
-    this.loadCandidates();
-  }
+  ngOnInit() {}
 
   ionViewWillEnter(): void {
-    this.loadCandidates();
-  }
-
-  loadCandidates() {
-    this.appService.loading = "Loading";
-    this.loading = true
-    this.candidateService.getAllCandidates().subscribe(
-      (response: any) => {
-        this.appService.loading = false;
-        this.loading = false
-        if (response.length > 0) {
-          this.candidates = response.reverse()
-          this.dataSource.data = response.reverse();
-          this.prepareData(this.dataSource.data);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        }
-      },
-      (error) => {
-        this.appService.loading = false;
-        this.loading = false
-        const errorMessage = "Internal Server Error : " + error.statusText;
-        this.appService.presentToast('top', errorMessage);
+    this.title = this.eventService.eventName
+    this.route.params.subscribe((params)=>{
+      if(params['_id']){
+        console.log(params['_id'])
+        this.loading = true
+        this.appService.loading = "Loading";
+        this.candidateService.getCandidatesList(params['_id']).subscribe((response:any)=>{
+          if(response.length>0){
+            this.loading = false
+            this.appService.loading = false;
+            this.candidates = response.reverse()
+            this.dataSource.data = response.reverse();
+            this.prepareData(this.dataSource.data);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          }else{
+            this.loading = false
+            this.appService.loading = false;
+            this.appService.presentToast('top',"No Candidate registered")
+          }
+        },(error) => {
+          this.appService.loading = false
+          const errorMessage = "Internal Server Error : "+error.statusText;
+          this.appService.presentToast('top',errorMessage)
+        })
+      }else{
+        this.router.navigate(['/edit-events']);
       }
-    );
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    // Reset pagination to the first page after filter
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  toggleEdit(element: any) {
-    element.isEdit = !element.isEdit;
-    if(!element.isEdit){
-      this.appService.loading = "Loading";
-      this.loading = true
-      element['updatedBy'] = localStorage.getItem('email'),
-      element['updatedOn'] = new Date(),
-      element['isEdited'] = true
-      this.candidateService.saveCandidate(element).subscribe(
-        (response: any) => {
-          this.appService.loading = false;
-          this.loading = false
-          this.loadCandidates()
-          this.appService.presentToast('top', "Candidate data updated successfully");
-        },
-        (error) => {
-          this.appService.loading = false;
-          this.loading = false
-          const errorMessage = "Internal Server Error : " + error.statusText;
-          this.appService.presentToast('top', errorMessage);
-        }
-      );
-    }
-  }
-
-  deleteEvent(element: any, j: number) {
-    console.log('Delete:', element);
+    }) 
   }
 
   exportToExcel() {
@@ -169,7 +134,7 @@ export class EditCandidateComponent implements OnInit {
     `);
     
     printWindow?.document.write('</head><body>');
-    printWindow?.document.write('<h1>Candidate List</h1>');  // Optional header
+    printWindow?.document.write('<h1>'+this.title+'</h1>');  // Optional header
     printWindow?.document.write('<div>' + printContent + '</div>');
     printWindow?.document.write('</body></html>');
     printWindow?.document.close();
@@ -186,6 +151,16 @@ export class EditCandidateComponent implements OnInit {
     elements.forEach(element => {
       element.dateOfBirth = this.formatDateForDatePicker(element.dateOfBirth);
     });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    // Reset pagination to the first page after filter
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
 }
