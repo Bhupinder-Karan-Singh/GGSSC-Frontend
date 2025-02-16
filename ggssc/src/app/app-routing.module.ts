@@ -10,6 +10,7 @@ import { LogoutComponent } from './pages/logout/logout.component';
 import { EditEventsComponent } from './pages/edit-events/edit-events.component';
 import { EditCandidateComponent } from './pages/edit-candidate/edit-candidate.component';
 import { CandidateListComponent } from './pages/candidate-list/candidate-list.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'admin',
     component:AdminComponent,
+  },
+  {
+    path: 'reset-password',
+    component:ResetPasswordComponent,
   },
   {
     path: 'register',

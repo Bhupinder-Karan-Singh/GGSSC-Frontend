@@ -38,10 +38,16 @@ export class CandidateListComponent  implements OnInit {
     private candidateService: CandidateServiceService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadCandidates()
+  }
 
   ionViewWillEnter(): void {
-    this.title = this.eventService.eventName
+    this.loadCandidates()
+  }
+
+  loadCandidates(){
+        this.title = this.eventService.eventName
     this.route.params.subscribe((params)=>{
       if(params['_id']){
         console.log(params['_id'])
@@ -69,7 +75,7 @@ export class CandidateListComponent  implements OnInit {
       }else{
         this.router.navigate(['/edit-events']);
       }
-    }) 
+    })
   }
 
   exportToExcel() {

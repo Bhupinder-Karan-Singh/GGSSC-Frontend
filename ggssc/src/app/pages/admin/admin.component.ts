@@ -51,4 +51,8 @@ export class AdminComponent  implements OnInit, ViewWillEnter {
       this.appService.presentToast('top','Invalid Credentials !!!')
     }
   } 
+
+  forgotPassword(){
+    this.router.navigate(['/reset-password']);
+  }
 }

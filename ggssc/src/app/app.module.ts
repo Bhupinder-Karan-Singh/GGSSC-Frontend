@@ -36,6 +36,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CandidateListComponent } from './pages/candidate-list/candidate-list.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { CandidateListComponent } from './pages/candidate-list/candidate-list.co
     EditCandidateComponent,
     LoadingComponent,
     CandidateImageUploadComponent,
-    CandidateListComponent
+    CandidateListComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule, 

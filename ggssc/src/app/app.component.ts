@@ -11,6 +11,8 @@ import {
 } from '@angular/router'
 import { AppServiceService } from './services/app-service.service';
 import { AuthServiceService } from './services/auth-service.service';
+import { BnNgIdleService } from 'bn-ng-idle';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -19,8 +21,10 @@ import { AuthServiceService } from './services/auth-service.service';
 export class AppComponent {
   currentYear:any;
   isLoading = false
+  timeoutId:any;
 
   constructor(
+    private bnIdle: BnNgIdleService,
     private loadingCtrl: LoadingController,
     private router: Router,
     public appService: AppServiceService,
@@ -29,6 +33,18 @@ export class AppComponent {
     this.router.events.subscribe((e : RouterEvent) => {
       this.navigationInterceptor(e);
     })
+
+    this.bnIdle.startWatching(60).subscribe((res:any) => {
+      if (res) {
+        if(this.appService.isLoggedIn()){
+          console.log("true")
+          console.log(res)
+          this.authService.SignOut()
+          this.appService.presentToast('top',"Session expired !!! Please login again")
+        }
+      }
+    });
+
   }
 
   ngOnInit(): void {
@@ -83,6 +99,5 @@ export class AppComponent {
         this.router.navigate(['/admin']);
       }
     }  
-  }
-    
+  } 
 }
