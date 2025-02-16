@@ -107,4 +107,8 @@ export class EditEventsComponent  implements OnInit {
     );
   }
 
+  goBack(){
+    this.router.navigate(['/admin-home']);
+  }
+
 }

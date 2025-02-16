@@ -140,13 +140,13 @@ export class CandidateListComponent  implements OnInit {
     `);
     
     printWindow?.document.write('</head><body>');
-    printWindow?.document.write('<h1>'+this.title+'</h1>');  // Optional header
+    printWindow?.document.write('<h1>Candidate List</h1>');  // Optional header
     printWindow?.document.write('<div>' + printContent + '</div>');
     printWindow?.document.write('</body></html>');
     printWindow?.document.close();
     printWindow?.print();
   }
-
+  
   formatDateForDatePicker(date: string | Date | null): string {
     if (!date) return ''; // Handle null or undefined case
     return new Date(date).toISOString().split('T')[0]; // Ensure 'YYYY-MM-DD' format
@@ -167,6 +167,10 @@ export class CandidateListComponent  implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  goBack(){
+    this.router.navigate(['/edit-events']);
   }
 
 }

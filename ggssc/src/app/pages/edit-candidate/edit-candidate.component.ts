@@ -188,4 +188,8 @@ export class EditCandidateComponent implements OnInit {
     });
   }
 
+  goBack(){
+    this.router.navigate(['/edit-events']);
+  }
+
 }

@@ -1,8 +1,14 @@
 <div id="container" *ngIf="!loading">
 
-  <div style="text-align: right;">
-    <a style="margin: 10px; cursor: pointer;" color="primary" expand="block" (click)="createEvent()">Create Event</a>
+  <div style="display: flex; justify-content: space-between; margin: 10px">
+    <div>
+      <a style="margin: 10px; cursor:pointer;" color="primary" expand="block" (click)="goBack()">Back</a>
+    </div>
+    <div>
+      <a style="margin: 10px; cursor: pointer;" color="primary" expand="block" (click)="createEvent()">Create Event</a>
+    </div>
   </div>
+
   <div *ngIf="events.length > 0">
       <ion-title>{{title}}</ion-title>
   </div>

@@ -212,6 +212,10 @@ export class CreateEventComponent  implements OnInit {
     this.router.navigate(['/edit-events']);
   }
 
+  goBack(){
+    this.router.navigate(['/admin-home']);
+  }
+
   // onCheckboxChange(event: any) {
   //   console.log('Checkbox state:', this.isChecked);
   //   console.log('Event details:', event);
