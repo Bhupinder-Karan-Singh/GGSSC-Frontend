@@ -2,25 +2,22 @@
   <div id="card-container">
     <div *ngIf="dataSource.data.length > 0">
 
-      <ion-title>{{ title }}</ion-title>
-
       <div style="display: flex; justify-content: space-between; margin: 10px">
         <div>
-          <a style="margin: 10px; cursor:pointer;" color="primary" expand="block" (click)="goBack()">Back</a>
+          <ion-icon style="cursor: pointer;" name="arrow-back-outline" (click)="goBack()"></ion-icon>
         </div>
         <div>
-          <a style="cursor: pointer;" (click)="exportToExcel()">Export to Excel</a>
+          <ion-title>{{ title }}</ion-title>
         </div>
         <div>
-          <a style="cursor: pointer;" (click)="printTable()">Print Table</a>
+          <ion-icon style="cursor: pointer; margin-right:10px" name="download-outline" (click)="exportToExcel()"></ion-icon>
+          <ion-icon style="cursor: pointer;" name="print-outline" (click)="printTable()"></ion-icon>
         </div>
       </div>
     
       <div style="margin-bottom: 10px;">
-        <input matInput (keyup)="applyFilter($event)" placeholder="Type to search" style="border-radius: 2px; height: 35px; border-color: lightgray;">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search..." style="border-radius: 2px; height: 35px; border-color: lightgray;">
       </div>
-    
-      <mat-divider></mat-divider>
     
       <div id="table-container" style="max-width:99vw; overflow: scroll;">
             <!-- Data Table -->
@@ -112,8 +109,6 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
         
-            <mat-divider></mat-divider>
-        
             <!-- Pagination -->
             <div class="pagination" style="margin-top: 10px;">
               <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
@@ -121,7 +116,10 @@
       </div>
       </div>
     <div *ngIf="dataSource.data.length <= 0">
-      <p>No Candidates Found</p>
+      <div style="float: left; margin-left: 10px;">
+        <ion-icon style="cursor: pointer;" name="arrow-back-outline" (click)="goBack()"></ion-icon>
+      </div>
+      <img alt="Event Image" src="../../../assets/icon/noData.jpg"/>
     </div>
   </div>
 </div>

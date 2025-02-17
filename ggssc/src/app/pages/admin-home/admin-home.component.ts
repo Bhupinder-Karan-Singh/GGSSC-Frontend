@@ -63,4 +63,8 @@ export class AdminHomeComponent  implements OnInit {
       this.router.navigate(['/edit-candidates']);
     }
   }
+
+  goBack(){
+    this.router.navigate(['/home']);
+  }
 }

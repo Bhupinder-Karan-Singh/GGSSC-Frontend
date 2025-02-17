@@ -25,9 +25,14 @@ export class EditEventsComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loadEvents()
   }
 
   ionViewWillEnter(): void {
+    this.loadEvents()
+  }
+
+  loadEvents(){
     this.loading = true
     this.appService.loading = "Loading";
     this.eventService.getAllEvents().subscribe((response:any)=>{
@@ -38,9 +43,11 @@ export class EditEventsComponent  implements OnInit {
       }else{
         this.loading = false
         this.appService.loading = false;
+        this.appService.presentToast('top',"No Events")
       }
     },(error) => {
       this.appService.loading = false
+      this.loading = false
       const errorMessage = "Internal Server Error : "+error.statusText;
       this.appService.presentToast('top',errorMessage)
     })

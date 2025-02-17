@@ -29,7 +29,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditCandidateComponent } from './pages/edit-candidate/edit-candidate.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
@@ -37,6 +37,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CandidateListComponent } from './pages/candidate-list/candidate-list.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { DialogBoxComponent } from './pages/dialog-box/dialog-box.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     LoadingComponent,
     CandidateImageUploadComponent,
     CandidateListComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    DialogBoxComponent
   ],
   imports: [
     BrowserModule, 
@@ -81,7 +83,8 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     MatSortModule,
     MatInputModule,
     MatButtonModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDialogModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

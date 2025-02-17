@@ -58,3 +58,16 @@
         // margin:10px;
         margin-left:0px
     }
+
+    table {
+      table-layout: auto; /* Allows dynamic width based on content */
+      width: 90%; /* Ensures the table takes full width if necessary */
+      border-collapse: collapse; 
+      margin: auto;/* Prevents spacing issues */
+    }
+    
+    td, th {
+      white-space: nowrap; /* Prevents text from wrapping */
+      padding: 8px; /* Ensures proper spacing */
+    }
+    

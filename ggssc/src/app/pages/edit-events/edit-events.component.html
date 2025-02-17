@@ -1,97 +1,78 @@
 <div id="container" *ngIf="!loading">
-
-  <div style="display: flex; justify-content: space-between; margin: 10px">
-    <div>
-      <a style="margin: 10px; cursor:pointer;" color="primary" expand="block" (click)="goBack()">Back</a>
-    </div>
-    <div>
-      <a style="margin: 10px; cursor: pointer;" color="primary" expand="block" (click)="createEvent()">Create Event</a>
-    </div>
-  </div>
-
-  <div *ngIf="events.length > 0">
-      <ion-title>{{title}}</ion-title>
-  </div>
-
   <div id="card-container">
-    <div *ngIf="events.length <= 0">
-      <p>
-        No Event Found
-      </p>
-    </div>
+    <div *ngIf="events.length > 0">
 
-    <ion-grid>
-      <ion-row *ngFor="let event of events; let i = index" style="margin: 20px 20px 20px 20px; 
-      border-radius: 0.3rem; 
-      background-color: #f2f2f2;
-      box-shadow: 0px 0px 10px grey;">
-        <ion-col style ="text-align: left; 
-        display: flex; 
-        flex-direction: column; 
-        justify-content: space-evenly;">
-          <div style="font-size: 13px; margin:10px">
-            <ion-icon name="bookmark" style="margin-right: 5px; margin-bottom: -1px;"></ion-icon>
-            <span>{{event.eventName}}</span>
-          </div>
-          <div style="font-size: 13px; margin:10px">
-            <ion-icon name="time" style="margin-right: 5px; margin-bottom: -1px;"></ion-icon>
-            <span>Starts - {{event.startTime}}</span>
-          </div>
-          <div style="font-size: 13px; margin:10px">
-            <ion-icon name="time" style="margin-right: 5px; margin-bottom: -1px;"></ion-icon>
-            <span>Ends - {{event.endTime}}</span>
-          </div>
-          <div style="font-size: 13px; margin:10px">
-            <ion-icon name="navigate" style="margin-right: 5px; margin-bottom: -1px;"></ion-icon>
-            <span>{{event.location}}</span>
-          </div>
-          <div style="font-size: 13px; margin:10px">
-            <ion-icon name="hourglass" style="margin-right: 5px; margin-bottom: -1px;"></ion-icon>
-            <span>
-              Status - 
-              <span *ngIf="event.status != 'Active'" style="color:rgb(255, 140, 0)">In-Active</span>
-              <span *ngIf="event.status == 'Active'" style="color:rgb(73, 248, 73)">Active</span>
-            </span>
-          </div>
-          <div style="font-size: 13px; margin:10px; display: flex; justify-content: space-between;">
-            <a style="cursor: pointer;" (click)="editEvent(event)">Edit</a> |
-            <a style="cursor: pointer;" (click)="deleteEvent(event)">Delete</a> |
-            <a style="cursor: pointer;" (click)="candidateList(event)">Candidate list</a>
-          </div>
-        </ion-col>
-        <ion-col size="4" style ="text-align: left; 
-        display: flex; 
-        flex-direction: column; 
-        justify-content: space-between;">
-          <a [href]="event.images" download="event.jpg" style="display: flex;">
-            <img class="img-event" alt="Event Image" [src]="event.images"/>
-          </a>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <!-- <div class="row" *ngFor="let event of events; let i = index" style="margin-top:15px; margin-bottom:15px;"> -->
-        <!-- <div>
-          {{event.eventName}}
+      <div style="display: flex; justify-content: space-between; margin: 10px">
+        <div>
+          <ion-icon style="cursor: pointer;" name="arrow-back-outline" (click)="goBack()"></ion-icon>
+        </div>
+        <div style="margin-left: 80px;">
+          <ion-title>{{title}}</ion-title>
         </div>
         <div>
-          <a [href]="event.images" download="event.jpg">
-            <img class="img-event" alt="Event Image" [src]="event.images"/>
-          </a>
-        </div> -->
-      <!-- <ion-title>{{event.eventName}}</ion-title>
-      <a [href]="event.images" download="event.jpg">
-        <img class="img-event" alt="Event Image" [src]="event.images"/>
-      </a>
-      <ion-card-header>
-        <ion-card-title></ion-card-title>
-      </ion-card-header> -->
-      <!-- <ion-card-content>
-        {{event.subtitle}}
-      </ion-card-content> -->
-      <!-- <ion-button fill="clear" (click)="editEvent(event)">Register</ion-button>
-      <ion-button fill="clear">Already registered ?</ion-button> -->
-    <!-- </div> -->
+          <a style="margin: 10px; cursor: pointer;" color="primary" expand="block" (click)="createEvent()">Create Event</a>
+        </div>
+      </div>
+      
+      <ion-grid>
+        <ion-row *ngFor="let event of events; let i = index" style="margin: 20px 20px 20px 20px; 
+        border-radius: 0.3rem; 
+        background-color: #f2f2f2;
+        box-shadow: 0px 0px 10px grey;">
+          <ion-col style ="text-align: left; 
+          display: flex; 
+          flex-direction: column; 
+          justify-content: space-evenly;">
+            <div style="font-size: 13px; margin:10px">
+              <ion-icon name="bookmark" style="margin-right: 5px; margin-bottom: -1px;"></ion-icon>
+              <span>{{event.eventName}}</span>
+            </div>
+            <div style="font-size: 13px; margin:10px">
+              <ion-icon name="time" style="margin-right: 5px; margin-bottom: -1px;"></ion-icon>
+              <span>Starts - {{event.startTime}}</span>
+            </div>
+            <div style="font-size: 13px; margin:10px">
+              <ion-icon name="time" style="margin-right: 5px; margin-bottom: -1px;"></ion-icon>
+              <span>Ends - {{event.endTime}}</span>
+            </div>
+            <div style="font-size: 13px; margin:10px">
+              <ion-icon name="navigate" style="margin-right: 5px; margin-bottom: -1px;"></ion-icon>
+              <span>{{event.location}}</span>
+            </div>
+            <div style="font-size: 13px; margin:10px">
+              <ion-icon name="hourglass" style="margin-right: 5px; margin-bottom: -1px;"></ion-icon>
+              <span>
+                Status - 
+                <span *ngIf="event.status != 'Active'" style="color:rgb(255, 140, 0)">In-Active</span>
+                <span *ngIf="event.status == 'Active'" style="color:rgb(73, 248, 73)">Active</span>
+              </span>
+            </div>
+            <div style="font-size: 13px; margin:10px; display: flex; justify-content: space-between;">
+              <a style="cursor: pointer;" (click)="editEvent(event)">Edit</a> |
+              <a style="cursor: pointer;" (click)="deleteEvent(event)">Delete</a> |
+              <a style="cursor: pointer;" (click)="candidateList(event)">Candidate list</a>
+            </div>
+          </ion-col>
+          <ion-col size="4" style ="text-align: left; 
+          display: flex; 
+          flex-direction: column; 
+          justify-content: space-between;">
+            <a [href]="event.images" download="event.jpg" style="display: flex;">
+              <img class="img-event" alt="Event Image" [src]="event.images"/>
+            </a>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      </div>
 
+    <div *ngIf="events.length <= 0">
+      <div style="float: left; margin-left: 10px;">
+        <ion-icon style="cursor: pointer;" name="arrow-back-outline" (click)="goBack()"></ion-icon>
+      </div>
+      <span>
+        <img alt="Event Image" src="../../../assets/icon/noData.jpg"/>
+      </span>
+    </div>
   </div>
 </div>
+

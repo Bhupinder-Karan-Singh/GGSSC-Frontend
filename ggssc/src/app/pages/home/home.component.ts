@@ -4,6 +4,8 @@ import { ViewWillEnter } from '@ionic/angular';
 import { AppComponent } from 'src/app/app.component';
 import { AppServiceService } from 'src/app/services/app-service.service';
 import { EventServiceService } from 'src/app/services/event-service.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +21,8 @@ export class HomeComponent  implements OnInit {
     private appService : AppServiceService,
     private eventService: EventServiceService,
     private appComponent: AppComponent,
-    private router : Router
+    private router : Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -86,6 +89,12 @@ export class HomeComponent  implements OnInit {
   register(event:any){
     this.appService.registerEvent = event
     this.router.navigate(['/register']);
+  }
+
+  openPopup(eventDescription:any): void {
+    this.dialog.open(DialogBoxComponent, {
+      data: { message: eventDescription },
+    });
   }
 
 }

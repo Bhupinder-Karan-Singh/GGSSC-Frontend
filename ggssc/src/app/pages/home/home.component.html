@@ -24,6 +24,9 @@
               <ion-icon name="navigate" style="margin-right: 5px; margin-bottom: -1px;"></ion-icon>
               <span>Location - {{event.location}}</span>
             </div>
+            <div style="font-size: 13px;">
+              <a style="cursor: pointer;" (click)="openPopup(event.eventDescription)">Click for more Details</a>
+            </div>
           </div>
         </ion-card-content>
         <ion-button fill="clear" (click)="register(event)">Register</ion-button>

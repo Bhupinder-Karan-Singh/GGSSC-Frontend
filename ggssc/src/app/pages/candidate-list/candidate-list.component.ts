@@ -28,6 +28,7 @@ export class CandidateListComponent  implements OnInit {
     loading:any = false
   
     title:any
+    error:any = false
 
   constructor(
     public eventService: EventServiceService,
@@ -47,7 +48,7 @@ export class CandidateListComponent  implements OnInit {
   }
 
   loadCandidates(){
-        this.title = this.eventService.eventName
+    this.title = this.eventService.eventName
     this.route.params.subscribe((params)=>{
       if(params['_id']){
         console.log(params['_id'])
@@ -62,12 +63,14 @@ export class CandidateListComponent  implements OnInit {
             this.prepareData(this.dataSource.data);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
+            this.error = false
           }else{
             this.loading = false
             this.appService.loading = false;
             this.appService.presentToast('top',"No Candidate registered")
           }
         },(error) => {
+          this.error = true
           this.appService.loading = false
           const errorMessage = "Internal Server Error : "+error.statusText;
           this.appService.presentToast('top',errorMessage)

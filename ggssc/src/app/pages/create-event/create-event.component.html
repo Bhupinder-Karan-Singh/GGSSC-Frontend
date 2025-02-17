@@ -3,15 +3,14 @@
 
   <div style="display: flex; justify-content: space-between; margin: 10px">
     <div>
-      <a style="margin: 10px; cursor:pointer;" color="primary" expand="block" (click)="goBack()">Back</a>
+      <ion-icon style="cursor: pointer;" name="arrow-back-outline" (click)="goBack()"></ion-icon>
+    </div>
+    <div style="margin-left: 80px;">
+      <ion-title style="font-size: 18px;">{{title}}</ion-title>
     </div>
     <div>
       <a style="margin: 10px; cursor:pointer;" color="primary" expand="block" (click)="eventsList()">Events List</a>
     </div>
-  </div>
-  
-  <div>
-      <ion-title style="font-size: 18px;">{{title}}</ion-title>
   </div>
 
   <ion-list>

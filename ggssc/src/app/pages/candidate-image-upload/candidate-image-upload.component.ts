@@ -37,7 +37,7 @@ export class CandidateImageUploadComponent  implements OnInit {
             if(this.uploadService.capturedProfileImages?.stepTitle){
               reader.onload = e => {
                 var fileName = file.name
-                if(file.size > 1 * 1024 *1024 && file.size < 15 * 1024 *1024){
+                if(file.size > 1 * 1024 * 1024 && file.size < 15 * 1024 *1024){
                   this.imageProcess.imgToFile(reader.result,fileName,file.type).then((imgObj) => {
                     this.imageAnalysis(imgObj,fileName,stepTitle,reader)
                   }).catch((error) => {

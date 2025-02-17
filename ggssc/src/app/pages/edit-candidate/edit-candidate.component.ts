@@ -25,6 +25,7 @@ export class EditCandidateComponent implements OnInit {
 
   candidates:any
   loading:any = false
+  error:any = false
 
   title = "Candidates List";
 
@@ -57,9 +58,15 @@ export class EditCandidateComponent implements OnInit {
           this.prepareData(this.dataSource.data);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+          this.error = false
+        }else{
+          this.loading = false
+          this.appService.loading = false;
+          this.appService.presentToast('top',"No Candidate registered")
         }
       },
       (error) => {
+        this.error = true
         this.appService.loading = false;
         this.loading = false
         const errorMessage = "Internal Server Error : " + error.statusText;
@@ -189,7 +196,7 @@ export class EditCandidateComponent implements OnInit {
   }
 
   goBack(){
-    this.router.navigate(['/edit-events']);
+    this.router.navigate(['/admin-home']);
   }
 
 }
