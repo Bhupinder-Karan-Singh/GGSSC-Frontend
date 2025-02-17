@@ -87,7 +87,6 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
     if(this.registrationForm.valid) {
       this.appService.loading = "Loading";
       const formData = this.registrationForm.value
-      formData.dateOfBirth = this.formatDate(formData.dateOfBirth)
       formData.createdBy = this.email
       formData.createdOn = new Date()
       formData.isEdited = false
@@ -95,6 +94,7 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
       formData.eventName = this.appService.registerEvent.eventName
       formData.location = this.appService.registerEvent.location
       formData.email = this.email
+      console.log(formData)
       this.eventService.registerEvent(formData).subscribe((response:any)=>{
         console.log(response)
         this.appService.loading = false;
@@ -110,6 +110,19 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
       console.log('Form is invalid!');
     }
   }
+
+  // calculateAge(dateString: string): number {
+  //   const birthDate = new Date(dateString); // Convert to Date object
+  //   const today = new Date();
+  //   let age = today.getFullYear() - birthDate.getFullYear();
+  //   // Adjust if birthday hasn't occurred yet this year
+  //   if (today.getMonth() < birthDate.getMonth() || 
+  //       (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())
+  //   ) {
+  //     age--;
+  //   }
+  //   return age;
+  // }
 
   // Helper function to format the date (no time)
   formatDate(date: string): string {

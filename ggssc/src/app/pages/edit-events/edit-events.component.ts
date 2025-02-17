@@ -25,7 +25,7 @@ export class EditEventsComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadEvents()
+    // this.loadEvents()
   }
 
   ionViewWillEnter(): void {

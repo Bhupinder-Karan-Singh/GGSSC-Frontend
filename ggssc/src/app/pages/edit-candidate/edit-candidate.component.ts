@@ -17,7 +17,7 @@ import 'jspdf-autotable';
   styleUrls: ['./edit-candidate.component.scss'],
 })
 export class EditCandidateComponent implements OnInit {
-  displayedColumns: string[] = ['roll_number', 'name', 'dob', 'fname', 'mname', 'email', 'phoneNumber', 'File', 'Action'];
+  displayedColumns: string[] = ['roll_number', 'name', 'dob', 'age', 'fname', 'mname', 'email', 'phoneNumber', 'File', 'Action'];
   dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -38,7 +38,7 @@ export class EditCandidateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadCandidates();
+    // this.loadCandidates();
   }
 
   ionViewWillEnter(): void {
@@ -119,6 +119,7 @@ export class EditCandidateComponent implements OnInit {
       rollNumber: candidate.rollNumber,
       name: candidate.name,
       dateOfBirth: candidate.dateOfBirth,
+      age: candidate.age,
       fatherName: candidate.fatherName,
       motherName: candidate.motherName,
       email: candidate.email,

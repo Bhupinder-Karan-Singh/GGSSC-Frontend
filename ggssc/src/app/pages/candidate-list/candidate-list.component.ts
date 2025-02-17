@@ -18,7 +18,7 @@ import { CandidateServiceService } from 'src/app/services/candidate-service.serv
 })
 export class CandidateListComponent  implements OnInit {
 
-    displayedColumns: string[] = ['roll_number', 'name', 'dob', 'fname', 'mname', 'email', 'phoneNumber', 'File'];
+    displayedColumns: string[] = ['roll_number', 'name', 'dob', 'age', 'fname', 'mname', 'email', 'phoneNumber', 'File'];
     dataSource = new MatTableDataSource<any>([]);
   
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -40,7 +40,7 @@ export class CandidateListComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadCandidates()
+    // this.loadCandidates()
   }
 
   ionViewWillEnter(): void {
@@ -86,6 +86,7 @@ export class CandidateListComponent  implements OnInit {
       rollNumber: candidate.rollNumber,
       name: candidate.name,
       dateOfBirth: candidate.dateOfBirth,
+      age: candidate.age,
       fatherName: candidate.fatherName,
       motherName: candidate.motherName,
       email: candidate.email,
