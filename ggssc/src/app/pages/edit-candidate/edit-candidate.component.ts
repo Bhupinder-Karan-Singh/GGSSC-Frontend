@@ -38,7 +38,7 @@ export class EditCandidateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.loadCandidates();
+    this.loadCandidates();
   }
 
   ionViewWillEnter(): void {

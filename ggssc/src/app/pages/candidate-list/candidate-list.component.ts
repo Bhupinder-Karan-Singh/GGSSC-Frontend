@@ -40,7 +40,7 @@ export class CandidateListComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.loadCandidates()
+    this.loadCandidates()
   }
 
   ionViewWillEnter(): void {

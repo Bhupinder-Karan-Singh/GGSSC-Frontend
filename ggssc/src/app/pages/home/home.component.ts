@@ -58,7 +58,7 @@ export class HomeComponent  implements OnInit {
     this.events = []
     this.title = "Guru Gobind Singh Study Circle, Canada";
     this.page = "Registration";
-    this.appService.loading = "Loading";
+    this.appService.loading = "Loading...";
     this.loading = true
     this.eventService.getEvents().subscribe((response:any)=>{
       if(response.length>0){
