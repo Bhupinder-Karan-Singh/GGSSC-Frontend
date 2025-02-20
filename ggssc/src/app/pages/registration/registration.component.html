@@ -1,13 +1,17 @@
 <div id="container">
-  <div>
-    <ion-title style="font-size: 18px;">Event : {{appService.registerEvent.eventName}}</ion-title>
-  </div>
+
+    <div style="text-align:left">
+      <ion-icon style="cursor: pointer; margin-left:10px" name="arrow-back-outline" (click)="goBack()"></ion-icon>
+    </div>
+    <div style="text-align:center; margin-bottom:30px">
+      <ion-header style="box-shadow: none;">
+        <ion-title style="font-size: 80%;">Event : {{appService.registerEvent.eventName}}</ion-title>
+      </ion-header>
+    </div>
 
   <ion-content  *ngIf="!otpVerified">
-
     <form [formGroup]="sendOtpForm" (ngSubmit)="sendOtp()">
       <ion-list>
-
         <ion-item>
           <ion-input formControlName="email" [(ngModel)]="email" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
             <div slot="label">Email
@@ -22,15 +26,12 @@
         <div *ngIf="sendOtpForm.get('email').hasError('email') && sendOtpForm.get('email').touched">
           <ion-text color="danger">Invalid email format.</ion-text>
         </div>
-    
         <ion-item>
           <ion-button color="primary" style="margin-bottom: 20px;" expand="block" type="submit" [disabled]="sendOtpForm.invalid">Send Code</ion-button>
         </ion-item>
-
         </ion-list>
       </form>
 
-      
     <form *ngIf="otpSent" [formGroup]="verifyForm" (ngSubmit)="verifyOtp()">
       <ion-list>
 

@@ -35,3 +35,18 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 // @import "@ionic/angular/css/palettes/dark.system.css";
+
+ion-input, input-wrapper, ion-textarea, select {
+    border-radius: 5px 5px 0px 0px;
+    box-shadow: none;
+    -webkit-box-shadow: 0 0 0px 1000px #f2f0f0 inset !important;
+  }
+
+//   .input-wrapper{
+//     margin-left : 20px;
+//   }
+
+//   .textarea-wrapper{
+//     margin-left : 20px;
+//   }
+

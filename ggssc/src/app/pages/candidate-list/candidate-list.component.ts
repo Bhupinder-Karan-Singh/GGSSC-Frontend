@@ -35,12 +35,11 @@ export class CandidateListComponent  implements OnInit {
     private route:ActivatedRoute,
     private router: Router,
     private appService: AppServiceService,
-    private alertController: AlertController,
     private candidateService: CandidateServiceService
   ) { }
 
   ngOnInit() {
-    this.loadCandidates()
+    // this.loadCandidates()
   }
 
   ionViewWillEnter(): void {
@@ -61,8 +60,10 @@ export class CandidateListComponent  implements OnInit {
             this.candidates = response.reverse()
             this.dataSource.data = response.reverse();
             this.prepareData(this.dataSource.data);
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
+            setTimeout(() => {
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+            },100);
             this.error = false
           }else{
             this.loading = false

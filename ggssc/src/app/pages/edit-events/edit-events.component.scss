@@ -6,8 +6,7 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    height:80%;
-    overflow: auto;
+    height:calc(100vh - 150px);
     }
     
     #container strong {
@@ -27,7 +26,14 @@
     }
     
     #card-container {
+      text-align: center;
       position: relative;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      height:calc(95vh - 200px);
+      overflow: auto;
+      top:45%
     }
     
     ion-card{

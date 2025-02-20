@@ -188,5 +188,8 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
     }
   }
 
+  goBack(){
+    this.router.navigate(['/home']);
+  }
 
 }

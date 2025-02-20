@@ -1,26 +1,32 @@
 <div id="container" *ngIf="!loading">
+
+  <div *ngIf="dataSource.data.length > 0">
+    <div>
+      <ion-header style="box-shadow: none;">
+        <ion-title>Event : {{ title }}</ion-title>
+      </ion-header>
+    </div>
+    <div style="display: flex; justify-content: space-between; margin: 10px">
+      <div>
+        <ion-icon style="cursor: pointer;" name="arrow-back-outline" (click)="goBack()"></ion-icon>
+      </div>
+      <div>
+        <ion-icon
+         style="cursor: pointer; margin-right:10px" name="download-outline" (click)="exportToExcel()"></ion-icon>
+        <ion-icon style="cursor: pointer;" name="print-outline" (click)="printTable()"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+
   <div id="card-container">
     <div *ngIf="dataSource.data.length > 0">
 
-      <div style="display: flex; justify-content: space-between; margin: 10px">
-        <div>
-          <ion-icon style="cursor: pointer;" name="arrow-back-outline" (click)="goBack()"></ion-icon>
-        </div>
-        <div>
-          <ion-title>Event : {{ title }}</ion-title>
-        </div>
-        <div>
-          <ion-icon
-           style="cursor: pointer; margin-right:10px" name="download-outline" (click)="exportToExcel()"></ion-icon>
-          <ion-icon style="cursor: pointer;" name="print-outline" (click)="printTable()"></ion-icon>
-        </div>
-      </div>
-    
       <div style="margin-bottom: 10px;">
         <input matInput (keyup)="applyFilter($event)" placeholder="Search..." style="border-radius: 2px; height: 35px; border-color: lightgray;">
       </div>
     
-      <div id="table-container" style="max-width:99vw; overflow: scroll;">
+      <div id="table-container" style="max-width:99vw;">
             <!-- Data Table -->
             <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
     

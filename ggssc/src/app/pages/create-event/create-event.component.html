@@ -1,159 +1,164 @@
 
 <div id="container" *ngIf="!loading">
 
+  <div>
+    <ion-header style="box-shadow: none;">
+      <ion-title>{{ title }}</ion-title>
+    </ion-header>
+  </div>
   <div style="display: flex; justify-content: space-between; margin: 10px">
     <div>
       <ion-icon style="cursor: pointer;" name="arrow-back-outline" (click)="goBack()"></ion-icon>
-    </div>
-    <div style="margin-left: 80px;">
-      <ion-title style="font-size: 18px;">{{title}}</ion-title>
     </div>
     <div>
       <a style="margin: 10px; cursor:pointer;" color="primary" expand="block" (click)="eventsList()">Events List</a>
     </div>
   </div>
 
-  <ion-list>
+  <div id="card-container">
+    <ion-list>
 
-    <ion-item>
-      <ion-input 
-      (ngModelChange)="detectChanges($event)"
-      fill="solid" 
-      labelPlacement="floating" 
-      [(ngModel)]="eventName" 
-      style="margin-bottom: 10px;">
-        <div slot="label">Event Name 
-          <ion-text color="primary">
-          </ion-text>
-        </div>
-      </ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-textarea 
-      class="text-area" 
-      fill="solid" 
-      labelPlacement="floating" 
-      [(ngModel)]="eventDescription" 
-      spellcheck="true"
-      rows="10"
-      style="margin-bottom: 10px;">
-        <div slot="label">Event Description 
-          <ion-text color="primary">
-          </ion-text>
-        </div>
-      </ion-textarea >
-    </ion-item>
-
-    <ion-item>
-      <ion-input
+      <ion-item>
+        <ion-input 
+        (ngModelChange)="detectChanges($event)"
+        fill="solid" 
+        labelPlacement="floating" 
+        [(ngModel)]="eventName" 
+        style="margin-bottom: 10px;">
+          <div slot="label">Event Name 
+            <ion-text color="primary">
+            </ion-text>
+          </div>
+        </ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-textarea 
+        class="text-area" 
+        fill="solid" 
+        labelPlacement="floating" 
+        [(ngModel)]="eventDescription" 
+        spellcheck="true"
+        rows="10"
+        style="margin-bottom: 10px;">
+          <div slot="label">Event Description 
+            <ion-text color="primary">
+            </ion-text>
+          </div>
+        </ion-textarea >
+      </ion-item>
+  
+      <ion-item>
+        <ion-input
+          fill="solid" 
+          labelPlacement="floating" 
+          readonly
+          (click)="openDatePicker()"
+          [value]="startTime | date: 'd MMM y'"
+          style="margin-bottom: 10px;">
+          <div slot="label">Start Date 
+            <ion-text color="primary">
+            </ion-text>
+          </div>
+        </ion-input>
+  
+        <ion-modal #datePickerModal>
+          <ng-template>
+            <ion-header>
+              <ion-toolbar>
+                <ion-buttons slot="start">
+                  <ion-button (click)="closeDatePicker()">Cancel</ion-button>
+                </ion-buttons>
+                <ion-title>Start Date</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button (click)="confirmDate()">OK</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+        
+            <ion-content>
+              <ion-datetime
+                [presentation]="'date'"
+                [(ngModel)]="startTime">
+              </ion-datetime>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+  
+      <ion-item>
+        <ion-input
         fill="solid" 
         labelPlacement="floating" 
         readonly
-        (click)="openDatePicker()"
-        [value]="startTime | date: 'd MMM y'"
+        (click)="openDatePicker2()"
+        [value]="endTime | date: 'd MMM y'"
         style="margin-bottom: 10px;">
-        <div slot="label">Start Date 
+        <div slot="label">End Date 
           <ion-text color="primary">
           </ion-text>
         </div>
-      </ion-input>
-
-      <ion-modal #datePickerModal>
-        <ng-template>
-          <ion-header>
-            <ion-toolbar>
-              <ion-buttons slot="start">
-                <ion-button (click)="closeDatePicker()">Cancel</ion-button>
-              </ion-buttons>
-              <ion-title>Start Date</ion-title>
-              <ion-buttons slot="end">
-                <ion-button (click)="confirmDate()">OK</ion-button>
-              </ion-buttons>
-            </ion-toolbar>
-          </ion-header>
-      
-          <ion-content>
-            <ion-datetime
-              [presentation]="'date'"
-              [(ngModel)]="startTime">
-            </ion-datetime>
-          </ion-content>
-        </ng-template>
-      </ion-modal>
-    </ion-item>
-
-    <ion-item>
-      <ion-input
-      fill="solid" 
-      labelPlacement="floating" 
-      readonly
-      (click)="openDatePicker2()"
-      [value]="endTime | date: 'd MMM y'"
-      style="margin-bottom: 10px;">
-      <div slot="label">End Date 
-        <ion-text color="primary">
-        </ion-text>
-      </div>
-      </ion-input>
-
-      <ion-modal #datePickerModal2>
-        <ng-template>
-          <ion-header>
-            <ion-toolbar>
-              <ion-buttons slot="start">
-                <ion-button (click)="closeDatePicker2()">Cancel</ion-button>
-              </ion-buttons>
-              <ion-title>End Date</ion-title>
-              <ion-buttons slot="end">
-                <ion-button (click)="confirmDate2()">OK</ion-button>
-              </ion-buttons>
-            </ion-toolbar>
-          </ion-header>
-      
-          <ion-content>
-            <ion-datetime
-              [presentation]="'date'"
-              [(ngModel)]="endTime">
-            </ion-datetime>
-          </ion-content>
-        </ng-template>
-      </ion-modal>
-
-    </ion-item>
-
-    <ion-item>
-      <ion-input 
-      (ngModelChange)="detectChanges($event)"
-      fill="solid" 
-      labelPlacement="floating" 
-      [(ngModel)]="location"
-      style="margin-bottom: 10px;">
-        <div slot="label">Location
-          <ion-text color="primary">
-          </ion-text>
+        </ion-input>
+  
+        <ion-modal #datePickerModal2>
+          <ng-template>
+            <ion-header>
+              <ion-toolbar>
+                <ion-buttons slot="start">
+                  <ion-button (click)="closeDatePicker2()">Cancel</ion-button>
+                </ion-buttons>
+                <ion-title>End Date</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button (click)="confirmDate2()">OK</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+        
+            <ion-content>
+              <ion-datetime
+                [presentation]="'date'"
+                [(ngModel)]="endTime">
+              </ion-datetime>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+  
+      </ion-item>
+  
+      <ion-item>
+        <ion-input 
+        (ngModelChange)="detectChanges($event)"
+        fill="solid" 
+        labelPlacement="floating" 
+        [(ngModel)]="location"
+        style="margin-bottom: 10px;">
+          <div slot="label">Location
+            <ion-text color="primary">
+            </ion-text>
+          </div>
+        </ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-checkbox 
+          slot="end" 
+          [(ngModel)]="isChecked">
+        </ion-checkbox>
+        <ion-label>Enable event</ion-label>
+      </ion-item>
+  
+      <ion-item style="margin-top:10px">
+        <div class="image-content" style="display: flex; justify-content: center;">
+          <app-image-upload [imageGuidelines]=imageGuidelines (imageChanged)="handleImageChange($event)"></app-image-upload>
         </div>
-      </ion-input>
-    </ion-item>
+      </ion-item>
+  
+      <ion-item>
+        <ion-button *ngIf="createForm" color="success" expand="block" [disabled]="createButtonDisabled" (click)="submit()">Create event</ion-button>
+        <ion-button *ngIf="!createForm" color="success" expand="block" [disabled]="saveButtonDisabled" (click)="save()">Save event</ion-button>
+      </ion-item>
+  
+    </ion-list>
+  </div>
 
-    <ion-item>
-      <ion-checkbox 
-        slot="end" 
-        [(ngModel)]="isChecked">
-      </ion-checkbox>
-      <ion-label>Enable event</ion-label>
-    </ion-item>
-
-    <ion-item style="margin-top:10px">
-      <div class="image-content" style="display: flex; justify-content: center;">
-        <app-image-upload [imageGuidelines]=imageGuidelines (imageChanged)="handleImageChange($event)"></app-image-upload>
-      </div>
-    </ion-item>
-
-    <ion-item>
-      <ion-button *ngIf="createForm" color="success" expand="block" [disabled]="createButtonDisabled" (click)="submit()">Create event</ion-button>
-      <ion-button *ngIf="!createForm" color="success" expand="block" [disabled]="saveButtonDisabled" (click)="save()">Save event</ion-button>
-    </ion-item>
-
-  </ion-list>
 </div>

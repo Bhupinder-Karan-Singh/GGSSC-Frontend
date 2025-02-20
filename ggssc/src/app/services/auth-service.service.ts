@@ -50,6 +50,7 @@ export class AuthServiceService {
     localStorage.removeItem('idToken');
     this.appService.appPages[1] = { title: 'Admin Login', url: '/admin', icon: 'person', active:true }
     this.appService.appPages[2].active = false
+    console.log("here")
     this.router.navigate(['/admin'])
   } 
 

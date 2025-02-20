@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AppServiceService } from 'src/app/services/app-service.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class ResetPasswordComponent  implements OnInit {
     private angularFireAuth: AngularFireAuth,
     private fb: FormBuilder,
     public appService: AppServiceService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -45,18 +47,8 @@ export class ResetPasswordComponent  implements OnInit {
     }
   }
 
-  // {
-  //   "error": {
-  //     "code": 400,
-  //     "message": "EMAIL_NOT_FOUND",
-  //     "errors": [
-  //       {
-  //         "message": "EMAIL_NOT_FOUND",
-  //         "domain": "global",
-  //         "reason": "invalid"
-  //       }
-  //     ]
-  //   }
-  // }
+  goBack(){
+    this.router.navigate(['/admin']);
+  }
 
 }

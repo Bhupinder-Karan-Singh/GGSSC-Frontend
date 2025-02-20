@@ -31,14 +31,12 @@ export class EditCandidateComponent implements OnInit {
 
   constructor(
     private candidateService: CandidateServiceService,
-    private appComponent: AppComponent,
     private router: Router,
     private appService: AppServiceService,
-    private alertController: AlertController
   ) {}
 
   ngOnInit() {
-    this.loadCandidates();
+    // this.loadCandidates();
   }
 
   ionViewWillEnter(): void {
@@ -46,7 +44,7 @@ export class EditCandidateComponent implements OnInit {
   }
 
   loadCandidates() {
-    this.appService.loading = "Loading";
+    this.appService.loading = "Loading...";
     this.loading = true
     this.candidateService.getAllCandidates().subscribe(
       (response: any) => {
@@ -56,8 +54,10 @@ export class EditCandidateComponent implements OnInit {
           this.candidates = response.reverse()
           this.dataSource.data = response.reverse();
           this.prepareData(this.dataSource.data);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
+          setTimeout(() => {
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          },100);
           this.error = false
         }else{
           this.loading = false
@@ -79,7 +79,6 @@ export class EditCandidateComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    // Reset pagination to the first page after filter
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -88,7 +87,7 @@ export class EditCandidateComponent implements OnInit {
   toggleEdit(element: any) {
     element.isEdit = !element.isEdit;
     if(!element.isEdit){
-      this.appService.loading = "Loading";
+      this.appService.loading = "Loading...";
       this.loading = true
       element['updatedBy'] = localStorage.getItem('email'),
       element['updatedOn'] = new Date(),
