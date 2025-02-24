@@ -11,7 +11,7 @@ export class ImageProcessService {
     // console.log("in image process service")
     return new Promise((resolve, reject) => {
         console.log('Size in bytes was:', this.imageCompress.byteCount(img));
-        this.imageCompress.compressFile(img, 0, 25, 25).then((result: DataUrl) => {
+        this.imageCompress.compressFile(img, 0, 50, 50  ).then((result: DataUrl) => {
             console.log(`Compressed: ${result.substring(0, 50)}... (${result.length} characters)`);
             console.log('Size in bytes is now:', this.imageCompress.byteCount(result));
             // var extension = type.split('/')[1];

@@ -4,11 +4,12 @@ export const environment = {
   // appsEndpoint:"https://www.singhbhupinderkaran.com:8443/apps/api/v1",
   appsEndpoint:"http://localhost:8000/apps/api/v1",
   firebaseConfig: {
-    apiKey: "AIzaSyDExtqeZgYySV8z9yFd4HAHwElFsHKjKUA",
-    authDomain: "photo-application-bk-singh.firebaseapp.com",
-    projectId: "photo-application-bk-singh",
-    storageBucket: "photo-application-bk-singh.appspot.com",
-    messagingSenderId: "65403506103",
-    appId: "1:65403506103:web:a268e364fafcd5059fec32"
+    apiKey: "AIzaSyBHnJOyQPijD5BuSQGR_1E-219vARamd3Y",
+    authDomain: "ggssccrashcourses.firebaseapp.com",
+    projectId: "ggssccrashcourses",
+    storageBucket: "ggssccrashcourses.firebasestorage.app",
+    messagingSenderId: "285634504793",
+    appId: "1:285634504793:web:b93abd5a8954907b4f2948",
+    measurementId: "G-XF2MWMQ07R"
   },
 };

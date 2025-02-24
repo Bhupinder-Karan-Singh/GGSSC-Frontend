@@ -1,11 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, from, map, Observable, switchMap, timeout } from 'rxjs';
-import  jwt_decode  from 'jwt-decode';
-import * as moment from 'moment';
-import { Router } from '@angular/router';
-import { AppServiceService } from './app-service.service';
-import { AuthServiceService } from './auth-service.service';
 const Timeout = 60 * 5 * 1000; //5 mmins
 
 @Injectable({
