@@ -34,7 +34,7 @@ export class AppComponent {
       this.navigationInterceptor(e);
     })
 
-    this.bnIdle.startWatching(1000).subscribe((res:any) => {
+    this.bnIdle.startWatching(300).subscribe((res:any) => {
       if (res) {
         if(this.appService.isLoggedIn()){
           console.log("true")

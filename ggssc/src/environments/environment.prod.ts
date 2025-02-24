@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  appsEndpoint:"https://www.singhbhupinderkaran.com:8443/apps/api/v1",
+  appsEndpoint:"https://www.techatggssc.com:8443/apps/api/v1",
   firebaseConfig: {
     apiKey: "AIzaSyBHnJOyQPijD5BuSQGR_1E-219vARamd3Y",
     authDomain: "ggssccrashcourses.firebaseapp.com",

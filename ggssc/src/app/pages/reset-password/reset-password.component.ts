@@ -35,7 +35,7 @@ export class ResetPasswordComponent  implements OnInit {
       if(!email) { 
         this.appService.presentToast('top',"Invalid Email")
       }
-      this.angularFireAuth.sendPasswordResetEmail(email, { url: 'https://bhupinderkaransingh.com' }).then(
+      this.angularFireAuth.sendPasswordResetEmail(email, { url: 'https://www.registeratggssc.com/#/admin' }).then(
         () => this.appService.presentToast('top',"Password reset link sent to email : "+email)
       ) 
       .catch((error: { message: any; }) => {
