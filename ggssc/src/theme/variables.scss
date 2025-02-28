@@ -1,2 +1,11 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+body {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+:root {
+--ion-font-family: 'Roboto', sans-serif;
+--ion-default-font-size: 16px;
+}
