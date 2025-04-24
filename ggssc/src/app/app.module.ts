@@ -20,9 +20,24 @@ import { AdminHomeComponent } from './pages/admin-home/admin-home.component';
 import { CreateEventComponent } from './pages/create-event/create-event.component'; 
 import { LogoutComponent } from './pages/logout/logout.component';
 import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
+import { CandidateImageUploadComponent } from './pages/candidate-image-upload/candidate-image-upload.component';
 import { MatTableModule } from '@angular/material/table';
 import { EditEventsComponent } from './pages/edit-events/edit-events.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { LoadingComponent } from './pages/loading/loading.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EditCandidateComponent } from './pages/edit-candidate/edit-candidate.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CandidateListComponent } from './pages/candidate-list/candidate-list.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { DialogBoxComponent } from './pages/dialog-box/dialog-box.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +49,13 @@ import { MatDividerModule } from '@angular/material/divider';
     CreateEventComponent,
     LogoutComponent,
     ImageUploadComponent,
-    EditEventsComponent
+    EditEventsComponent,
+    EditCandidateComponent,
+    LoadingComponent,
+    CandidateImageUploadComponent,
+    CandidateListComponent,
+    ResetPasswordComponent,
+    DialogBoxComponent
   ],
   imports: [
     BrowserModule, 
@@ -54,7 +75,16 @@ import { MatDividerModule } from '@angular/material/divider';
       AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     MatTableModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatDialogModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

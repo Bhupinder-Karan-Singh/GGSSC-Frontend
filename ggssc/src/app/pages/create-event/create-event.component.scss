@@ -1,16 +1,26 @@
 ion-menu-button {
     color: var(--ion-color-primary);
   }
+
+  #card-container {
+    text-align: center;
+    position: relative;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    height:calc(99vh - 250px);
+    overflow: auto;
+    top:45%
+  }
   
   #container {
     text-align: center;
     position: absolute;
     left: 0;
     right: 0;
-    top: 50%;
-    height:80%;
-    overflow: auto;
+    top: 55%;
     transform: translateY(-50%);
+    height:calc(100vh - 150px);
   }
   
   #container strong {
@@ -32,14 +42,13 @@ ion-menu-button {
   ion-item{
     width:80%; 
     margin: auto; 
-    margin-bottom: 20px;
     --border-style: 0px
   }
 
   ion-button{
-    width: 50%; 
+    width: 100%; 
     margin: auto; 
-    margin-bottom: 10px;
+    margin-top:0px
   }
 
   ion-item:first-child {
@@ -51,6 +60,26 @@ ion-menu-button {
   }
 
   app-image-upload{
-    width:70%
+    width:100%
   }
+
+  /* Custom styles for the modal */
+.custom-date-picker-modal {
+  --width: 80%;   /* Adjust the width of the modal */
+  --height: 60%;  /* Adjust the height of the modal */
+  --border-radius: 10px; /* Optional: rounded corners */
+  --max-height: 90%; /* Prevent the modal from growing too tall */
+}
+
+/* Optional: Adjust the modal content height */
+.custom-date-picker-modal .modal-wrapper {
+  max-height: 80%; /* Control max height for the content */
+}
+
+.custom-date-picker-modal .datetime-modal {
+  height: 100%; /* Ensures the datetime picker fills the available space */
+  width: 100%;  /* Make sure the datetime picker fills the width */
+}
+
+
 

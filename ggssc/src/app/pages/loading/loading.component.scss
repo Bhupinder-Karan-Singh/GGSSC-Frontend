@@ -1,0 +1,28 @@
+.loading-cont{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 101;
+    background-color: rgba(0, 0, 0, 0.608);
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    font-size: larger;
+    flex-direction: column;
+    padding-top: 30vh;
+    mat-spinner{
+        margin-bottom: 1rem;
+    }
+    .sub-msg{
+        width: 260px;
+        font-weight: 100;
+        text-align: center;
+        margin-top: 12px;
+    }
+
+    .mat-spinner-color::ng-deep circle {
+        stroke: #ffffff;
+      }
+}
