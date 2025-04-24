@@ -1,10 +1,14 @@
+<app-loading *ngIf="appService.loading"></app-loading>
 <ion-app>
   <ion-header [translucent]="true">
     <ion-toolbar>
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <!-- <ion-title id="header-title">Guru Gobind Singh Study Circle</ion-title> -->
+      <div style="display: flex; flex-direction: row-reverse;">
+        <img style="width:25px; margin-left: 5px; margin-right: 10px;" src="../assets/icon/logo.png"/>
+        <ion-title id="header-title">Guru Gobind Singh Study Circle</ion-title>
+      </div>
     </ion-toolbar>
   </ion-header>
 
@@ -17,7 +21,7 @@
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appService.appPages; let i = index">
             <ion-item *ngIf="p.active" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-              <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
@@ -30,8 +34,8 @@
   <ion-footer [translucent]="true">
     <ion-toolbar>
       <ion-title id="footer-title">
-          <!-- &copy; GGSSC {{currentYear}}. All rights reserved. -->
-          &copy; {{currentYear}}. All rights reserved.
+          &copy; GGSSC {{currentYear}}. All rights reserved.
+          <!-- &copy; {{currentYear}}. All rights reserved. -->
       </ion-title>
     </ion-toolbar>
     

@@ -28,25 +28,19 @@ export class AdminHomeComponent  implements OnInit {
       "name": "Create an event",
       "subtitle": "subtitle",
       "description": "Click on proceed to create an event",
-      "color": "COLOR",
-      "feature_icon": "assets/Power plant - blue.svg",
       "task":"createEvent"
     },
     {
       "name": "Edit events",
       "subtitle": "Edit events",
       "description": "Edit already created event",
-      "color": "COLOR",
-      "feature_icon": "assets/Power plant - blue.svg",
       "task":"editEvents"
     },
     {
-      "name": "Candidate list",
-      "subtitle": "Event subtitle",
-      "description": "Event details",
-      "color": "COLOR",
-      "feature_icon": "assets/Power plant - blue.svg",
-      "task":"candidateList"
+      "name": "Edit Candidates",
+      "subtitle": "Edit Candidates",
+      "description": "Click to edit the candidates",
+      "task":"editCandidates"
     },
   ]
 
@@ -65,5 +59,12 @@ export class AdminHomeComponent  implements OnInit {
     if(task=="editEvents"){
       this.router.navigate(['/edit-events']);
     }
+    if(task=="editCandidates"){
+      this.router.navigate(['/edit-candidates']);
+    }
+  }
+
+  goBack(){
+    this.router.navigate(['/home']);
   }
 }

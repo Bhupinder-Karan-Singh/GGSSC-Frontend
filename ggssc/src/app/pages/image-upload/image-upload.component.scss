@@ -5,6 +5,7 @@
     width: 100%;    
     gap: 5%;
     margin-top:10px;
+    margin-bottom:10px;
     .captured-image-cont{
         // aspect-ratio: 1;
         width: 80%;
@@ -40,4 +41,10 @@ ion-button{
     width: 100%; 
     margin: auto; 
     margin-bottom: 10px;
+  }
+
+ion-icon{
+    background-color: #0053e8;
+    border-radius: 50%;
+    color: white;
   }

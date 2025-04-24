@@ -18,4 +18,9 @@ export class LogoutComponent  implements OnInit {
     this.authService.SignOut()
   }
 
+  ionViewWillEnter(): void {
+    this.authService.SignOut()
+  }
+
+
 }

@@ -27,14 +27,17 @@ export class AuthServiceService {
 
   /* Sign in */
   SignIn(email: string, password: string) {
+    this.appService.loading = "Loading..."
     this.angularFireAuth['signInWithEmailAndPassword'](email, password).then((res: any) => {
         localStorage.setItem('email', email);
         this.saveIdToken(res.user);
         this.appService.appPages[1] = { title: 'Admin Home', url: '/admin-home', icon: 'person', active:true }
         this.appService.appPages[2].active = true
         this.router.navigate(['/admin-home'])
+        this.appService.loading = false
       })
       .catch((err) => {
+        this.appService.loading = false
         const errorMessage = err.message.replace(/.*Firebase:\s/, '').trim();
         this.appService.presentToast('top',errorMessage)
       });
@@ -43,10 +46,11 @@ export class AuthServiceService {
   SignOut() {
     this.angularFireAuth['signOut']();
     localStorage.clear();
-    localStorage.removeItem('user_email');
+    localStorage.removeItem('email');
     localStorage.removeItem('idToken');
     this.appService.appPages[1] = { title: 'Admin Login', url: '/admin', icon: 'person', active:true }
     this.appService.appPages[2].active = false
+    console.log("here")
     this.router.navigate(['/admin'])
   } 
 

@@ -6,13 +6,16 @@ import { ToastController } from '@ionic/angular';
 })
 export class AppServiceService {
 
+  public loading: any;
+  public loadingSubMessage:any
   public isLoading = false
   public appPages = [
     { title: 'Home', url: '/home', icon: 'home', active:true},
     { title: 'Admin Login', url: '/admin', icon: 'person', active:true},
     { title: 'Sign out', url: '/logout', icon: 'exit', active:false},
-    // { title: 'Registration', url: '/registration', icon: 'document' },
   ];
+  public registerEvent:any;
+  public eventId:any;
   constructor(
     private toastController: ToastController
   ) { }
@@ -41,6 +44,7 @@ export class AppServiceService {
           },
         },
       ],
+      cssClass: 'custom-toast',
     });
     await toast.present();
   }
