@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AppServiceService } from 'src/app/services/app-service.service';
 import { ImageProcessService } from 'src/app/services/image-process.service';
 import { UploadServiceService } from 'src/app/services/upload-service.service';
 
@@ -9,13 +10,14 @@ import { UploadServiceService } from 'src/app/services/upload-service.service';
 })
 export class ImageUploadComponent  implements OnInit {
   @Input() imageGuidelines:any;
+  @Output() imageChanged = new EventEmitter<any>();
   constructor(
     public uploadService: UploadServiceService,
     private imageProcess: ImageProcessService,
+    private appService: AppServiceService
   ) { }
 
   ngOnInit() {
-    console.log(this.imageGuidelines)
   }
 
   arrayify(obj:any){
@@ -30,36 +32,47 @@ export class ImageUploadComponent  implements OnInit {
           if(i>=1)
           return;
           let file = event.target.files[i];
-          console.log(file)
           const reader = new FileReader();
             if(this.uploadService.capturedImages?.stepTitle){
               reader.onload = e => {
                 var fileName = file.name
-                if(file.size > 1 * 1024 *1024 && file.size < 15 * 1024 *1024){
-                  this.imageProcess.imgToFile(reader.result,fileName,file.type).then((imageFile) => {
-                    this.imageAnalysis(imageFile,fileName,stepTitle,reader)
+                if(file.size > 1 * 1024 * 1024 && file.size < 15 * 1024 * 1024){
+                  this.imageProcess.imgToFile(reader.result,fileName,file.type).then((imgObj) => {
+                    this.imageAnalysis(imgObj,fileName,stepTitle,reader)
                   }).catch((error) => {
                     console.error('Error:', error);
                 });
                 }else if(file.size > 15 * 1024 *1024){
-                  console.log("Unsupported media file. Please try again.")
+                  const errorMessage = "Unsupported media file. Image size too large";
+                  this.appService.presentToast('top',errorMessage)
                 }else{
-                  this.imageAnalysis(this.imgToFile(reader.result,fileName,file.type),fileName,stepTitle,reader)
+                  const imgObj2 = {
+                    title: fileName,
+                    img: reader.result,
+                    size: file.size,
+                  }
+                  this.imageAnalysis(imgObj2,fileName,stepTitle,reader)
                 }
               }
             }else{
               reader.onload = e => {
                 var fileName = file.name
                 if(file.size > 1 * 1024 * 1024 && file.size < 15 * 1024 * 1024){
-                  this.imageProcess.imgToFile(reader.result,fileName,file.type).then((imageFile) => {
-                    this.imageAnalysis(imageFile,fileName,stepTitle,reader)
+                  this.imageProcess.imgToFile(reader.result,fileName,file.type).then((imgObj) => {
+                    this.imageAnalysis(imgObj,fileName,stepTitle,reader)
                   }).catch((error) => {
                     console.error('Error:', error);
                 });
                 }else if(file.size > 15 * 1024 * 1024){
-                  console.log("Unsupported media file. Please try again.")
+                  const errorMessage = "Unsupported media file. Image size too large";
+                  this.appService.presentToast('top',errorMessage)
                 }else{
-                  this.imageAnalysis(this.imgToFile(reader.result,fileName,file.type),fileName,stepTitle,reader)
+                  const imgObj2 = {
+                    title: fileName,
+                    img: reader.result,
+                    size: file.size,
+                  }
+                  this.imageAnalysis(imgObj2,fileName,stepTitle,reader)
                 }
               }
           }
@@ -69,42 +82,20 @@ export class ImageUploadComponent  implements OnInit {
       }
     }
 
-
-    imgToFile(img:any,title:any,type:any): File {
-      var extension = type.split('/')[1];
-      const imageName = title+'.'+extension;
-      const imageBlob = this.dataURItoBlob(img.replace('data:'+type+';base64,',''));
-      const imageFile = new File([imageBlob], imageName, { type: type });
-      return imageFile;
-    }
-    
-    dataURItoBlob(dataURI:any) {
-      const byteString = window.atob(dataURI);
-      const arrayBuffer = new ArrayBuffer(byteString.length);
-      const int8Array = new Uint8Array(arrayBuffer);
-      for (let i = 0; i < byteString.length; i++) {
-        int8Array[i] = byteString.charCodeAt(i);
-      }
-      const blob = new Blob([int8Array], { type: 'image/png' });    
-      return blob;
-    } 
-
-    imageAnalysis(imageFile:any,fileName:any,stepTitle:any,reader:any){
+    imageAnalysis(imgObj:any,fileName:any,stepTitle:any,reader:any){
       var imageObject = {
-        title:fileName,
-        img: reader.result,
+        imageFile: imgObj
       }
       this.uploadService.capturingStep = stepTitle
       this.uploadService.setImages([imageObject]);
-      // this.uploadService.uploadResource(imageFile,fileName).subscribe((result:any)=>{
-      //   },(e)=>{
-      // })
+      this.imageChanged.emit(this.uploadService.capturedImages);
     }
 
     deleteImage(stepTitle:any,toDelete:any){
       this.uploadService.capturedImages[stepTitle].splice(this.uploadService.capturedImages[stepTitle].indexOf(toDelete),1);
       if(this.uploadService.capturedImages[stepTitle].length == 0){
         delete this.uploadService.capturedImages[stepTitle]
+        this.imageChanged.emit(null);
       }
     }
 }

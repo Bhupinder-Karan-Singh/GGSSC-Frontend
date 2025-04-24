@@ -2,25 +2,41 @@
   <div id="card-container">
     
     <div *ngIf="events.length > 0">
-      <ion-card *ngFor="let event of events; let i = index">
-        <ion-title>Event #{{i+1}}</ion-title>
+      <ion-card *ngFor="let event of events; let i = index" style="box-shadow: 0px 0px 10px grey;">
+        <!-- <ion-title style="margin-top:10px; color: darkgoldenrod;font-family: sans-serif;font-weight: 600;">{{event.eventName}}</ion-title> -->
         <a [href]="event.images" download="event.jpg">
           <img class="img-event" alt="Event Image" [src]="event.images"/>
         </a>
-        <ion-card-header>
+        <ion-card-header style="margin-bottom: 10px;">
           <ion-card-title>{{event.eventName}}</ion-card-title>
         </ion-card-header>
-        <!-- <ion-card-content>
-          {{event.subtitle}}
-        </ion-card-content> -->
-        <ion-button fill="clear">Register</ion-button>
-        <ion-button fill="clear">Already registered ?</ion-button>
+        <ion-card-content style="padding-bottom: 0px;">
+          <div style="display: flex; flex-direction: column;">
+            <div style="font-size: 13px;">
+              <ion-icon name="time" style="margin-right: 5px; margin-bottom: -1px;"></ion-icon>
+              <span>Registration start sate - {{event.startTime}}</span>
+            </div>
+            <div style="font-size: 13px;">
+              <ion-icon name="time" style="margin-right: 5px; margin-bottom: -1px;"></ion-icon>
+              <span>Registration end date - {{event.endTime}}</span>
+            </div>
+            <div style="font-size: 13px;">
+              <ion-icon name="navigate" style="margin-right: 5px; margin-bottom: -1px;"></ion-icon>
+              <span>Location - {{event.location}}</span>
+            </div>
+            <div style="font-size: 13px;">
+              <a style="cursor: pointer;" (click)="openPopup(event.eventDescription)">Click for more Details</a>
+            </div>
+          </div>
+        </ion-card-content>
+        <ion-button fill="clear" (click)="register(event)" style="margin-top:20px; margin-bottom: 15px; background-color: #dee7fd">Register</ion-button>
+        <!-- <ion-button fill="clear">Already registered ?</ion-button> -->
       </ion-card>
     </div>
 
     <div *ngIf="events.length <= 0">
       <span>
-        No event to display !!!
+        <img alt="Event Image" src="../../../assets/icon/no-event-bg.png"/>
       </span>
     </div>
 

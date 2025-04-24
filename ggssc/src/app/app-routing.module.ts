@@ -8,6 +8,9 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { CreateEventComponent } from './pages/create-event/create-event.component';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { EditEventsComponent } from './pages/edit-events/edit-events.component';
+import { EditCandidateComponent } from './pages/edit-candidate/edit-candidate.component';
+import { CandidateListComponent } from './pages/candidate-list/candidate-list.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -22,6 +25,14 @@ const routes: Routes = [
   {
     path: 'admin',
     component:AdminComponent,
+  },
+  {
+    path: 'reset-password',
+    component:ResetPasswordComponent,
+  },
+  {
+    path: 'register',
+    component:RegistrationComponent,
   },
   // {
   //   path: 'registration',
@@ -46,6 +57,16 @@ const routes: Routes = [
     path: 'edit-events',
     component:EditEventsComponent,
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'edit-candidates',
+    component:EditCandidateComponent,
+    canActivate: [AuthGuardService] 
+  },
+  {
+    path: 'candidates-list/:_id',
+    component:CandidateListComponent,
+    canActivate: [AuthGuardService] 
   },
   {
     path: 'logout',
