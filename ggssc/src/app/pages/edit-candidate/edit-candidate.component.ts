@@ -33,6 +33,8 @@ export class EditCandidateComponent implements OnInit {
     private candidateService: CandidateServiceService,
     private router: Router,
     private appService: AppServiceService,
+    private alertController: AlertController,
+    private appComponent: AppComponent,
   ) {}
 
   ngOnInit() {
@@ -109,8 +111,44 @@ export class EditCandidateComponent implements OnInit {
     }
   }
 
-  deleteEvent(element: any, j: number) {
-    console.log('Delete:', element);
+async deleteCandidate(element:any){
+
+    const alert = await this.alertController.create({
+      header: 'Confirm',
+      message: 'Are you sure you want to delete this candidate?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          },
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            console.log('Delete clicked');    
+            this.loading = true
+            this.appComponent.isLoading = true
+            this.appService.loading = "Loading";
+            this.candidateService.deleteCandidate(element._id).subscribe((response:any)=>{
+              this.loading = false
+              this.appService.loading = false;
+              const index = this.candidates.findIndex((item:any) => item._id === element._id);
+                if (index !== -1) {
+                  this.candidates.splice(index, 1);
+                }
+            },(error) => {
+              this.appService.loading = false
+              const errorMessage = "Internal Server Error : "+error.statusText;
+              this.appService.presentToast('top',errorMessage)
+            })
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   exportToExcel() {
