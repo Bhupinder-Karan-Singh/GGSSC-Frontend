@@ -18,7 +18,7 @@ import { CandidateServiceService } from 'src/app/services/candidate-service.serv
 })
 export class CandidateListComponent  implements OnInit {
 
-    displayedColumns: string[] = ['roll_number', 'name', 'dob', 'age', 'fname', 'mname', 'email', 'phoneNumber', 'File'];
+    displayedColumns: string[] = ['roll_number', 'name', 'dob', 'age', 'fname', 'mname', 'email', 'phoneNumber','Category','Comments', 'File'];
     dataSource = new MatTableDataSource<any>([]);
   
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -84,6 +84,10 @@ export class CandidateListComponent  implements OnInit {
 
   exportToExcel() {
     const truncatedCandidates = this.candidates.map((candidate: any) => ({
+      Category: candidate.category === 'Winner Age Group 1' ?  '🏅 Winner' : 
+          candidate.category === 'Winner Age Group 2' ? '🏅 Winner' : 
+          candidate.category === 'Runner up' ? '⭐ Runner up' : 
+          '',
       rollNumber: candidate.rollNumber,
       name: candidate.name,
       dateOfBirth: candidate.dateOfBirth,
@@ -92,6 +96,8 @@ export class CandidateListComponent  implements OnInit {
       motherName: candidate.motherName,
       email: candidate.email,
       phoneNumber: candidate.phoneNumber,
+      category: candidate.category,
+      comments: candidate.comments
       // images: candidate.images?.length > 100 ? candidate.images.substring(0, 100) + "..." : candidate.images, // Optionally truncate long URLs
     }));
   
@@ -140,6 +146,22 @@ export class CandidateListComponent  implements OnInit {
           .action-column {display: none;}
           .mat-sort-header-arrow {display: none;}
           .pagination {display: none;}
+
+          .blinking-ageGroup-1 {
+            background-color: #ffdc73 !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+          .blinking-ageGroup-2 {
+            background-color: #ffdc73 !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+          .blinking-runnerup {
+            background-color: #b5e2ff !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
         }
       </style>
     `);

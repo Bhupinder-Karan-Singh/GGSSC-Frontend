@@ -34,7 +34,7 @@ export class AppServiceService {
   async presentToast(position: 'top' | 'middle' | 'bottom', message:any) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 5000,
+      duration: 10000,
       position: position,
       buttons: [
         {

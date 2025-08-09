@@ -94,6 +94,7 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
       formData.eventName = this.appService.registerEvent.eventName
       formData.location = this.appService.registerEvent.location
       formData.email = this.email
+      formData.category = "Participant"
       console.log(formData)
       this.eventService.registerEvent(formData).subscribe((response:any)=>{
         console.log(response)

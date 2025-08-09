@@ -33,12 +33,15 @@
 
   <ion-footer [translucent]="true">
     <ion-toolbar>
-      <ion-title id="footer-title">
-          &copy; GGSSC {{currentYear}}. All rights reserved.
-          <!-- &copy; {{currentYear}}. All rights reserved. -->
-      </ion-title>
+      <div style="display: flex; justify-content: flex-end;">
+        <ion-title id="footer-title">
+            &copy; GGSSC {{currentYear}}. All rights reserved.
+        </ion-title>
+        <ion-title id="footer-title-2">
+          <a href="https://www.ggssc.ca/contact" target="_blank" style="text-decoration: none;   color: grey;font-size: 10px; font-weight: 100;">Contact us</a>
+        </ion-title>
+      </div>
     </ion-toolbar>
-    
   </ion-footer>
   
 </ion-app>
