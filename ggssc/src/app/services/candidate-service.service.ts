@@ -27,10 +27,17 @@ export class CandidateServiceService {
     return this.httpService.post(environment.appsEndpoint+"/form/saveCandidate", payload, {headers});
   }
 
-    deleteCandidate(id:any){
+  deleteCandidate(id:any){
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded'
     });
     return this.httpService.delete(environment.appsEndpoint+"/form/deleteCandidate?candidateId="+id);
+  }
+
+  removeCandidate(id:any,eventId:any){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+    return this.httpService.delete(environment.appsEndpoint+"/form/removeCandidate?candidateId="+id+"&&eventId="+eventId);
   }
 }

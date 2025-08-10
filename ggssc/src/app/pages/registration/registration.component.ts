@@ -99,7 +99,7 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
       this.eventService.registerEvent(formData).subscribe((response:any)=>{
         console.log(response)
         this.appService.loading = false;
-        this.appService.presentToast('top',response)
+        this.appService.presentToastLong('top',response)
         this.uploadService.capturedImages = {}
         this.router.navigate(['/home']);
       },(error) => {

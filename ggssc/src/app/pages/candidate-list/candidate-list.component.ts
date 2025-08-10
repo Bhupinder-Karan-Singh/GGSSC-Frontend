@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppServiceService } from 'src/app/services/app-service.service';
 import { AlertController } from '@ionic/angular';
 import { CandidateServiceService } from 'src/app/services/candidate-service.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-candidate-list',
@@ -18,7 +19,7 @@ import { CandidateServiceService } from 'src/app/services/candidate-service.serv
 })
 export class CandidateListComponent  implements OnInit {
 
-    displayedColumns: string[] = ['roll_number', 'name', 'dob', 'age', 'fname', 'mname', 'email', 'phoneNumber','Category','Comments', 'File'];
+    displayedColumns: string[] = ['roll_number', 'name', 'dob', 'age', 'fname', 'mname', 'email', 'phoneNumber','Category','Comments', 'File','Action'];
     dataSource = new MatTableDataSource<any>([]);
   
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -30,12 +31,16 @@ export class CandidateListComponent  implements OnInit {
     title:any
     error:any = false
 
+    paramsId:any;
+
   constructor(
     public eventService: EventServiceService,
     private route:ActivatedRoute,
     private router: Router,
     private appService: AppServiceService,
-    private candidateService: CandidateServiceService
+    private candidateService: CandidateServiceService,
+    private alertController: AlertController,
+    private appComponent: AppComponent,
   ) { }
 
   ngOnInit() {
@@ -200,4 +205,47 @@ export class CandidateListComponent  implements OnInit {
     this.router.navigate(['/edit-events']);
   }
 
+  async removeCandidate(element:any){
+    this.route.params.subscribe((params)=>{
+      if(params['_id']){
+        this.paramsId = params['_id']
+      }
+    })
+    const alert = await this.alertController.create({
+      header: 'Confirm',
+      message: 'The candidate will be removed from the event !!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          },
+        },
+        {
+          text: 'Remove',
+          handler: () => {
+            console.log('Delete clicked');    
+            this.loading = true
+            this.appComponent.isLoading = true
+            this.appService.loading = "Loading";
+            this.candidateService.removeCandidate(element._id,this.paramsId).subscribe((response:any)=>{
+              this.loading = false
+              this.appService.loading = false;
+              const index = this.candidates.findIndex((item:any) => item._id === element._id);
+                if (index !== -1) {
+                  this.candidates.splice(index, 1);
+                }
+                this.appService.presentToast('top',response)
+            },(error: { statusText: string; }) => {
+              this.appService.loading = false
+              const errorMessage = "Internal Server Error : "+error.statusText;
+              this.appService.presentToast('top',errorMessage)
+            })
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
 }

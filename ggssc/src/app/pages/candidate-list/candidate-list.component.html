@@ -109,6 +109,15 @@
                   </a>
                 </td>
               </ng-container>
+
+                <ng-container matColumnDef="Action" >
+                  <th class="action-column" mat-header-cell *matHeaderCellDef>Action</th>
+                  <td class="action-column" mat-cell *matCellDef="let element; let j = index">
+                    <a style="cursor: pointer; margin-left: 5px;" (click)="removeCandidate(element)">
+                      Remove
+                    </a>
+                  </td>
+              </ng-container>
         
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;" 

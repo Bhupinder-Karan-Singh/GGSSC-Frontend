@@ -34,7 +34,25 @@ export class AppServiceService {
   async presentToast(position: 'top' | 'middle' | 'bottom', message:any) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 10000,
+      duration: 5000,
+      position: position,
+      buttons: [
+        {
+          icon: 'close',
+          htmlAttributes: {
+            'aria-label': 'close',
+          },
+        },
+      ],
+      cssClass: 'custom-toast',
+    });
+    await toast.present();
+  }
+
+    async presentToastLong(position: 'top' | 'middle' | 'bottom', message:any) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 60000,
       position: position,
       buttons: [
         {

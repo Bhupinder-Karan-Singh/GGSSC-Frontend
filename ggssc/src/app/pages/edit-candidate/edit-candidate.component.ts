@@ -112,10 +112,9 @@ export class EditCandidateComponent implements OnInit {
   }
 
 async deleteCandidate(element:any){
-
     const alert = await this.alertController.create({
       header: 'Confirm',
-      message: 'Are you sure you want to delete this candidate?',
+      message: 'The candidate will be deleted permanently from the database !!!',
       buttons: [
         {
           text: 'Cancel',
@@ -138,6 +137,7 @@ async deleteCandidate(element:any){
                 if (index !== -1) {
                   this.candidates.splice(index, 1);
                 }
+                this.appService.presentToast('top',response)
             },(error) => {
               this.appService.loading = false
               const errorMessage = "Internal Server Error : "+error.statusText;
@@ -147,7 +147,6 @@ async deleteCandidate(element:any){
         },
       ],
     });
-
     await alert.present();
   }
 
