@@ -63,7 +63,7 @@ export class EditEventsComponent  implements OnInit {
 
     const alert = await this.alertController.create({
       header: 'Confirm',
-      message: 'Are you sure you want to delete this event?',
+      message: 'The event will be deleted permanently from the database !!!',
       buttons: [
         {
           text: 'Cancel',
@@ -86,9 +86,7 @@ export class EditEventsComponent  implements OnInit {
                 if (index !== -1) {
                   this.events.splice(index, 1);
                 }
-              // if(response == "Deleted"){
-              //   window.location.reload()
-              // }
+                this.appService.presentToast('top',response)
             },(error) => {
               this.appService.loading = false
               const errorMessage = "Internal Server Error : "+error.statusText;
