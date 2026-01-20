@@ -58,6 +58,9 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
       motherName: ['', Validators.required],
       email: [{value:this.email, disabled: true}, [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      phoneNumber2: ['', [Validators.pattern(/^\d{10}$/)]],
+      email2: ['',[Validators.email]],
+      alreadyAttendedEvent: [false,[]],
       images: [null, requiredObjectValidator],
       eventId: [''], 
       otp: ['']
@@ -65,9 +68,32 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.uploadService.capturedProfileImages = {}
-      this.otpVerified = false;
-      this.otpSent = false
+    this.uploadService.capturedProfileImages = {}
+    this.otpVerified = false;
+    this.otpSent = false
+
+    this.sendOtpForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+    });
+
+    this.verifyForm = this.fb.group({
+      otp: ['', Validators.required],
+    });
+    
+    this.registrationForm = this.fb.group({
+      name: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      fatherName: ['', Validators.required],
+      motherName: ['', Validators.required],
+      email: [{value:this.email, disabled: true}, [Validators.required, Validators.email]],
+      phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      phoneNumber2: ['', [Validators.pattern(/^\d{10}$/)]],
+      email2: ['',[Validators.email]],
+      alreadyAttendedEvent: [false,[]],
+      images: [null, requiredObjectValidator],
+      eventId: [''], 
+      otp: ['']
+    });
   }
 
   openDatePicker() {
@@ -94,12 +120,14 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
       formData.eventName = this.appService.registerEvent.eventName
       formData.location = this.appService.registerEvent.location
       formData.email = this.email
+      formData.category = "Participant"
       console.log(formData)
       this.eventService.registerEvent(formData).subscribe((response:any)=>{
         console.log(response)
         this.appService.loading = false;
-        this.appService.presentToast('top',response)
+        this.appService.presentToastLong('top',response)
         this.uploadService.capturedImages = {}
+        this.otpVerified = false
         this.router.navigate(['/home']);
       },(error) => {
         this.appService.loading = false
