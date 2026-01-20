@@ -17,7 +17,7 @@ import 'jspdf-autotable';
   styleUrls: ['./edit-candidate.component.scss'],
 })
 export class EditCandidateComponent implements OnInit {
-  displayedColumns: string[] = ['roll_number', 'name', 'dob', 'age', 'fname', 'mname', 'email', 'phoneNumber', 'File', 'Action'];
+  displayedColumns: string[] = ['roll_number', 'name', 'dob', 'age', 'fname', 'mname', 'email', 'phoneNumber', 'Category','Comments', 'File', 'Action'];
   dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -33,6 +33,8 @@ export class EditCandidateComponent implements OnInit {
     private candidateService: CandidateServiceService,
     private router: Router,
     private appService: AppServiceService,
+    private alertController: AlertController,
+    private appComponent: AppComponent,
   ) {}
 
   ngOnInit() {
@@ -109,12 +111,51 @@ export class EditCandidateComponent implements OnInit {
     }
   }
 
-  deleteEvent(element: any, j: number) {
-    console.log('Delete:', element);
+async deleteCandidate(element:any){
+    const alert = await this.alertController.create({
+      header: 'Confirm',
+      message: 'The candidate will be deleted permanently from the database !!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          },
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            console.log('Delete clicked');    
+            this.loading = true
+            this.appComponent.isLoading = true
+            this.appService.loading = "Loading";
+            this.candidateService.deleteCandidate(element._id).subscribe((response:any)=>{
+              this.loading = false
+              this.appService.loading = false;
+              const index = this.candidates.findIndex((item:any) => item._id === element._id);
+                if (index !== -1) {
+                  this.candidates.splice(index, 1);
+                }
+                this.appService.presentToast('top',response)
+            },(error) => {
+              this.appService.loading = false
+              const errorMessage = "Internal Server Error : "+error.statusText;
+              this.appService.presentToast('top',errorMessage)
+            })
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 
   exportToExcel() {
     const truncatedCandidates = this.candidates.map((candidate: any) => ({
+      Category: candidate.category === 'Winner Age Group 1' ?  '🏅 Winner' : 
+                candidate.category === 'Winner Age Group 2' ? '🏅 Winner' : 
+                candidate.category === 'Runner up' ? '⭐ Runner up' : 
+                '',
       rollNumber: candidate.rollNumber,
       name: candidate.name,
       dateOfBirth: candidate.dateOfBirth,
@@ -123,6 +164,8 @@ export class EditCandidateComponent implements OnInit {
       motherName: candidate.motherName,
       email: candidate.email,
       phoneNumber: candidate.phoneNumber,
+      category: candidate.category,
+      comments: candidate.comments
       // images: candidate.images?.length > 100 ? candidate.images.substring(0, 100) + "..." : candidate.images, // Optionally truncate long URLs
     }));
   
@@ -171,6 +214,22 @@ export class EditCandidateComponent implements OnInit {
           .action-column {display: none;}
           .mat-sort-header-arrow {display: none;}
           .pagination {display: none;}
+
+          .blinking-ageGroup-1 {
+            background-color: #ffdc73 !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+          .blinking-ageGroup-2 {
+            background-color: #ffdc73 !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+          .blinking-runnerup {
+            background-color: #b5e2ff !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
         }
       </style>
     `);

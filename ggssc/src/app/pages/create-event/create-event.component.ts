@@ -122,6 +122,7 @@ export class CreateEventComponent  implements OnInit {
 
   save(){
     this.appService.loading = "Loading";
+    console.log(this.startTime)
     this.payload = {
       "_id":this.payloadId,
       "eventName":this.eventName,
@@ -135,6 +136,7 @@ export class CreateEventComponent  implements OnInit {
       "createdBy" : localStorage.getItem('email'),
       "updatedBy" : localStorage.getItem('email')
     }
+    console.log(this.payload)
 
     this.eventService.saveEvent(this.payload).subscribe((response:any)=>{
       this.uploadService.capturedImages = {}
@@ -161,19 +163,17 @@ export class CreateEventComponent  implements OnInit {
     })
   }
 
-  // Helper function to format the date (no time)
-  formatDate(date: string): string {
-    const parsedDate = new Date(date);
-    return parsedDate.toLocaleDateString('en-GB', {
-      // weekday: 'short', // Example: 'Tue'
-      year: 'numeric',
-      month: 'short', // Example: 'Dec'
-      day: 'numeric',
-      // hour: '2-digit',
-      // minute: '2-digit',
-      // hour12: true // 12-hour format
-    });
+formatDate(date: string): string {
+  const [year, month, day] = date.split("T")[0].split("-");
+  const parsedDate = new Date(Number(year), Number(month) - 1, Number(day));
+
+  let monthStr = parsedDate.toLocaleDateString("en-GB", { month: "short" });
+  if (parsedDate.getMonth() === 8) { // September = 8 (0-indexed)
+    monthStr = "Sep";
   }
+
+  return `${parsedDate.getDate()} ${monthStr} ${parsedDate.getFullYear()}`;
+}
 
   detectChanges(event:any){
     if(event.length < 3 ){

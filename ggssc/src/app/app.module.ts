@@ -38,6 +38,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CandidateListComponent } from './pages/candidate-list/candidate-list.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { DialogBoxComponent } from './pages/dialog-box/dialog-box.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { DialogBoxComponent } from './pages/dialog-box/dialog-box.component';
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
