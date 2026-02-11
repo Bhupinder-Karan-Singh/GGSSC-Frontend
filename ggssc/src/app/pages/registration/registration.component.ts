@@ -56,11 +56,15 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
       dateOfBirth: ['', Validators.required],
       fatherName: ['', Validators.required],
       motherName: ['', Validators.required],
+      address: ['', Validators.required],
       email: [{value:this.email, disabled: true}, [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       phoneNumber2: ['', [Validators.pattern(/^\d{10}$/)]],
       email2: ['',[Validators.email]],
       alreadyAttendedEvent: [false,[]],
+      alreadyWinner:[false,[]],
+      gender: ['', Validators.required], 
+      conditions:[false,Validators.requiredTrue],
       images: [null, requiredObjectValidator],
       eventId: [''], 
       otp: ['']
@@ -85,11 +89,15 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
       dateOfBirth: ['', Validators.required],
       fatherName: ['', Validators.required],
       motherName: ['', Validators.required],
+      address: ['', Validators.required],
       email: [{value:this.email, disabled: true}, [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       phoneNumber2: ['', [Validators.pattern(/^\d{10}$/)]],
       email2: ['',[Validators.email]],
       alreadyAttendedEvent: [false,[]],
+      alreadyWinner:[false,[]],
+      gender: ['', Validators.required], 
+      conditions:[false,Validators.requiredTrue],
       images: [null, requiredObjectValidator],
       eventId: [''], 
       otp: ['']
@@ -128,6 +136,24 @@ export class RegistrationComponent  implements OnInit, OnDestroy {
         this.appService.presentToastLong('top',response)
         this.uploadService.capturedImages = {}
         this.otpVerified = false
+        this.registrationForm = this.fb.group({
+          name: ['', Validators.required],
+          dateOfBirth: ['', Validators.required],
+          fatherName: ['', Validators.required],
+          motherName: ['', Validators.required],
+          address: ['', Validators.required],
+          email: [{value:this.email, disabled: true}, [Validators.required, Validators.email]],
+          phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+          phoneNumber2: ['', [Validators.pattern(/^\d{10}$/)]],
+          email2: ['',[Validators.email]],
+          alreadyAttendedEvent: [false,[]],
+          alreadyWinner:[false,[]],
+          gender: ['', Validators.required], 
+          conditions:[false,Validators.requiredTrue],
+          images: [null, requiredObjectValidator],
+          eventId: [''], 
+          otp: ['']
+        });
         this.router.navigate(['/home']);
       },(error) => {
         this.appService.loading = false

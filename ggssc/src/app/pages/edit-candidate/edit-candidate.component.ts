@@ -17,7 +17,8 @@ import 'jspdf-autotable';
   styleUrls: ['./edit-candidate.component.scss'],
 })
 export class EditCandidateComponent implements OnInit {
-  displayedColumns: string[] = ['roll_number', 'name', 'dob', 'age', 'fname', 'mname', 'email', 'phoneNumber', 'Category','Comments', 'File', 'Action'];
+  // displayedColumns: string[] = ['roll_number', 'name', 'dob', 'age', 'fname', 'mname', 'email', 'phoneNumber', 'Category','Comments', 'File', 'Action'];
+  displayedColumns: string[] = ['File', 'Details'];
   dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -209,7 +210,8 @@ async deleteCandidate(element:any){
           table { width: 100%; border-collapse: collapse; }
           table, th, td { border: 1px solid #ddd; }
           th, td { padding: 8px; text-align: left; word-wrap: break-word; }
-          img { max-width: 100px; max-height: 100px; object-fit: contain; }
+          .image { text-align: center !important;}
+          img { max-width: 200px; max-height: 200px; object-fit: fill; }
           h1 { text-align: center; }
           .action-column {display: none;}
           .mat-sort-header-arrow {display: none;}
