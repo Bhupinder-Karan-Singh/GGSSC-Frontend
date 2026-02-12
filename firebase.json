@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "ggssc/www",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

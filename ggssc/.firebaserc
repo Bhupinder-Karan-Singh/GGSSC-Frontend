@@ -1,7 +1,9 @@
 {
   "projects": {
-    "default": "ggssccrashcourses",
-    "prod": "ggssccrashcourses"
+    "default": "ggssc-349bf",
+    "prod": "ggssccrashcourses",
+    "photo-application-bk-singh": "photo-application-bk-singh",
+    "ggssc": "ggssc-349bf"
   },
   "targets": {},
   "etags": {}
