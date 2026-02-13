@@ -19,6 +19,10 @@
       <div style="margin-bottom: 10px;">
         <input class="input-color"  matInput (keyup)="applyFilter($event)" placeholder="Search..." style="border-radius: 2px; height: 35px; border-color: lightgray;">
       </div>
+      <div>
+         <a *ngIf="!checkDuplicates" style="cursor: pointer; margin-left: 5px;" (click)="getDuplicateCandidates()">Show duplicate entries</a>
+         <a *ngIf="checkDuplicates" style="cursor: pointer; margin-left: 5px;" (click)="loadCandidates()">Show all entries</a>
+      </div>
     </div>
   </div>
 

@@ -29,6 +29,7 @@ export class EditCandidateComponent implements OnInit {
   error:any = false
 
   title = "Candidates List";
+  checkDuplicates = false
 
   constructor(
     private candidateService: CandidateServiceService,
@@ -47,6 +48,7 @@ export class EditCandidateComponent implements OnInit {
   }
 
   loadCandidates() {
+    this.checkDuplicates = false
     this.appService.loading = "Loading...";
     this.loading = true
     this.candidateService.getAllCandidates().subscribe(
@@ -137,6 +139,11 @@ async deleteCandidate(element:any){
               const index = this.candidates.findIndex((item:any) => item._id === element._id);
                 if (index !== -1) {
                   this.candidates.splice(index, 1);
+                }
+                if(this.checkDuplicates){
+                  this.getDuplicateCandidates()
+                }else{
+                  this.loadCandidates()
                 }
                 this.appService.presentToast('top',response)
             },(error) => {
@@ -258,6 +265,44 @@ async deleteCandidate(element:any){
 
   goBack(){
     this.router.navigate(['/admin-home']);
+  }
+
+  getDuplicateCandidates() {
+    this.checkDuplicates = true
+    this.appService.loading = "Loading...";
+    this.loading = true
+    this.dataSource.data = []
+    this.candidateService.getAllDuplicates().subscribe(
+      (response: any) => {
+        this.appService.loading = false;
+        this.loading = false
+        if (response.groups && response.groups.length > 0) {
+          this.appService.presentToast('top',"Duplicate group(s) found")
+          response.groups.forEach((group : any) => {
+            group.forEach((element : any) => {
+              this.dataSource.data.push(element)
+            });
+          });
+          console.log(this.dataSource.data)
+          this.prepareData(this.dataSource.data);
+          setTimeout(() => {
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          },100);
+        }else{
+          this.loading = false
+          this.appService.loading = false;
+          this.appService.presentToast('top',"No Duplicate candidates found")
+        }
+      },
+      (error) => {
+        this.error = true
+        this.appService.loading = false;
+        this.loading = false
+        const errorMessage = "Internal Server Error : " + error.statusText;
+        this.appService.presentToast('top', errorMessage);
+      }
+    );
   }
 
 }

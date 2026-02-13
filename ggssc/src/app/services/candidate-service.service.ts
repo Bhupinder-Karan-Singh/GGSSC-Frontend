@@ -16,6 +16,10 @@ export class CandidateServiceService {
       return this.httpService.get(environment.appsEndpoint+"/form/getAllCandidates");
   }
 
+  getAllDuplicates(){
+      return this.httpService.get(environment.appsEndpoint+"/form/getAllDuplicates");
+  }
+
   getCandidatesList(payloadId:any){
     return this.httpService.get(environment.appsEndpoint+"/form/getCandidatesList?payloadId="+payloadId);
   }
