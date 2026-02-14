@@ -3,7 +3,7 @@
   <div *ngIf="dataSource.data.length > 0">
     <div style="text-align:center; margin-bottom:30px">
       <ion-header style="box-shadow: none; top:-10px">
-        <ion-title style="font-size: 18px;">Event : {{ title }}</ion-title>
+        <ion-title style="font-size: 18px;">{{ title }}</ion-title>
       </ion-header>
     </div>
     <div style="display: flex; justify-content: space-between; margin: 10px">
@@ -34,8 +34,8 @@
             <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
               <ng-container matColumnDef="File">
-                <th class="image" mat-header-cell *matHeaderCellDef style="width:30%">Image</th>
-                <td class="image" mat-cell *matCellDef="let element" style="width:30%">
+                <th class="image" mat-header-cell *matHeaderCellDef style="width:30%; text-align: center;">Image</th>
+                <td class="image" mat-cell *matCellDef="let element" style="width:30%; text-align: center;">
                   <a [href]="element.images.profilePhoto[0].imageFile.img" download="event.jpg">
                     <img class="img-event" alt="Image" [src]="element.images.profilePhoto[0].imageFile.img"/>
                   </a>
@@ -49,45 +49,86 @@
                     <span><b>Roll Number : </b>{{ element.rollNumber }}</span>
                   </div>
                   <div>
-                    <input class="input-color" matInput *ngIf="element.isEdit" [(ngModel)]="element.name">
-                    <span *ngIf="!element.isEdit"><b>Name : </b>{{ element.name }}</span>
-                  </div>
-                  <div>
-                    <input 
-                      class="input-color" 
-                      matInput 
-                      type="date" 
-                      *ngIf="element.isEdit" 
-                      [(ngModel)]="element.dateOfBirth">
-                    <span *ngIf="!element.isEdit"><b>DOB : </b>{{ formatDateForDatePicker(element.dateOfBirth) }}</span>
-                  </div>
-                  <div>
                     <span><b>Age : </b>{{ element.age }}</span>
                   </div>
                   <div>
-                    <input class="input-color" matInput *ngIf="element.isEdit" [(ngModel)]="element.fatherName">
-                    <span *ngIf="!element.isEdit"><b>Father name : </b>{{ element.fatherName }}</span>
+                    <b>Name : </b>
+                    <input class="input-color" matInput *ngIf="element.isEdit" [(ngModel)]="element.name">
+                    <span *ngIf="!element.isEdit">{{ element.name }}</span>
                   </div>
                   <div>
-                    <input class="input-color"  matInput *ngIf="element.isEdit" [(ngModel)]="element.motherName">
-                    <span *ngIf="!element.isEdit"><b>Mother Name : </b>{{ element.motherName }}</span>
-                  </div>
-                  <div>
+                    <b>Email : </b>
                     <input class="input-color"  matInput *ngIf="element.isEdit" [(ngModel)]="element.email">
-                    <span *ngIf="!element.isEdit"><b>Email : </b>{{ element.email }}</span>
+                    <span *ngIf="!element.isEdit">{{ element.email }}</span>
                   </div>
                   <div>
+                    <b>DOB : </b>
+                    <input 
+                      class="input-color" 
+                      matInput  
+                      type="date" 
+                      *ngIf="element.isEdit" 
+                      [(ngModel)]="element.dateOfBirth">
+                    <span *ngIf="!element.isEdit">{{ formatDateForDatePicker(element.dateOfBirth) }}</span>
+                  </div>
+                  <div>
+                    <b>Gender : </b>
+                    <select [(value)]="element.gender" [(ngModel)]="element.gender" *ngIf="element.isEdit">
+                      <option [value]="'male'">Male</option>
+                      <option [value]="'female'">Female</option>
+                    </select>
+                    <span *ngIf="!element.isEdit">{{ element.gender }}</span>
+                  </div>
+                  <div>
+                    <b>Address : </b>
+                    <input class="input-color"  matInput *ngIf="element.isEdit" [(ngModel)]="element.address">
+                    <span *ngIf="!element.isEdit">{{ element.address }}</span>
+                  </div>
+                  <div>
+                    <b>Contact number : </b>
                     <input class="input-color"  matInput *ngIf="element.isEdit" [(ngModel)]="element.phoneNumber">
-                    <span *ngIf="!element.isEdit"><b>Contact number : </b>{{ element.phoneNumber }}</span>
+                    <span *ngIf="!element.isEdit">{{ element.phoneNumber }}</span>
+                  </div>
+                  <div>
+                    <b>Father name : </b>
+                    <input class="input-color" matInput *ngIf="element.isEdit" [(ngModel)]="element.fatherName">
+                    <span *ngIf="!element.isEdit">{{ element.fatherName }}</span>
+                  </div>
+                  <div>
+                    <b>Mother Name : </b>
+                    <input class="input-color"  matInput *ngIf="element.isEdit" [(ngModel)]="element.motherName">
+                    <span *ngIf="!element.isEdit">{{ element.motherName }}</span>
+                  </div>
+                  <div>
+                    <b>Parents' Email : </b>
+                    <input class="input-color"  matInput *ngIf="element.isEdit" [(ngModel)]="element.email2">
+                    <span *ngIf="!element.isEdit">{{ element.email2 }}</span>
+                  </div>
+                  <div>
+                    <b>Parents' phone number : </b>
+                    <input class="input-color"  matInput *ngIf="element.isEdit" [(ngModel)]="element.phoneNumber2">
+                    <span *ngIf="!element.isEdit">{{ element.phoneNumber2 }}</span>
                   </div>
                   <div [class.winner-cell]="element.category === 'Winner Age Group 1'">
+                    <b>Category : </b>
                     <select [(value)]="element.category" [(ngModel)]="element.category" *ngIf="element.isEdit">
                       <option [value]="'Winner Age Group 1'">Winner Age Group 1</option>
                       <option [value]="'Winner Age Group 2'">Winner Age Group 2</option>
                       <option [value]="'Runner up'">Runner up</option>
                       <option [value]="'Participant'">Participant</option>
                     </select>
-                    <span *ngIf="!element.isEdit"><b>Category : </b>{{ element.category }}</span>
+                    <span *ngIf="!element.isEdit">{{ element.category }}</span>
+                  </div>
+                  <div>
+                    <b>New Participant : </b>
+                    <span *ngIf="!element.isEdit">{{ !element.alreadyAttendedEvent ? "Yes" : "No" }}</span>
+                  </div>
+                  <div>
+                    <b>Winner : </b>
+                    <span *ngIf="!element.isEdit">{{ element.alreadyWinner ? "Yes" : "No" }}</span>
+                  </div>
+                  <div style="font-size: 13px;">
+                    <b>Registration history : </b><a style="cursor: pointer; text-decoration: underline;" (click)="openPopup(element,element.eventHistory)">Click here</a>
                   </div>
                   <div class="action-column" style="margin-top:10px">
                     <a style="cursor: pointer; margin-right: 5px;" (click)="toggleEdit(element)">
@@ -95,6 +136,9 @@
                     </a>
                     <a style="cursor: pointer; margin-left: 5px;" (click)="deleteCandidate(element)">
                       Delete
+                    </a>
+                    <a *ngIf="element.isEdit" style="cursor: pointer; margin-left: 5px;" (click)="cancel(element)">
+                      Cancel
                     </a>
                   </div>
                 </td>
@@ -232,9 +276,9 @@
             </table>
         
             <!-- Pagination -->
-            <div class="pagination" style="margin-top: 10px;">
+            <!-- <div class="pagination" style="margin-top: 10px;">
               <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-            </div>
+            </div> -->
       </div>
       </div>
     <div *ngIf="dataSource.data.length <= 0">

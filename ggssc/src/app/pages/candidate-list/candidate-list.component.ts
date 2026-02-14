@@ -11,6 +11,8 @@ import { AppServiceService } from 'src/app/services/app-service.service';
 import { AlertController } from '@ionic/angular';
 import { CandidateServiceService } from 'src/app/services/candidate-service.service';
 import { AppComponent } from 'src/app/app.component';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-candidate-list',
@@ -19,9 +21,9 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class CandidateListComponent  implements OnInit {
 
-    displayedColumns: string[] = ['roll_number', 'name', 'dob', 'age', 'fname', 'mname', 'email', 'phoneNumber','Category','Comments', 'File','Action'];
+    // displayedColumns: string[] = ['roll_number', 'name', 'dob', 'age', 'fname', 'mname', 'email', 'phoneNumber','Category','Comments', 'File','Action'];
     dataSource = new MatTableDataSource<any>([]);
-  
+    displayedColumns: string[] = ['File', 'Details'];
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
   
@@ -41,6 +43,7 @@ export class CandidateListComponent  implements OnInit {
     private candidateService: CandidateServiceService,
     private alertController: AlertController,
     private appComponent: AppComponent,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -133,7 +136,7 @@ export class CandidateListComponent  implements OnInit {
   }
   
   printTable() {
-    const printContent = document.getElementById('table-container')?.innerHTML;
+    const printContent = document.getElementById('table-container-2')?.innerHTML;
     const printWindow = window.open('', '', 'height=600,width=800');
     printWindow?.document.write('<html><head><title>Print Table</title>');
     
@@ -142,7 +145,7 @@ export class CandidateListComponent  implements OnInit {
       <style>
         @media print {
           body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-          #table-container { width: 100%; overflow: hidden; }
+          #table-container-2 { width: 100%; overflow: hidden; }
           table { width: 100%; border-collapse: collapse; }
           table, th, td { border: 1px solid #ddd; }
           th, td { padding: 8px; text-align: left; word-wrap: break-word; }
@@ -172,7 +175,7 @@ export class CandidateListComponent  implements OnInit {
     `);
     
     printWindow?.document.write('</head><body>');
-    printWindow?.document.write('<h1>Candidate List</h1>');  // Optional header
+    printWindow?.document.write('<h1>'+this.eventService.eventName+'</h1>');  // Optional header
     printWindow?.document.write('<div>' + printContent + '</div>');
     printWindow?.document.write('</body></html>');
     printWindow?.document.close();
@@ -248,4 +251,19 @@ export class CandidateListComponent  implements OnInit {
     });
     await alert.present();
   }
+
+    openPopup(element:any,eventHistory: any[]): void {
+      const formattedMessage = eventHistory
+        .map((event, index) => 
+          `${index + 1}. Event Name: ${event.eventName}, Age: ${event.age}, Year: ${event.eventRegistrationYear}`
+        )
+        .join('\n');
+  
+      this.dialog.open(DialogBoxComponent, {
+        data: { 
+          title: +element.rollNumber +" : "+ element.name ,
+          message: formattedMessage 
+        },
+      });
+    }
 }

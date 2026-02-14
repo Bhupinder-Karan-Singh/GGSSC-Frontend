@@ -58,10 +58,9 @@ ion-button{
   }
   
 .img-event{
-    transition: all 0.2s ease-in-out;
     border-radius: 0.2em;
     object-fit: cover;
-    width:100px;
+    width:200px;
     // margin:10px;
     margin-left:0px
 }
@@ -180,4 +179,12 @@ td, th {
 
 .blinking-runnerup {
   animation: runnerup 2s infinite;
+}
+
+::ng-deep  .cdk-overlay-container{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
 }

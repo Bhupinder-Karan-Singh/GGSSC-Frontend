@@ -10,7 +10,7 @@ export class DialogBoxComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DialogBoxComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { message: string }
+    @Inject(MAT_DIALOG_DATA) public data: { title: string, message: string }
   ) {}
 
   closeDialog(): void {

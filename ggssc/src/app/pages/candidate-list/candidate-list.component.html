@@ -27,9 +27,125 @@
   <div id="card-container">
     <div *ngIf="dataSource.data.length > 0">
     
-      <div id="table-container" style="max-width:99vw; margin-bottom:100px">
+      <div id="table-container-2" style="max-width:99vw; margin-bottom:100px">
             <!-- Data Table -->
+
             <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+              <ng-container matColumnDef="File">
+                <th class="image" mat-header-cell *matHeaderCellDef style="width:30%; text-align: center;">Image</th>
+                <td class="image" mat-cell *matCellDef="let element" style="width:30%; text-align: center;">
+                  <a [href]="element.images.profilePhoto[0].imageFile.img" download="event.jpg">
+                    <img class="img-event" alt="Image" [src]="element.images.profilePhoto[0].imageFile.img"/>
+                  </a>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Details">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:70%">Details</th>
+                <td mat-cell *matCellDef="let element" style="width:70%">
+                  <div>
+                    <span><b>Roll Number : </b>{{ element.rollNumber }}</span>
+                  </div>
+                  <div>
+                    <span><b>Age : </b>{{ element.age }}</span>
+                  </div>
+                  <div>
+                    <b>Name : </b>
+                    <input class="input-color" matInput *ngIf="element.isEdit" [(ngModel)]="element.name">
+                    <span *ngIf="!element.isEdit">{{ element.name }}</span>
+                  </div>
+                  <div>
+                    <b>Email : </b>
+                    <input class="input-color"  matInput *ngIf="element.isEdit" [(ngModel)]="element.email">
+                    <span *ngIf="!element.isEdit">{{ element.email }}</span>
+                  </div>
+                  <div>
+                    <b>DOB : </b>
+                    <input 
+                      class="input-color" 
+                      matInput  
+                      type="date" 
+                      *ngIf="element.isEdit" 
+                      [(ngModel)]="element.dateOfBirth">
+                    <span *ngIf="!element.isEdit">{{ formatDateForDatePicker(element.dateOfBirth) }}</span>
+                  </div>
+                  <div>
+                    <b>Gender : </b>
+                    <select [(value)]="element.gender" [(ngModel)]="element.gender" *ngIf="element.isEdit">
+                      <option [value]="'male'">Male</option>
+                      <option [value]="'female'">Female</option>
+                    </select>
+                    <span *ngIf="!element.isEdit">{{ element.gender }}</span>
+                  </div>
+                  <div>
+                    <b>Address : </b>
+                    <input class="input-color"  matInput *ngIf="element.isEdit" [(ngModel)]="element.address">
+                    <span *ngIf="!element.isEdit">{{ element.address }}</span>
+                  </div>
+                  <div>
+                    <b>Contact number : </b>
+                    <input class="input-color"  matInput *ngIf="element.isEdit" [(ngModel)]="element.phoneNumber">
+                    <span *ngIf="!element.isEdit">{{ element.phoneNumber }}</span>
+                  </div>
+                  <div>
+                    <b>Father name : </b>
+                    <input class="input-color" matInput *ngIf="element.isEdit" [(ngModel)]="element.fatherName">
+                    <span *ngIf="!element.isEdit">{{ element.fatherName }}</span>
+                  </div>
+                  <div>
+                    <b>Mother Name : </b>
+                    <input class="input-color"  matInput *ngIf="element.isEdit" [(ngModel)]="element.motherName">
+                    <span *ngIf="!element.isEdit">{{ element.motherName }}</span>
+                  </div>
+                  <div>
+                    <b>Parents' Email : </b>
+                    <input class="input-color"  matInput *ngIf="element.isEdit" [(ngModel)]="element.email2">
+                    <span *ngIf="!element.isEdit">{{ element.email2 }}</span>
+                  </div>
+                  <div>
+                    <b>Parents' phone number : </b>
+                    <input class="input-color"  matInput *ngIf="element.isEdit" [(ngModel)]="element.phoneNumber2">
+                    <span *ngIf="!element.isEdit">{{ element.phoneNumber2 }}</span>
+                  </div>
+                  <div [class.winner-cell]="element.category === 'Winner Age Group 1'">
+                    <b>Category : </b>
+                    <select [(value)]="element.category" [(ngModel)]="element.category" *ngIf="element.isEdit">
+                      <option [value]="'Winner Age Group 1'">Winner Age Group 1</option>
+                      <option [value]="'Winner Age Group 2'">Winner Age Group 2</option>
+                      <option [value]="'Runner up'">Runner up</option>
+                      <option [value]="'Participant'">Participant</option>
+                    </select>
+                    <span *ngIf="!element.isEdit">{{ element.category }}</span>
+                  </div>
+                  <div>
+                    <b>New Participant : </b>
+                    <span *ngIf="!element.isEdit">{{ !element.alreadyAttendedEvent ? "Yes" : "No" }}</span>
+                  </div>
+                  <div>
+                    <b>Winner : </b>
+                    <span *ngIf="!element.isEdit">{{ element.alreadyWinner ? "Yes" : "No" }}</span>
+                  </div>
+                  <div style="font-size: 13px;">
+                    <b>Registration history : </b><a style="cursor: pointer; text-decoration: underline;" (click)="openPopup(element,element.eventHistory)">Click here</a>
+                  </div>
+                  <div class="action-column" style="margin-top:10px">
+                    <a style="cursor: pointer; margin-right: 5px;" (click)="removeCandidate(element)">
+                      Remove
+                    </a>
+                  </div>
+                </td>
+              </ng-container>
+        
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+                [ngClass]="{ 'blinking-ageGroup-1': row.category === 'Winner Age Group 1', 
+                'blinking-ageGroup-2': row.category === 'Winner Age Group 2',
+                'blinking-runnerup': row.category === 'Runner up'
+                }">
+              </tr>
+            </table>
+            <!-- <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
     
               <ng-container matColumnDef="roll_number">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Roll Number</th>
@@ -126,12 +242,12 @@
                 'blinking-runnerup': row.category === 'Runner up'
                 }">
               </tr>
-            </table>
+            </table> -->
         
             <!-- Pagination -->
-            <div class="pagination" style="margin-top: 10px;">
+            <!-- <div class="pagination" style="margin-top: 10px;">
               <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-            </div>
+            </div> -->
         </div>
       </div>
     <div *ngIf="dataSource.data.length <= 0">

@@ -91,9 +91,12 @@ export class HomeComponent  implements OnInit {
     this.router.navigate(['/register']);
   }
 
-  openPopup(eventDescription:any): void {
+  openPopup(event:any, eventDescription:any): void {
     this.dialog.open(DialogBoxComponent, {
-      data: { message: eventDescription },
+      data: { 
+        title: event.eventName,
+        message: eventDescription 
+      },
     });
   }
 

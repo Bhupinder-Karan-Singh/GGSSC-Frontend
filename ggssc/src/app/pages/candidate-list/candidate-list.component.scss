@@ -110,3 +110,11 @@ td, th {
 .blinking-runnerup {
   animation: runnerup 2s infinite;
 }
+
+::ng-deep  .cdk-overlay-container{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+}

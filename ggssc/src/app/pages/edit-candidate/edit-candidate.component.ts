@@ -10,6 +10,8 @@ import { CandidateServiceService } from 'src/app/services/candidate-service.serv
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import 'jspdf-autotable';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-candidate',
@@ -28,7 +30,7 @@ export class EditCandidateComponent implements OnInit {
   loading:any = false
   error:any = false
 
-  title = "Candidates List";
+  title = "All Candidates List";
   checkDuplicates = false
 
   constructor(
@@ -37,6 +39,7 @@ export class EditCandidateComponent implements OnInit {
     private appService: AppServiceService,
     private alertController: AlertController,
     private appComponent: AppComponent,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -97,6 +100,7 @@ export class EditCandidateComponent implements OnInit {
       element['updatedBy'] = localStorage.getItem('email'),
       element['updatedOn'] = new Date(),
       element['isEdited'] = true
+      console.log(element)
       this.candidateService.saveCandidate(element).subscribe(
         (response: any) => {
           this.appService.loading = false;
@@ -205,7 +209,7 @@ async deleteCandidate(element:any){
   
   printTable() {
     const printContent = document.getElementById('table-container')?.innerHTML;
-    const printWindow = window.open('', '', 'height=600,width=800');
+    const printWindow = window.open('', '', 'height=auto,width=auto');
     printWindow?.document.write('<html><head><title>Print Table</title>');
     
     // Adding the print styles to the new window's document
@@ -218,7 +222,7 @@ async deleteCandidate(element:any){
           table, th, td { border: 1px solid #ddd; }
           th, td { padding: 8px; text-align: left; word-wrap: break-word; }
           .image { text-align: center !important;}
-          img { max-width: 200px; max-height: 200px; object-fit: fill; }
+          img { max-width: 200px; max-height: 200px; object-fit: cover; border-radius: 0.2em; }
           h1 { text-align: center; }
           .action-column {display: none;}
           .mat-sort-header-arrow {display: none;}
@@ -244,7 +248,7 @@ async deleteCandidate(element:any){
     `);
     
     printWindow?.document.write('</head><body>');
-    printWindow?.document.write('<h1>Candidate List</h1>');  // Optional header
+    printWindow?.document.write('<h1>All Candidate List</h1>');  // Optional header
     printWindow?.document.write('<div>' + printContent + '</div>');
     printWindow?.document.write('</body></html>');
     printWindow?.document.close();
@@ -293,6 +297,8 @@ async deleteCandidate(element:any){
           this.loading = false
           this.appService.loading = false;
           this.appService.presentToast('top',"No Duplicate candidates found")
+          // this.checkDuplicates = false
+          // this.loadCandidates()
         }
       },
       (error) => {
@@ -303,6 +309,26 @@ async deleteCandidate(element:any){
         this.appService.presentToast('top', errorMessage);
       }
     );
+  }
+
+  openPopup(element:any,eventHistory: any[]): void {
+    const formattedMessage = eventHistory
+      .map((event, index) => 
+        `${index + 1}. Event Name: ${event.eventName}, Age: ${event.age}, Year: ${event.eventRegistrationYear}`
+      )
+      .join('\n');
+
+    this.dialog.open(DialogBoxComponent, {
+      data: { 
+        title: +element.rollNumber +" : "+ element.name ,
+        message: formattedMessage 
+      },
+    });
+  }
+
+  cancel(element: any){
+    element.isEdit = false
+    this.loadCandidates()
   }
 
 }

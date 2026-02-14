@@ -14,7 +14,7 @@
         <form [formGroup]="sendOtpForm" (ngSubmit)="sendOtp()">
           <ion-list>
             <ion-item>
-              <ion-input formControlName="email" [(ngModel)]="email" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
+              <ion-input autocomplete="on" formControlName="email" [(ngModel)]="email" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
                 <div slot="label">Email
                   <ion-text color="primary">
                   </ion-text>
@@ -77,7 +77,7 @@
             </div>
             
           <ion-item >
-            <ion-input formControlName="name" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
+            <ion-input autocomplete="on" formControlName="name" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
               <div slot="label">Candidate Name 
                 <ion-text color="primary">
                 </ion-text>
@@ -105,7 +105,7 @@
           </div>
           
           <ion-item>
-            <ion-input formControlName="fatherName" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
+            <ion-input autocomplete="on" formControlName="fatherName" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
               <div slot="label">Father's Name
                 <ion-text color="primary">
                 </ion-text>
@@ -117,7 +117,7 @@
           </div>
       
           <ion-item>
-            <ion-input formControlName="motherName" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
+            <ion-input autocomplete="on" formControlName="motherName" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
               <div slot="label">Mother's Name
                 <ion-text color="primary">
                 </ion-text>
@@ -129,7 +129,7 @@
           </div>
 
           <ion-item>
-            <ion-textarea formControlName="address" class="text-area" fill="solid" spellcheck="true" rows="5" labelPlacement="floating" style="margin-bottom: 10px;">
+            <ion-textarea autocomplete="on" formControlName="address" class="text-area" fill="solid" spellcheck="true" rows="5" labelPlacement="floating" style="margin-bottom: 10px;">
               <div slot="label">Address
                 <ion-text color="primary">
                 </ion-text>
@@ -141,7 +141,7 @@
           </div>
       
           <ion-item>
-            <ion-input formControlName="phoneNumber" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
+            <ion-input autocomplete="on" formControlName="phoneNumber" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
               <div slot="label">Phone Number
                 <ion-text color="primary">
                 </ion-text>
@@ -156,8 +156,8 @@
           </div>
 
           <ion-item>
-            <ion-input formControlName="phoneNumber2" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
-              <div slot="label">Parent's phone number
+            <ion-input autocomplete="on" formControlName="phoneNumber2" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
+              <div slot="label">Parents' phone number
                 <ion-text color="primary">
                 </ion-text>
               </div>
@@ -168,7 +168,7 @@
           </div>
 
           <ion-item>
-            <ion-input formControlName="email2" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
+            <ion-input autocomplete="on" formControlName="email2" type="text" fill="solid"  labelPlacement="floating" style="margin-bottom: 10px;">
               <div slot="label">Parent's email
                 <ion-text color="primary">
                 </ion-text>
@@ -182,16 +182,17 @@
           <ion-item>
             
             <ion-input
-            fill="solid" 
-            labelPlacement="floating" 
-            readonly
-            (click)="openDatePicker()"
-            [value]="dateOfBirth | date: 'd MMM y'"
-            style="margin-bottom: 10px;">
-            <div slot="label">Date Of Birth 
-              <ion-text color="primary">
-              </ion-text>
-            </div>
+              autocomplete="on"
+              fill="solid" 
+              labelPlacement="floating" 
+              readonly
+              (click)="openDatePicker()"
+              [value]="dateOfBirth | date: 'd MMM y'"
+              style="margin-bottom: 10px;">
+              <div slot="label">Date Of Birth 
+                <ion-text color="primary">
+                </ion-text>
+              </div>
             </ion-input>
             
             <ion-modal #datePickerModal>
