@@ -26,6 +26,9 @@ export class EditCandidateComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  currentSortField: 'name' | 'age' | null = null;
+  currentDirection: 'asc' | 'desc' = 'asc';
+
   candidates:any
   loading:any = false
   error:any = false
@@ -208,52 +211,78 @@ async deleteCandidate(element:any){
   }
   
   printTable() {
-    const printContent = document.getElementById('table-container')?.innerHTML;
-    const printWindow = window.open('', '', 'height=auto,width=auto');
-    printWindow?.document.write('<html><head><title>Print Table</title>');
-    
-    // Adding the print styles to the new window's document
-    printWindow?.document.write(`
-      <style>
-        @media print {
-          body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-          #table-container { width: 100%; overflow: hidden; }
-          table { width: 100%; border-collapse: collapse; }
-          table, th, td { border: 1px solid #ddd; }
-          th, td { padding: 8px; text-align: left; word-wrap: break-word; }
-          .image { text-align: center !important;}
-          img { max-width: 200px; max-height: 200px; object-fit: cover; border-radius: 0.2em; }
-          h1 { text-align: center; }
-          .action-column {display: none;}
-          .mat-sort-header-arrow {display: none;}
-          .pagination {display: none;}
+    const tableContainer = document.getElementById('table-container');
+    if (!tableContainer) return;
 
-          .blinking-ageGroup-1 {
-            background-color: #ffdc73 !important;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-          }
-          .blinking-ageGroup-2 {
-            background-color: #ffdc73 !important;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-          }
-          .blinking-runnerup {
-            background-color: #b5e2ff !important;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-          }
-        }
-      </style>
+    const printContent = tableContainer.innerHTML;
+    const totalEntries = this.dataSource?.data?.length || 0; 
+
+    // Create hidden iframe for printing
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'absolute';
+    iframe.style.width = '0';
+    iframe.style.height = '0';
+    iframe.style.border = '0';
+    document.body.appendChild(iframe);
+
+    const doc = iframe.contentDocument || iframe.contentWindow?.document;
+    if (!doc) return;
+
+    // Write HTML + styles
+    doc.open();
+    doc.write(`
+      <html>
+        <head>
+          <title>Print Table</title>
+          <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            table { width: 100%; border-collapse: collapse; }
+            table, th, td { border: 1px solid #ddd; }
+            th, td { padding: 8px; text-align: left; word-wrap: break-word; }
+            .image { text-align: center !important; }
+            img { max-width: 200px; max-height: 200px; object-fit: cover; border-radius: 0.2em; }
+            .action-column, .mat-sort-header-arrow, .pagination { display: none !important; }
+
+            /* Highlight categories */
+            .blinking-ageGroup-1 { background-color: #ffdc73; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .blinking-ageGroup-2 { background-color: #ffdc73; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .blinking-runnerup { background-color: #b5e2ff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            h2 { text-align: center; }
+            h3 { text-align: center; }
+          </style>
+        </head>
+        <body>
+          <h2>All Candidate List</h2>
+          <h3>Total Candidates: ${totalEntries}</h3>
+          <div>${printContent}</div>
+        </body>
+      </html>
     `);
-    
-    printWindow?.document.write('</head><body>');
-    printWindow?.document.write('<h1>All Candidate List</h1>');  // Optional header
-    printWindow?.document.write('<div>' + printContent + '</div>');
-    printWindow?.document.write('</body></html>');
-    printWindow?.document.close();
-    printWindow?.print();
+    doc.close();
+
+    const images = doc.images;
+    let loaded = 0;
+
+    if (images.length === 0) {
+      iframe.contentWindow?.focus();
+      iframe.contentWindow?.print();
+      document.body.removeChild(iframe);
+      return;
+    }
+
+    // Wait for all images to load before printing
+    for (let i = 0; i < images.length; i++) {
+      images[i].onload = images[i].onerror = () => {
+        loaded++;
+        if (loaded === images.length) {
+          iframe.contentWindow?.focus();
+          iframe.contentWindow?.print();
+          setTimeout(() => document.body.removeChild(iframe), 500);
+        }
+      };
+    }
   }
+
 
   formatDateForDatePicker(date: string | Date | null): string {
     if (!date) return ''; // Handle null or undefined case
@@ -314,7 +343,7 @@ async deleteCandidate(element:any){
   openPopup(element:any,eventHistory: any[]): void {
     const formattedMessage = eventHistory
       .map((event, index) => 
-        `${index + 1}. Event Name: ${event.eventName}, Age: ${event.age}, Year: ${event.eventRegistrationYear}`
+        `${index + 1}. Event : ${event.eventName}, Age: ${event.age}, Year: ${event.eventRegistrationYear}`
       )
       .join('\n');
 
@@ -331,4 +360,30 @@ async deleteCandidate(element:any){
     this.loadCandidates()
   }
 
+  sortBy(field: 'name' | 'age') {
+    // If clicking same field → toggle direction
+    if (this.currentSortField === field) {
+      this.currentDirection =
+        this.currentDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      // New field → reset to ascending
+      this.currentSortField = field;
+      this.currentDirection = 'asc';
+    }
+
+    // Custom sorting accessor
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      return field === 'age'
+        ? Number(item.age)
+        : item.name?.toLowerCase();
+    };
+
+    this.sort.active = 'Details';
+    this.sort.direction = this.currentDirection;
+
+    this.sort.sortChange.emit({
+      active: 'Details',
+      direction: this.currentDirection
+    });
+  }
 }

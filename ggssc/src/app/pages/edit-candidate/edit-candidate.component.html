@@ -1,11 +1,11 @@
 <div id="container" *ngIf="!loading">
   
   <div *ngIf="dataSource.data.length > 0">
-    <div style="text-align:center; margin-bottom:30px">
+    <!-- <div style="text-align:center;"> -->
       <ion-header style="box-shadow: none; top:-10px">
         <ion-title style="font-size: 18px;">{{ title }}</ion-title>
       </ion-header>
-    </div>
+    <!-- </div> -->
     <div style="display: flex; justify-content: space-between; margin: 10px">
       <div>
         <ion-icon style="cursor: pointer;" name="arrow-back-outline" (click)="goBack()"></ion-icon>
@@ -16,13 +16,24 @@
       </div>
     </div>
     <div>
-      <div style="margin-bottom: 10px;">
+      <div style="margin-bottom: 20px;">
         <input class="input-color"  matInput (keyup)="applyFilter($event)" placeholder="Search..." style="border-radius: 2px; height: 35px; border-color: lightgray;">
       </div>
       <div>
-         <a *ngIf="!checkDuplicates" style="cursor: pointer; margin-left: 5px;" (click)="getDuplicateCandidates()">Show duplicate entries</a>
+         <!-- <a *ngIf="!checkDuplicates" style="cursor: pointer; margin-left: 5px;" (click)="getDuplicateCandidates()">Show duplicate entries</a> -->
          <a *ngIf="checkDuplicates" style="cursor: pointer; margin-left: 5px;" (click)="loadCandidates()">Show all entries</a>
       </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; margin: 10px 10px 0px 10px">
+      <a style="text-decoration: underline; color: grey;" (click)="sortBy('name')">Sort by Name</a>
+      <div class="stat-card">
+        <ion-icon name="people-outline"></ion-icon>
+        <div class="stat-info">
+          <div class="stat-number">{{ dataSource.data.length || 0 }} Candidate(s)</div>
+        </div>
+      </div>
+      <a style="text-decoration: underline; color: grey" (click)="sortBy('age')">Sort by Age</a>
     </div>
   </div>
 
@@ -266,7 +277,7 @@
                 </td>
               </ng-container> -->
         
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns;" style="background-color: #dedede;"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
                 [ngClass]="{ 'blinking-ageGroup-1': row.category === 'Winner Age Group 1', 
                 'blinking-ageGroup-2': row.category === 'Winner Age Group 2',
@@ -280,7 +291,7 @@
               <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
             </div> -->
       </div>
-      </div>
+    </div>
     <div *ngIf="dataSource.data.length <= 0">
       <div style="float: left; margin-left: 10px;">
         <ion-icon style="cursor: pointer;" name="arrow-back-outline" (click)="goBack()"></ion-icon>

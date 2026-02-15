@@ -188,3 +188,45 @@ td, th {
   transform: translate(-50%, -50%);
   width: 80%;
 }
+
+// .badge-wrapper {
+//   position: relative;
+//   display: inline-block;
+// }
+
+// .badge-wrapper ion-icon {
+//   font-size: 30px;
+// }
+
+// .badge {
+//   position: absolute;
+//   top: -6px;
+//   right: -8px;
+//   background: #f44336;
+//   color: white;
+//   font-size: 12px;
+//   padding: 4px 8px;
+//   border-radius: 50px;
+//   font-weight: bold;
+// }
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 15px;
+  background: linear-gradient(180deg, #a3a3a3, #454545);
+  color: white;
+  border-radius: 4px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.stat-card ion-icon {
+  font-size: 15px;
+}
+
+.stat-number {
+  font-size: 10px;
+}
+

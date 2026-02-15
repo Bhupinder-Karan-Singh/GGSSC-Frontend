@@ -51,10 +51,10 @@
                 <span *ngIf="event.status == 'Active'" style="color:rgb(73, 248, 73)">Active</span>
               </span>
             </div>
-            <div style="font-size: 13px; margin:10px; display: flex; justify-content: space-between;">
-              <a style="cursor: pointer;" (click)="editEvent(event)">Edit</a> |
-              <a style="cursor: pointer;" (click)="deleteEvent(event)">Delete</a> |
-              <a style="cursor: pointer;" (click)="candidateList(event)">Candidate list</a>
+            <div style="font-size: 13px; margin:10px; display: flex; justify-content: flex-start;">
+              <a style="cursor: pointer; margin-right: 10px;" (click)="editEvent(event)">Edit</a> |
+              <!-- <a style="cursor: pointer;" (click)="deleteEvent(event)">Delete</a> | -->
+              <a style="cursor: pointer; margin-left: 10px;" (click)="candidateList(event)">Candidate list</a>
             </div>
           </ion-col>
           <ion-col size="4" style ="text-align: left; 

@@ -118,3 +118,24 @@ td, th {
   transform: translate(-50%, -50%);
   width: 80%;
 }
+
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 15px;
+  background: linear-gradient(180deg, #a3a3a3, #454545);
+  color: white;
+  border-radius: 4px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.stat-card ion-icon {
+  font-size: 15px;
+}
+
+.stat-number {
+  font-size: 10px;
+}
